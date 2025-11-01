@@ -144,7 +144,7 @@ export default function Home() {
                   Welcome to my portfolio
                 </div>
                 <h1 className="text-6xl md:text-7xl font-bold leading-tight">
-                  Hi, I'm <span className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">Sarah</span>
+                  Hi, I'm <span className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">Pruthviraj Mane</span>
                 </h1>
                 <p className="text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
                   AI researcher and machine learning engineer passionate about building intelligent systems that solve real-world problems.
@@ -484,7 +484,7 @@ export default function Home() {
         {/* Footer */}
         <footer className="border-t border-slate-200 dark:border-slate-800 pt-12 pb-8 text-center text-slate-600 dark:text-slate-400">
           <p className="mb-2">Designed and built with React, Tailwind CSS, and ❤️</p>
-          <p className="text-sm">© {new Date().getFullYear()} Sarah Chen. All rights reserved.</p>
+          <p className="text-sm">© {new Date().getFullYear()} Pruthviraj Mane. All rights reserved.</p>
         </footer>
       </main>
     </div>

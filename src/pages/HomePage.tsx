@@ -15,7 +15,7 @@ export default function HomePage() {
                 Welcome to my portfolio
               </div>
               <h1 className="text-6xl md:text-7xl font-bold leading-tight">
-                Hi, I'm <span className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">Sarah</span>
+                Hi, I'm <span className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">Pruthviraj Mane</span>
               </h1>
               <p className="text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
                 AI researcher and machine learning engineer passionate about building intelligent systems that solve real-world problems.

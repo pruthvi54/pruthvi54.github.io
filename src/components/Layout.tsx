@@ -145,7 +145,7 @@ export default function Layout({ children }: LayoutProps) {
       {/* Footer */}
       <footer className="border-t border-slate-200 dark:border-slate-800 mt-20 pt-12 pb-8 text-center text-slate-600 dark:text-slate-400">
         <p className="mb-2">Designed and built with React, Tailwind CSS, and ❤️</p>
-        <p className="text-sm">© {new Date().getFullYear()} Sarah Chen. All rights reserved.</p>
+        <p className="text-sm">© {new Date().getFullYear()} Pruthviraj Mane. All rights reserved.</p>
       </footer>
     </div>
   );
