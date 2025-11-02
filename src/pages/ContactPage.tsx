@@ -6,29 +6,29 @@ export default function ContactPage() {
     {
       icon: Mail,
       title: 'Email',
-      value: 'sarah@example.com',
-      link: 'mailto:sarah@example.com',
+      value: 'pruthviraj3629@gmail.com',
+      link: 'mailto:pruthviraj3629@gmail.com',
       color: 'blue'
     },
     {
       icon: Linkedin,
       title: 'LinkedIn',
-      value: 'linkedin.com/in/sarahchen',
-      link: 'https://linkedin.com',
+      value: 'linkedin.com/in/pruthviraj-mane',
+      link: 'https://linkedin.com/in/pruthviraj-mane',
       color: 'purple'
     },
     {
       icon: Github,
       title: 'GitHub',
-      value: 'github.com/sarahchen',
-      link: 'https://github.com',
+      value: 'github.com/pruthvi54',
+      link: 'https://github.com/pruthvi54',
       color: 'slate'
     },
     {
-      icon: Twitter,
-      title: 'Twitter',
-      value: '@sarahchen_ai',
-      link: 'https://twitter.com',
+      icon: Github,
+      title: 'ACC Project',
+      value: 'Adaptive Cruise Control Repo',
+      link: 'https://github.com/pruthvi54/Adaptive_cruise_control',
       color: 'pink'
     }
   ];
@@ -80,7 +80,7 @@ export default function ContactPage() {
         <div className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-700 dark:to-purple-700 text-white rounded-xl p-12 text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">Open to Collaborations</h2>
           <p className="text-lg opacity-90 mb-6">
-            Whether it's research, projects, or just a chat about AI—feel free to reach out!
+            Whether it's robotics, simulation projects, or research collaborations—feel free to reach out!
           </p>
           <p className="opacity-75">
             I typically respond within 24-48 hours. Looking forward to connecting with you.
@@ -93,19 +93,19 @@ export default function ContactPage() {
             <ul className="space-y-3 text-slate-700 dark:text-slate-300">
               <li className="flex gap-3">
                 <span className="text-blue-600 dark:text-blue-400 font-bold">✓</span>
-                <span>Research collaborations in AI and ML</span>
+                <span>Research collaborations in robotics and simulation</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-purple-600 dark:text-purple-400 font-bold">✓</span>
-                <span>Speaking opportunities at conferences</span>
+                <span>AUV and marine robotics projects</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-pink-600 dark:text-pink-400 font-bold">✓</span>
-                <span>Mentoring and knowledge sharing</span>
+                <span>EV control systems and ADAS</span>
               </li>
               <li className="flex gap-3">
                 <span className="text-blue-600 dark:text-blue-400 font-bold">✓</span>
-                <span>Interesting project ideas</span>
+                <span>Simulation and modeling opportunities</span>
               </li>
             </ul>
           </div>

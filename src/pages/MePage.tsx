@@ -15,10 +15,10 @@ export default function MePage() {
             <div>
               <h2 className="text-2xl font-bold mb-4">My Journey</h2>
               <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
-                I started my journey in computer science with a passion for understanding how machines can learn and adapt. Over the years, I've worked on diverse projects ranging from computer vision to natural language processing, always driven by the goal of making AI more accessible and impactful.
+                I started my journey in mechanical engineering, but found my passion in robotics and simulation. From leading a 30-member team to AIR 38 in Robocon 2018, to pursuing specialized research in electric vehicles at IIT Guwahati, I've always been driven by building intelligent systems that solve real-world problems.
               </p>
               <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
-                My research focuses on creating efficient and interpretable AI systems that can solve real-world problems. I believe in the power of collaboration and open science, which is why I actively contribute to the research community through publications, open-source projects, and mentoring.
+                Currently at IISc AIRL, I focus on modeling and simulating autonomous underwater vehicles, developing everything from 6-DoF dynamics models to sonar-based obstacle avoidance systems. I believe in building end-to-end simulation environments that bridge the gap between theoretical research and practical applications.
               </p>
             </div>
 
@@ -27,19 +27,19 @@ export default function MePage() {
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
                   <Zap className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                  <span className="text-slate-700 dark:text-slate-300">Solving complex problems with elegant solutions</span>
+                  <span className="text-slate-700 dark:text-slate-300">Building photorealistic simulation environments</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Zap className="w-5 h-5 text-purple-600 dark:text-purple-400" />
-                  <span className="text-slate-700 dark:text-slate-300">Making AI understandable and trustworthy</span>
+                  <span className="text-slate-700 dark:text-slate-300">Bridging theory and practical robotics applications</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Zap className="w-5 h-5 text-pink-600 dark:text-pink-400" />
-                  <span className="text-slate-700 dark:text-slate-300">Collaborating with brilliant minds globally</span>
+                  <span className="text-slate-700 dark:text-slate-300">Developing intelligent autonomous systems</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Zap className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                  <span className="text-slate-700 dark:text-slate-300">Continuous learning and growth</span>
+                  <span className="text-slate-700 dark:text-slate-300">Continuous learning and innovation</span>
                 </div>
               </div>
             </div>
@@ -51,19 +51,19 @@ export default function MePage() {
               <div className="space-y-4">
                 <div>
                   <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">Location</p>
-                  <p className="text-lg font-semibold">San Francisco, CA</p>
+                  <p className="text-lg font-semibold">Bengaluru, India</p>
                 </div>
                 <div>
                   <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">Education</p>
-                  <p className="text-lg font-semibold">PhD in Computer Science</p>
+                  <p className="text-lg font-semibold">MS(R) Emobility, IIT Guwahati</p>
                 </div>
                 <div>
                   <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">Specialization</p>
-                  <p className="text-lg font-semibold">AI & Machine Learning</p>
+                  <p className="text-lg font-semibold">Robotics & Simulation</p>
                 </div>
                 <div>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">Experience</p>
-                  <p className="text-lg font-semibold">5+ Years</p>
+                  <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">GATE Score</p>
+                  <p className="text-lg font-semibold">98.79 Percentile</p>
                 </div>
               </div>
             </div>
@@ -74,7 +74,7 @@ export default function MePage() {
                 <div>
                   <p className="text-sm text-slate-600 dark:text-slate-400 font-medium mb-2">Programming</p>
                   <div className="flex flex-wrap gap-2">
-                    {['Python', 'C++', 'JavaScript', 'Rust'].map((lang) => (
+                    {['Python', 'C/C++', 'MATLAB'].map((lang) => (
                       <span key={lang} className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm">
                         {lang}
                       </span>
@@ -84,7 +84,7 @@ export default function MePage() {
                 <div>
                   <p className="text-sm text-slate-600 dark:text-slate-400 font-medium mb-2">Frameworks</p>
                   <div className="flex flex-wrap gap-2">
-                    {['PyTorch', 'TensorFlow', 'React', 'Node.js'].map((fw) => (
+                    {['ROS/ROS2', 'PyTorch', 'Simulink', 'Docker'].map((fw) => (
                       <span key={fw} className="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-sm">
                         {fw}
                       </span>
@@ -92,11 +92,11 @@ export default function MePage() {
                   </div>
                 </div>
                 <div>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 font-medium mb-2">Languages</p>
+                  <p className="text-sm text-slate-600 dark:text-slate-400 font-medium mb-2">Tools</p>
                   <div className="flex flex-wrap gap-2">
-                    {['English', 'Mandarin', 'Spanish'].map((lang) => (
-                      <span key={lang} className="px-3 py-1 bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 rounded-full text-sm">
-                        {lang}
+                    {['SolidWorks', 'Gazebo', 'Unreal Engine 5', 'Isaac Sim'].map((tool) => (
+                      <span key={tool} className="px-3 py-1 bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 rounded-full text-sm">
+                        {tool}
                       </span>
                     ))}
                   </div>
@@ -107,10 +107,10 @@ export default function MePage() {
             <div className="bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl p-8 border border-green-200 dark:border-green-800">
               <h3 className="font-bold text-lg mb-4">Beyond Work</h3>
               <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
-                When I'm not diving into research papers or writing code, you'll find me exploring the intersection of technology and creativity. I'm passionate about photography, love traveling to new places, and enjoy playing music in my spare time.
+                When I'm not building simulators or debugging control algorithms, I enjoy problem-solving competitions and hackathons. Proud to have led teams to success in Robocon and various tech challenges including E-Yantra and Inter IIT competitions.
               </p>
               <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
-                Coffee enthusiast, open-source contributor, and lifelong learner. Always excited to connect with people who share similar interests!
+                From Maharashtra to Guwahati to Bengaluru - my journey has taught me the value of collaboration, innovation, and never stopping to learn. Always excited to work on challenging robotics problems!
               </p>
             </div>
           </div>

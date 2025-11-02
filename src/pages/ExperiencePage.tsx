@@ -3,32 +3,25 @@ import Layout from '@/components/Layout';
 export default function ExperiencePage() {
   const experiences = [
     {
-      title: 'Senior AI Researcher',
-      company: 'Stanford University',
-      period: 'Jan 2024 - Present',
-      description: 'Leading research on multimodal learning systems and developing novel architectures for vision-language models.',
-      highlights: ['94% accuracy on benchmarks', '40% faster inference', '3 publications']
+      title: 'Project Associate',
+      company: 'AIRL (Artificial Intelligence & Robotics Lab), IISc Bangalore',
+      period: 'Aug 2022 - Present',
+      description: 'Modeling and simulating autonomous underwater vehicles (AUVs) with focus on system modeling, simulation, and intelligent autonomy for marine applications.',
+      highlights: ['6-DoF AUV modeling in MATLAB/Simulink', 'ROS/ROS2 + Gazebo simulator', 'Sonar-based obstacle avoidance', 'Unreal Engine 5 integration', 'Physics-informed neural networks with CBF']
     },
     {
-      title: 'ML Engineer',
-      company: 'MIT CSAIL',
-      period: 'Jul 2023 - Dec 2023',
-      description: 'Implemented real-time 3D point cloud processing for autonomous systems and robotics applications.',
-      highlights: ['Real-time processing', 'Edge deployment', '5+ collaborators']
+      title: 'Graduate Student (MS Research)',
+      company: 'IIT Guwahati - Emobility Program',
+      period: 'Aug 2020 - Jul 2022',
+      description: 'Specialized in electric vehicle dynamics, stability analysis, and advanced control systems for automotive applications.',
+      highlights: ['EV torque vectoring research', 'LQR/MPC/SMC controllers', 'CGPA: 7.76', 'Inter IIT Tech Meet participation']
     },
     {
-      title: 'Research Assistant',
-      company: 'UC Berkeley',
-      period: 'Aug 2022 - Jun 2023',
-      description: 'Developed multilingual NLP models for low-resource languages with focus on data efficiency.',
-      highlights: ['50+ languages', '100K+ documents', 'Cross-lingual performance']
-    },
-    {
-      title: 'Junior ML Developer',
-      company: 'Tech Startup',
-      period: 'Jan 2022 - Jul 2022',
-      description: 'Built machine learning pipelines for computer vision applications in production environments.',
-      highlights: ['Production deployment', 'Model optimization', 'Team collaboration']
+      title: 'Team Captain, Robocon',
+      company: 'Walchand College of Engineering',
+      period: 'Jan 2018 - May 2019',
+      description: 'Led a 30-member interdisciplinary team in ABU Robocon 2018, achieving All India Rank 38 out of 107 participating teams.',
+      highlights: ['AIR 38/107 in Robocon 2018', '30-member team leadership', 'Autonomous agricultural robot', 'SolidWorks design and prototyping']
     }
   ];
 
@@ -37,7 +30,7 @@ export default function ExperiencePage() {
       <section className="py-12">
         <div className="space-y-4 mb-12">
           <h1 className="text-5xl font-bold">Experience</h1>
-          <p className="text-lg text-slate-600 dark:text-slate-400">My professional journey in AI and machine learning</p>
+          <p className="text-lg text-slate-600 dark:text-slate-400">My professional journey in robotics, simulation, and autonomous systems</p>
         </div>
 
         <div className="space-y-6">

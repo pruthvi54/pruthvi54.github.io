@@ -14,12 +14,12 @@ export default function HomePage() {
               <div className="inline-block px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-sm font-medium">
                 Welcome to my portfolio
               </div>
-              <h1 className="text-6xl md:text-7xl font-bold leading-tight">
-                Hi, I'm <span className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">Pruthviraj Mane</span>
-              </h1>
-              <p className="text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
-                AI researcher and machine learning engineer passionate about building intelligent systems that solve real-world problems.
-              </p>
+                <h1 className="text-6xl md:text-7xl font-bold leading-tight">
+                  Hi, I'm <span className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">Pruthviraj Mane</span>
+                </h1>
+                <p className="text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Robotics Engineer focused on system modeling & simulation. I build intelligent systems for marine and EV applications using ROS, MATLAB/Simulink, and Unreal Engine 5.
+                </p>
             </div>
 
             <div className="flex flex-wrap gap-4">
@@ -37,20 +37,20 @@ export default function HomePage() {
               </button>
             </div>
 
-            <div className="flex gap-6 pt-4">
-              <div>
-                <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">50+</div>
-                <p className="text-sm text-slate-600 dark:text-slate-400">Research Papers</p>
+              <div className="flex gap-6 pt-4">
+                <div>
+                  <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">2.5+</div>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">Years at IISc</p>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">5+</div>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">Major Projects</p>
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-pink-600 dark:text-pink-400">98.79</div>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">GATE Percentile</p>
+                </div>
               </div>
-              <div>
-                <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">10+</div>
-                <p className="text-sm text-slate-600 dark:text-slate-400">Projects</p>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-pink-600 dark:text-pink-400">5+</div>
-                <p className="text-sm text-slate-600 dark:text-slate-400">Years Experience</p>
-              </div>
-            </div>
           </div>
 
           {/* Hero Image */}
