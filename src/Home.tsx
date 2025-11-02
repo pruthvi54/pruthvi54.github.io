@@ -449,7 +449,7 @@ export default function Home() {
             >
               <div className="text-4xl mb-3">💼</div>
               <h3 className="font-bold text-lg mb-2">LinkedIn</h3>
-              <p className="text-purple-600 dark:text-purple-400 font-medium group-hover:underline">linkedin.com/in/sarahchen</p>
+              <p className="text-purple-600 dark:text-purple-400 font-medium group-hover:underline">https://www.linkedin.com/in/pruthviraj-mane/</p>
             </a>
 
             <a
