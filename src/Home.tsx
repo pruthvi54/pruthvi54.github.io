@@ -442,7 +442,7 @@ export default function Home() {
             </a>
 
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/pruthviraj-mane/"
               target="_blank"
               rel="noopener noreferrer"
               className="group p-8 rounded-xl bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 border-2 border-purple-200 dark:border-purple-800 hover:shadow-lg transition-all"
