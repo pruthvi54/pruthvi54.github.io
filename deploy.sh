@@ -15,7 +15,8 @@ NC='\033[0m' # No Color
 # Configuration
 REPO_URL="https://github.com/pruthvi54/pruthvi54.github.io.git"
 GITHUB_PAGES_URL="https://pruthvi54.github.io"
-PROJECT_DIR="/home/pruthvi/Desktop/personal_website"
+# Get the directory where the script is located
+PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Function to print colored output
 print_status() {

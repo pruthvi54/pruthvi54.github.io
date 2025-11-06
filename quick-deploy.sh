@@ -5,7 +5,9 @@
 
 set -e
 
-cd /home/pruthvi/Desktop/personal_website
+# Get the directory where the script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
 
 echo "🚀 Quick deploying to GitHub Pages..."
 
