@@ -23,14 +23,14 @@ export default function ContactPage() {
       value: 'github.com/pruthvi54',
       link: 'https://github.com/pruthvi54',
       color: 'slate'
-    },
-    {
-      icon: Github,
-      title: 'ACC Project',
-      value: 'Adaptive Cruise Control Repo',
-      link: 'https://github.com/pruthvi54/Adaptive_cruise_control',
-      color: 'pink'
     }
+    // {
+    //   icon: Github,
+    //   title: 'ACC Project',
+    //   value: 'Adaptive Cruise Control Repo',
+    //   link: 'https://github.com/pruthvi54/Adaptive_cruise_control',
+    //   color: 'pink'
+    // }
   ];
 
   const colorClasses = {
@@ -121,10 +121,10 @@ export default function ContactPage() {
                 <p className="font-medium text-slate-900 dark:text-white">LinkedIn</p>
                 <p className="text-sm">2-3 days</p>
               </div>
-              <div>
+              {/* <div>
                 <p className="font-medium text-slate-900 dark:text-white">Twitter</p>
                 <p className="text-sm">Variable</p>
-              </div>
+              </div> */}
               <div>
                 <p className="font-medium text-slate-900 dark:text-white">GitHub Issues</p>
                 <p className="text-sm">1-2 weeks</p>

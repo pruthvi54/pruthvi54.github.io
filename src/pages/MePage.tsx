@@ -55,16 +55,16 @@ export default function MePage() {
                 </div>
                 <div>
                   <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">Education</p>
-                  <p className="text-lg font-semibold">MS(R) Emobility, IIT Guwahati</p>
+                  <p className="text-lg font-semibold">MS(Research), IIT Guwahati</p>
                 </div>
                 <div>
                   <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">Specialization</p>
                   <p className="text-lg font-semibold">Robotics & Simulation</p>
                 </div>
-                <div>
+                {/* <div>
                   <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">GATE Score</p>
                   <p className="text-lg font-semibold">98.79 Percentile</p>
-                </div>
+                </div> */}
               </div>
             </div>
 
@@ -107,7 +107,7 @@ export default function MePage() {
             <div className="bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl p-8 border border-green-200 dark:border-green-800">
               <h3 className="font-bold text-lg mb-4">Beyond Work</h3>
               <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
-                When I'm not building simulators or debugging control algorithms, I enjoy problem-solving competitions and hackathons. Proud to have led teams to success in Robocon and various tech challenges including E-Yantra and Inter IIT competitions.
+                When I'm not building simulators or debugging control algorithms, I will either be on tennis court of football field or watching a movie.
               </p>
               <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
                 From Maharashtra to Guwahati to Bengaluru - my journey has taught me the value of collaboration, innovation, and never stopping to learn. Always excited to work on challenging robotics problems!

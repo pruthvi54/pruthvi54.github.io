@@ -46,10 +46,10 @@ export default function HomePage() {
                   <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">5+</div>
                   <p className="text-sm text-slate-600 dark:text-slate-400">Major Projects</p>
                 </div>
-                <div>
+                {/* <div>
                   <div className="text-3xl font-bold text-pink-600 dark:text-pink-400">98.79</div>
                   <p className="text-sm text-slate-600 dark:text-slate-400">GATE Percentile</p>
-                </div>
+                </div> */}
               </div>
           </div>
 
