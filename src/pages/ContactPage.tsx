@@ -52,7 +52,7 @@ export default function ContactPage() {
       <section className="py-12">
         <div className="space-y-4 mb-12">
           <h1 className="text-5xl font-bold">Let's Connect</h1>
-          <p className="text-lg text-slate-600 dark:text-slate-400">I'd love to hear from you</p>
+          {/* <p className="text-lg text-slate-600 dark:text-slate-400">I'd love to hear from you</p> */}
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 mb-12">

@@ -56,7 +56,7 @@ export default function HomePage() {
           {/* Hero Image */}
           <div className="relative h-96 md:h-full flex items-center justify-center">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-400 rounded-2xl opacity-20 blur-3xl"></div>
-            <div className="relative w-64 h-64 rounded-2xl overflow-hidden shadow-2xl border-4 border-blue-500/20">
+            <div className="relative w-64 h-100 rounded-2xl overflow-hidden shadow-2xl border-4 border-blue-500/20">
               <img 
                 src="/pruthvi.jpg" 
                 alt="Pruthviraj Mane" 

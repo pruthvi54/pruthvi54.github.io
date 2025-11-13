@@ -3,52 +3,47 @@ import Layout from '@/components/Layout';
 export default function PublicationsPage() {
   const publications = [
     {
-      title: 'Efficient Multimodal Learning with Cross-Modal Attention',
-      authors: 'Chen, S., Smith, J., & Johnson, K.',
-      venue: 'International Conference on Machine Learning (ICML)',
+      title: 'AquaNav-Unmanned Surface Vehicle Simulator Using Unreal Engine 5',
+      authors: 'Mane, Pruthviraj and George, Allen and Khonde, Aditya and Sundaram, Suresh',
+      venue: 'OCEANS 2025 Brest',
+      year: 2025,
+      abstract: 'A high-fidelity Unmanned Surface Vehicle (USV) simulator built using Unreal Engine 5 for testing and validation of autonomous navigation algorithms in realistic maritime environments. The simulator provides photorealistic rendering, dynamic environmental control, and ROS integration for seamless sim-to-real transfer.',
+      links: { 
+        paper: 'https://ieeexplore.ieee.org/abstract/document/11104589',
+        github: 'https://github.com/AIRLabIISc/AquaNav'
+      }
+    },
+    {
+      title: 'EROAS: 3D Efficient Reactive Obstacle Avoidance System for Autonomous Underwater Vehicles using 2.5 D Forward-Looking Sonar',
+      authors: 'Mane, Pruthviraj and George, Allen Jacob and Makam, Rajini and Majumder, Rudrashis and Sundaram, Suresh',
+      venue: 'arXiv preprint',
       year: 2024,
-      abstract: 'This paper presents a novel approach to multimodal learning that reduces computational complexity while maintaining state-of-the-art performance on benchmark datasets. We introduce a cross-modal attention mechanism that efficiently combines information from multiple modalities.',
-      links: { pdf: '#', arxiv: '#', code: '#' }
+      abstract: 'Autonomous Underwater Vehicles (AUVs) have advanced significantly in obstacle detection and path planning. This paper proposes EROAS, a lightweight framework that augments a standard 2D FLS with a pivoting mechanism, effectively transforming it into a cost-efficient 2.5D sonar. The system integrates SPD2C for rapid gap detection, SCG for maintaining short-term obstacle memory, and ST-CBF for enforcing safety constraints.',
+      links: { 
+        paper: 'https://arxiv.org/abs/2411.05516',
+        github: 'https://github.com/AIRLabIISc/EROAS'
+      }
     },
     {
-      title: 'Real-Time 3D Object Detection in Point Clouds',
-      authors: 'Chen, S., Lee, M., & Wang, X.',
-      venue: 'IEEE/CVF Computer Vision and Pattern Recognition (CVPR)',
+      title: 'Safe navigation of autonomous underwater vehicles using physics-informed neural networks',
+      authors: 'Majumder, Rudrashis and Makam, Rajini and Mane, Pruthviraj and KS, Bharathwaj and Sundaram, Suresh',
+      venue: 'OCEANS 2024-Singapore',
+      year: 2024,
+      abstract: 'This paper presents a novel approach to safe navigation of autonomous underwater vehicles using physics-informed neural networks (PINNs). The method combines data-driven learning with physical constraints to ensure safe and robust navigation in complex underwater environments.',
+      links: { 
+        paper: 'https://ieeexplore.ieee.org/document/10682406',
+        github: 'https://github.com/AIRLabIISc/Vertical_PINN'
+      }
+    },
+    {
+      title: 'A comprehensive study on modelling and control of autonomous underwater vehicle',
+      authors: 'Makam, Rajini and Mane, Pruthviraj and Sundaram, Suresh and Sujit, PB',
+      venue: 'arXiv preprint (Book Chapter - Assistive Robotics, CRC Press)',
       year: 2023,
-      abstract: 'A novel architecture for real-time 3D object detection optimized for autonomous vehicles and robotics applications. Our method achieves state-of-the-art accuracy while maintaining real-time inference speeds on edge devices.',
-      links: { pdf: '#', arxiv: '#', code: '#' }
-    },
-    {
-      title: 'Building Multilingual Language Models for Low-Resource Languages',
-      authors: 'Chen, S., Patel, R., & Kumar, A.',
-      venue: 'Association for Computational Linguistics (ACL)',
-      year: 2023,
-      abstract: 'Techniques for efficiently training multilingual models with limited data, achieving competitive performance across 50+ languages. We propose novel data augmentation and transfer learning strategies specifically designed for low-resource scenarios.',
-      links: { pdf: '#', arxiv: '#', code: '#' }
-    },
-    {
-      title: 'Interpretable AI for Autonomous Systems',
-      authors: 'Chen, S., Brown, D., & Garcia, M.',
-      venue: 'IEEE Transactions on Robotics',
-      year: 2023,
-      abstract: 'Methods for building interpretable machine learning models for autonomous systems. We demonstrate how to balance model complexity with interpretability while maintaining high performance.',
-      links: { pdf: '#', arxiv: '#', code: '#' }
-    },
-    {
-      title: 'Efficient Fine-tuning of Large Language Models',
-      authors: 'Chen, S., Wilson, K., & Taylor, J.',
-      venue: 'Neural Information Processing Systems (NeurIPS)',
-      year: 2022,
-      abstract: 'Novel techniques for efficient fine-tuning of large language models with reduced memory requirements. Our approach enables fine-tuning on consumer-grade hardware while maintaining competitive performance.',
-      links: { pdf: '#', arxiv: '#', code: '#' }
-    },
-    {
-      title: 'Cross-Lingual Transfer Learning for NLP Tasks',
-      authors: 'Chen, S., Kumar, A., & Patel, R.',
-      venue: 'Findings of the Association for Computational Linguistics (ACL)',
-      year: 2022,
-      abstract: 'Investigating cross-lingual transfer learning mechanisms for low-resource NLP tasks. We propose novel training strategies that improve performance on target languages with minimal labeled data.',
-      links: { pdf: '#', arxiv: '#', code: '#' }
+      abstract: 'This comprehensive study presents modeling and robust control of autonomous underwater vehicles in the presence of uncertainties. The vehicle uses a 6-DOF approach considering ocean currents. The study compares conventional and sliding-mode control (SMC) methodologies, showcasing robustness against disturbances and parameter fluctuations.',
+      links: { 
+        paper: 'https://arxiv.org/abs/2312.02690'
+      }
     }
   ];
 
@@ -68,15 +63,16 @@ export default function PublicationsPage() {
               <p className="text-sm font-medium text-blue-600 dark:text-blue-400 mb-3">{pub.venue} ({pub.year})</p>
               <p className="text-slate-700 dark:text-slate-300 mb-4 leading-relaxed">{pub.abstract}</p>
               <div className="flex flex-wrap gap-3">
-                <a href={pub.links.pdf} className="text-xs font-medium text-blue-600 dark:text-blue-400 hover:underline">
-                  [PDF]
-                </a>
-                <a href={pub.links.arxiv} className="text-xs font-medium text-blue-600 dark:text-blue-400 hover:underline">
-                  [arXiv]
-                </a>
-                <a href={pub.links.code} className="text-xs font-medium text-blue-600 dark:text-blue-400 hover:underline">
-                  [Code]
-                </a>
+                {pub.links.paper && (
+                  <a href={pub.links.paper} target="_blank" rel="noopener noreferrer" className="text-xs font-medium text-blue-600 dark:text-blue-400 hover:underline">
+                    [Paper]
+                  </a>
+                )}
+                {pub.links.github && (
+                  <a href={pub.links.github} target="_blank" rel="noopener noreferrer" className="text-xs font-medium text-blue-600 dark:text-blue-400 hover:underline">
+                    [GitHub]
+                  </a>
+                )}
               </div>
             </div>
           ))}

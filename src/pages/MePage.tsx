@@ -21,7 +21,7 @@ export default function MePage() {
                 Currently at IISc AIRL, I focus on modeling and simulating autonomous underwater vehicles, developing everything from 6-DoF dynamics models to sonar-based obstacle avoidance systems. I believe in building end-to-end simulation environments that bridge the gap between theoretical research and practical applications.
               </p>
             </div>
-
+    
             <div>
               <h2 className="text-2xl font-bold mb-4">What Drives Me</h2>
               <div className="space-y-3">
@@ -49,21 +49,21 @@ export default function MePage() {
             <div className="bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-800">
               <h3 className="font-bold text-lg mb-6">Quick Facts</h3>
               <div className="space-y-4">
-                <div>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">Location</p>
-                  <p className="text-lg font-semibold">Bengaluru, India</p>
+                <div className="flex justify-between items-start gap-4">
+                  <span className="text-sm text-slate-600 dark:text-slate-400 font-medium shrink-0">Location:</span>
+                  <span className="text-lg font-semibold text-right">Bengaluru, India</span>
                 </div>
-                <div>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">Education</p>
-                  <p className="text-lg font-semibold">MS(Research), IIT Guwahati</p>
+                <div className="flex justify-between items-start gap-4">
+                  <span className="text-sm text-slate-600 dark:text-slate-400 font-medium shrink-0">Education:</span>
+                  <span className="text-lg font-semibold text-right">MS(Research), IIT Guwahati</span>
                 </div>
-                <div>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">Specialization</p>
-                  <p className="text-lg font-semibold">Robotics & Simulation</p>
+                <div className="flex justify-between items-start gap-4">
+                  <span className="text-sm text-slate-600 dark:text-slate-400 font-medium shrink-0">Specialization:</span>
+                  <span className="text-lg font-semibold text-right">Robotics & Simulation</span>
                 </div>
-                {/* <div>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">GATE Score</p>
-                  <p className="text-lg font-semibold">98.79 Percentile</p>
+                {/* <div className="flex justify-between items-start gap-4">
+                  <span className="text-sm text-slate-600 dark:text-slate-400 font-medium shrink-0">GATE Score:</span>
+                  <span className="text-lg font-semibold text-right">98.79 Percentile</span>
                 </div> */}
               </div>
             </div>
@@ -110,7 +110,7 @@ export default function MePage() {
                 When I'm not building simulators or debugging control algorithms, I will either be on tennis court of football field or watching a movie.
               </p>
               <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
-                From Maharashtra to Guwahati to Bengaluru - my journey has taught me the value of collaboration, innovation, and never stopping to learn. Always excited to work on challenging robotics problems!
+                My journey till today has taught me the value of collaboration, innovation, and never stopping to learn. Always excited to work on challenging robotics problems!
               </p>
             </div>
           </div>
