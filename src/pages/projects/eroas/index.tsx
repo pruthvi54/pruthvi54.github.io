@@ -299,9 +299,47 @@ export default function Eroas() {
                 <li className="text-justify">significantly smoother control commands (lower yaw rate oscillations).</li>
               </ul>
 
-              <p className="text-slate-900 dark:text-slate-100 leading-relaxed text-justify">
+              <p className="text-slate-900 dark:text-slate-100 leading-relaxed mb-4 text-justify">
                 These results confirm that EROAS can perform real-time, safe obstacle avoidance using only sonar data, with computational efficiency suitable for onboard embedded systems.
               </p>
+
+              {/* FIG 11 & SIDE.PNG - Two views of the same result (side by side) */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                  {imageErrors.has(6) ? (
+                    <div className="w-full h-64 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 text-center px-2">Image not found: {projectData.media.images[6].url}</p>
+                    </div>
+                  ) : (
+                    <img 
+                      src={projectData.media.images[6].url} 
+                      alt={projectData.media.images[6].alt}
+                      className="w-full h-64 object-cover rounded-lg shadow-md"
+                      onError={() => handleImageError(6)}
+                    />
+                  )}
+                  <p className="text-xs text-slate-600 dark:text-slate-200 mt-2 text-center">
+                    {projectData.media.images[6].caption}
+                  </p>
+                </div>
+                <div>
+                  {imageErrors.has(7) ? (
+                    <div className="w-full h-64 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 text-center px-2">Image not found: {projectData.media.images[7].url}</p>
+                    </div>
+                  ) : (
+                    <img 
+                      src={projectData.media.images[7].url} 
+                      alt={projectData.media.images[7].alt}
+                      className="w-full h-64 object-cover rounded-lg shadow-md"
+                      onError={() => handleImageError(7)}
+                    />
+                  )}
+                  <p className="text-xs text-slate-600 dark:text-slate-200 mt-2 text-center">
+                    {projectData.media.images[7].caption}
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* Efficiency and Real-Time Performance Section */}

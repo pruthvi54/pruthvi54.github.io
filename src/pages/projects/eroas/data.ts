@@ -104,7 +104,7 @@ export const projectData = {
   // ========================================
   media: {
     demoVideo: {
-      url: "/projects/eroas/videos/EROAS_demo.mp4", // Will be added
+      url: "/projects/eroas/videos/EROAS_Demo.mp4",
       thumbnail: null,
       caption: "EROAS in action - Watch the AUV scanning, detecting, and dynamically avoiding underwater obstacles within a simulated environment"
     },
@@ -138,6 +138,17 @@ export const projectData = {
         url: "/projects/eroas/images/auv_trajectory.png", 
         alt: "AUV trajectory in simulation demonstrating avoidance behavior", 
         caption: "IMAGE 6: AUV trajectory in simulation demonstrating avoidance behavior - Smooth, collision-free path through complex obstacles" 
+      },
+      // Fig 11 and side.png - two views of the same result (displayed side by side)
+      { 
+        url: "/projects/eroas/images/EROAS_Fig_11_a.jpg", 
+        alt: "EROAS Figure 11 - Top view of trajectory results", 
+        caption: "Figure 11: EROAS trajectory results - Top view" 
+      },
+      { 
+        url: "/projects/eroas/images/side.png", 
+        alt: "EROAS side view of trajectory results", 
+        caption: "Side view: EROAS trajectory results - Side perspective" 
       }
     ]
   },
