@@ -305,36 +305,40 @@ export default function Eroas() {
 
               {/* FIG 11 & SIDE.PNG - Two views of the same result (side by side) */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                <div>
-                  {imageErrors.has(6) ? (
-                    <div className="w-full min-h-64 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
-                      <p className="text-xs text-slate-500 dark:text-slate-400 text-center px-2">Image not found: {projectData.media.images[6].url}</p>
-                    </div>
-                  ) : (
-                    <img 
-                      src={projectData.media.images[6].url} 
-                      alt={projectData.media.images[6].alt}
-                      className="w-full h-auto object-contain rounded-lg shadow-md"
-                      onError={() => handleImageError(6)}
-                    />
-                  )}
+                <div className="flex flex-col">
+                  <div className="flex-grow">
+                    {imageErrors.has(6) ? (
+                      <div className="w-full min-h-64 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
+                        <p className="text-xs text-slate-500 dark:text-slate-400 text-center px-2">Image not found: {projectData.media.images[6].url}</p>
+                      </div>
+                    ) : (
+                      <img 
+                        src={projectData.media.images[6].url} 
+                        alt={projectData.media.images[6].alt}
+                        className="w-full h-auto object-contain rounded-lg shadow-md"
+                        onError={() => handleImageError(6)}
+                      />
+                    )}
+                  </div>
                   <p className="text-xs text-slate-600 dark:text-slate-200 mt-2 text-center">
                     {projectData.media.images[6].caption}
                   </p>
                 </div>
-                <div>
-                  {imageErrors.has(7) ? (
-                    <div className="w-full min-h-64 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
-                      <p className="text-xs text-slate-500 dark:text-slate-400 text-center px-2">Image not found: {projectData.media.images[7].url}</p>
-                    </div>
-                  ) : (
-                    <img 
-                      src={projectData.media.images[7].url} 
-                      alt={projectData.media.images[7].alt}
-                      className="w-full h-auto object-contain rounded-lg shadow-md"
-                      onError={() => handleImageError(7)}
-                    />
-                  )}
+                <div className="flex flex-col">
+                  <div className="flex-grow">
+                    {imageErrors.has(7) ? (
+                      <div className="w-full min-h-64 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
+                        <p className="text-xs text-slate-500 dark:text-slate-400 text-center px-2">Image not found: {projectData.media.images[7].url}</p>
+                      </div>
+                    ) : (
+                      <img 
+                        src={projectData.media.images[7].url} 
+                        alt={projectData.media.images[7].alt}
+                        className="w-full h-auto object-contain rounded-lg shadow-md"
+                        onError={() => handleImageError(7)}
+                      />
+                    )}
+                  </div>
                   <p className="text-xs text-slate-600 dark:text-slate-200 mt-2 text-center">
                     {projectData.media.images[7].caption}
                   </p>

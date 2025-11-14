@@ -1,9 +1,24 @@
 import { useLocation } from 'wouter';
 import { ArrowRight, Calendar } from 'lucide-react';
+import { useEffect } from 'react';
 import Layout from '@/components/Layout';
 
 export default function ProjectsPage() {
   const [, setLocation] = useLocation();
+
+  // Save and restore scroll position
+  useEffect(() => {
+    // Restore scroll position when returning to this page
+    const savedScrollPosition = sessionStorage.getItem('projectsPageScrollPosition');
+    if (savedScrollPosition) {
+      window.scrollTo(0, parseInt(savedScrollPosition, 10));
+    }
+
+    // Save scroll position when leaving this page
+    return () => {
+      sessionStorage.setItem('projectsPageScrollPosition', window.scrollY.toString());
+    };
+  }, []);
 
   // Projects organized by year
   const projectsByYear = {
