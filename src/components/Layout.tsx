@@ -138,7 +138,7 @@ export default function Layout({ children }: LayoutProps) {
       </nav>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-12 max-w-5xl">
+      <main className="container mx-auto px-6 py-12 max-w-7xl">
         {children}
       </main>
 
