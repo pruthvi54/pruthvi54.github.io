@@ -134,14 +134,14 @@ export default function Eroas() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div>
                   {imageErrors.has(0) ? (
-                    <div className="w-full h-64 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
+                    <div className="w-full min-h-64 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
                       <p className="text-xs text-slate-500 dark:text-slate-400 text-center px-2">Image not found: {projectData.media.images[0].url}</p>
                     </div>
                   ) : (
                     <img 
                       src={projectData.media.images[0].url} 
                       alt={projectData.media.images[0].alt}
-                      className="w-full h-64 object-cover rounded-lg shadow-md"
+                      className="w-full h-auto object-contain rounded-lg shadow-md"
                       onError={() => handleImageError(0)}
                     />
                   )}
@@ -151,14 +151,14 @@ export default function Eroas() {
                 </div>
                 <div>
                   {imageErrors.has(1) ? (
-                    <div className="w-full h-64 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
+                    <div className="w-full min-h-64 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
                       <p className="text-xs text-slate-500 dark:text-slate-400 text-center px-2">Image not found: {projectData.media.images[1].url}</p>
                     </div>
                   ) : (
                     <img 
                       src={projectData.media.images[1].url} 
                       alt={projectData.media.images[1].alt}
-                      className="w-full h-64 object-cover rounded-lg shadow-md"
+                      className="w-full h-auto object-contain rounded-lg shadow-md"
                       onError={() => handleImageError(1)}
                     />
                   )}
@@ -188,14 +188,14 @@ export default function Eroas() {
               {/* IMAGE 3 - After SPD²C (Control Framework) */}
               <div className="mb-6">
                 {imageErrors.has(2) ? (
-                  <div className="w-full h-80 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
+                  <div className="w-full min-h-80 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
                     <p className="text-xs text-slate-500 dark:text-slate-400 text-center px-2">Image not found: {projectData.media.images[2].url}</p>
                   </div>
                 ) : (
                   <img 
                     src={projectData.media.images[2].url} 
                     alt={projectData.media.images[2].alt}
-                    className="w-full h-80 object-cover rounded-lg shadow-md"
+                    className="w-full h-auto object-contain rounded-lg shadow-md"
                     onError={() => handleImageError(2)}
                   />
                 )}
@@ -215,14 +215,14 @@ export default function Eroas() {
               {/* IMAGE 4 - After SCG (Spatial Context) */}
               <div className="mb-6">
                 {imageErrors.has(3) ? (
-                  <div className="w-full h-80 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
+                  <div className="w-full min-h-80 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
                     <p className="text-xs text-slate-500 dark:text-slate-400 text-center px-2">Image not found: {projectData.media.images[3].url}</p>
                   </div>
                 ) : (
                   <img 
                     src={projectData.media.images[3].url} 
                     alt={projectData.media.images[3].alt}
-                    className="w-full h-80 object-cover rounded-lg shadow-md"
+                    className="w-full h-auto object-contain rounded-lg shadow-md"
                     onError={() => handleImageError(3)}
                   />
                 )}
@@ -252,14 +252,14 @@ export default function Eroas() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div>
                   {imageErrors.has(4) ? (
-                    <div className="w-full h-64 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
+                    <div className="w-full min-h-64 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
                       <p className="text-xs text-slate-500 dark:text-slate-400 text-center px-2">Image not found: {projectData.media.images[4].url}</p>
                     </div>
                   ) : (
                     <img 
                       src={projectData.media.images[4].url} 
                       alt={projectData.media.images[4].alt}
-                      className="w-full h-64 object-cover rounded-lg shadow-md"
+                      className="w-full h-auto object-contain rounded-lg shadow-md"
                       onError={() => handleImageError(4)}
                     />
                   )}
@@ -269,14 +269,14 @@ export default function Eroas() {
                 </div>
                 <div>
                   {imageErrors.has(5) ? (
-                    <div className="w-full h-64 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
+                    <div className="w-full min-h-64 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
                       <p className="text-xs text-slate-500 dark:text-slate-400 text-center px-2">Image not found: {projectData.media.images[5].url}</p>
                     </div>
                   ) : (
                     <img 
                       src={projectData.media.images[5].url} 
                       alt={projectData.media.images[5].alt}
-                      className="w-full h-64 object-cover rounded-lg shadow-md"
+                      className="w-full h-auto object-contain rounded-lg shadow-md"
                       onError={() => handleImageError(5)}
                     />
                   )}
@@ -307,14 +307,14 @@ export default function Eroas() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div>
                   {imageErrors.has(6) ? (
-                    <div className="w-full h-64 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
+                    <div className="w-full min-h-64 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
                       <p className="text-xs text-slate-500 dark:text-slate-400 text-center px-2">Image not found: {projectData.media.images[6].url}</p>
                     </div>
                   ) : (
                     <img 
                       src={projectData.media.images[6].url} 
                       alt={projectData.media.images[6].alt}
-                      className="w-full h-64 object-cover rounded-lg shadow-md"
+                      className="w-full h-auto object-contain rounded-lg shadow-md"
                       onError={() => handleImageError(6)}
                     />
                   )}
@@ -324,14 +324,14 @@ export default function Eroas() {
                 </div>
                 <div>
                   {imageErrors.has(7) ? (
-                    <div className="w-full h-64 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
+                    <div className="w-full min-h-64 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
                       <p className="text-xs text-slate-500 dark:text-slate-400 text-center px-2">Image not found: {projectData.media.images[7].url}</p>
                     </div>
                   ) : (
                     <img 
                       src={projectData.media.images[7].url} 
                       alt={projectData.media.images[7].alt}
-                      className="w-full h-64 object-cover rounded-lg shadow-md"
+                      className="w-full h-auto object-contain rounded-lg shadow-md"
                       onError={() => handleImageError(7)}
                     />
                   )}
