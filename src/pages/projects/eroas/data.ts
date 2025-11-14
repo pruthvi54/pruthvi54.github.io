@@ -120,7 +120,7 @@ export const projectData = {
         caption: "IMAGE 2: AUV navigating a cluttered simulated underwater environment - Demonstrating real-time obstacle avoidance capabilities" 
       },
       { 
-        url: "/projects/eroas/images/control_framework.png", 
+        url: "/projects/eroas/images/Block_diagram_final_2.jpeg", 
         alt: "EROAS control framework schematic", 
         caption: "IMAGE 3: EROAS control framework schematic - Architecture showing SPD²C, SCG, and ST-CBF modules working together" 
       },
