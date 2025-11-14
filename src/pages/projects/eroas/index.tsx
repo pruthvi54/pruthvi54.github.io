@@ -2,9 +2,16 @@ import { useLocation } from 'wouter';
 import { ArrowLeft, Github, ExternalLink, FileText } from 'lucide-react';
 import Layout from '@/components/Layout';
 import { projectData } from './data';
+import { useState } from 'react';
 
 export default function Eroas() {
   const [, setLocation] = useLocation();
+  const [imageErrors, setImageErrors] = useState<Set<number>>(new Set());
+  const [videoError, setVideoError] = useState(false);
+  
+  const handleImageError = (index: number) => {
+    setImageErrors(prev => new Set(prev).add(index));
+  };
 
   return (
     <Layout>
@@ -76,10 +83,25 @@ export default function Eroas() {
             {/* VIDEO FIRST - Before Overview */}
             {projectData.media.demoVideo.url && (
               <div className="mb-8">
-                <video controls className="w-full rounded-xl shadow-lg">
-                  <source src={projectData.media.demoVideo.url} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                {videoError ? (
+                  <div className="aspect-video bg-slate-200 dark:bg-slate-800 rounded-xl shadow-lg flex items-center justify-center">
+                    <p className="text-slate-600 dark:text-slate-400 text-center px-4">
+                      Video file not found: {projectData.media.demoVideo.url}
+                      <br />
+                      <span className="text-xs">Please ensure the file exists at: public/projects/eroas/videos/</span>
+                    </p>
+                  </div>
+                ) : (
+                  <video 
+                    controls 
+                    className="w-full rounded-xl shadow-lg" 
+                    preload="metadata"
+                    onError={() => setVideoError(true)}
+                  >
+                    <source src={projectData.media.demoVideo.url} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                )}
                 <p className="text-sm text-slate-600 dark:text-slate-200 text-center mt-3 italic">
                   {projectData.media.demoVideo.caption}
                 </p>
@@ -111,21 +133,35 @@ export default function Eroas() {
               {/* IMAGE 1 & 2 - After Reinventing Sonar Perception */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div>
-                  <img 
-                    src={projectData.media.images[0].url} 
-                    alt={projectData.media.images[0].alt}
-                    className="w-full h-64 object-cover rounded-lg shadow-md"
-                  />
+                  {imageErrors.has(0) ? (
+                    <div className="w-full h-64 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 text-center px-2">Image not found: {projectData.media.images[0].url}</p>
+                    </div>
+                  ) : (
+                    <img 
+                      src={projectData.media.images[0].url} 
+                      alt={projectData.media.images[0].alt}
+                      className="w-full h-64 object-cover rounded-lg shadow-md"
+                      onError={() => handleImageError(0)}
+                    />
+                  )}
                   <p className="text-xs text-slate-600 dark:text-slate-200 mt-2 text-center">
                     {projectData.media.images[0].caption}
                   </p>
                 </div>
                 <div>
-                  <img 
-                    src={projectData.media.images[1].url} 
-                    alt={projectData.media.images[1].alt}
-                    className="w-full h-64 object-cover rounded-lg shadow-md"
-                  />
+                  {imageErrors.has(1) ? (
+                    <div className="w-full h-64 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 text-center px-2">Image not found: {projectData.media.images[1].url}</p>
+                    </div>
+                  ) : (
+                    <img 
+                      src={projectData.media.images[1].url} 
+                      alt={projectData.media.images[1].alt}
+                      className="w-full h-64 object-cover rounded-lg shadow-md"
+                      onError={() => handleImageError(1)}
+                    />
+                  )}
                   <p className="text-xs text-slate-600 dark:text-slate-200 mt-2 text-center">
                     {projectData.media.images[1].caption}
                   </p>
@@ -151,11 +187,18 @@ export default function Eroas() {
 
               {/* IMAGE 3 - After SPD²C (Control Framework) */}
               <div className="mb-6">
-                <img 
-                  src={projectData.media.images[2].url} 
-                  alt={projectData.media.images[2].alt}
-                  className="w-full h-80 object-cover rounded-lg shadow-md"
-                />
+                {imageErrors.has(2) ? (
+                  <div className="w-full h-80 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
+                    <p className="text-xs text-slate-500 dark:text-slate-400 text-center px-2">Image not found: {projectData.media.images[2].url}</p>
+                  </div>
+                ) : (
+                  <img 
+                    src={projectData.media.images[2].url} 
+                    alt={projectData.media.images[2].alt}
+                    className="w-full h-80 object-cover rounded-lg shadow-md"
+                    onError={() => handleImageError(2)}
+                  />
+                )}
                 <p className="text-xs text-slate-600 dark:text-slate-200 mt-2 text-center">
                   {projectData.media.images[2].caption}
                 </p>
@@ -171,11 +214,18 @@ export default function Eroas() {
 
               {/* IMAGE 4 - After SCG (Spatial Context) */}
               <div className="mb-6">
-                <img 
-                  src={projectData.media.images[3].url} 
-                  alt={projectData.media.images[3].alt}
-                  className="w-full h-80 object-cover rounded-lg shadow-md"
-                />
+                {imageErrors.has(3) ? (
+                  <div className="w-full h-80 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
+                    <p className="text-xs text-slate-500 dark:text-slate-400 text-center px-2">Image not found: {projectData.media.images[3].url}</p>
+                  </div>
+                ) : (
+                  <img 
+                    src={projectData.media.images[3].url} 
+                    alt={projectData.media.images[3].alt}
+                    className="w-full h-80 object-cover rounded-lg shadow-md"
+                    onError={() => handleImageError(3)}
+                  />
+                )}
                 <p className="text-xs text-slate-600 dark:text-slate-200 mt-2 text-center">
                   {projectData.media.images[3].caption}
                 </p>
@@ -201,21 +251,35 @@ export default function Eroas() {
               {/* IMAGE 5 & 6 - Simulation Environment and Trajectory */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div>
-                  <img 
-                    src={projectData.media.images[4].url} 
-                    alt={projectData.media.images[4].alt}
-                    className="w-full h-64 object-cover rounded-lg shadow-md"
-                  />
+                  {imageErrors.has(4) ? (
+                    <div className="w-full h-64 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 text-center px-2">Image not found: {projectData.media.images[4].url}</p>
+                    </div>
+                  ) : (
+                    <img 
+                      src={projectData.media.images[4].url} 
+                      alt={projectData.media.images[4].alt}
+                      className="w-full h-64 object-cover rounded-lg shadow-md"
+                      onError={() => handleImageError(4)}
+                    />
+                  )}
                   <p className="text-xs text-slate-600 dark:text-slate-200 mt-2 text-center">
                     {projectData.media.images[4].caption}
                   </p>
                 </div>
                 <div>
-                  <img 
-                    src={projectData.media.images[5].url} 
-                    alt={projectData.media.images[5].alt}
-                    className="w-full h-64 object-cover rounded-lg shadow-md"
-                  />
+                  {imageErrors.has(5) ? (
+                    <div className="w-full h-64 bg-slate-200 dark:bg-slate-800 rounded-lg shadow-md flex items-center justify-center">
+                      <p className="text-xs text-slate-500 dark:text-slate-400 text-center px-2">Image not found: {projectData.media.images[5].url}</p>
+                    </div>
+                  ) : (
+                    <img 
+                      src={projectData.media.images[5].url} 
+                      alt={projectData.media.images[5].alt}
+                      className="w-full h-64 object-cover rounded-lg shadow-md"
+                      onError={() => handleImageError(5)}
+                    />
+                  )}
                   <p className="text-xs text-slate-600 dark:text-slate-200 mt-2 text-center">
                     {projectData.media.images[5].caption}
                   </p>
