@@ -7,7 +7,7 @@ export const projectData = {
   // ========================================
   title: "EROAS: Forward-Looking Sonar Based AUV Obstacle Avoidance",
   shortDescription: "Intelligent Navigation Beneath the Waves - A real-time, computationally lightweight obstacle avoidance framework for AUVs using forward-looking sonar",
-  status: "Published", // Active, Published, or Completed
+  status: "Submitted", // Submitted, Published, or Completed
   
   // ========================================
   // PROJECT DETAILS
@@ -20,7 +20,7 @@ export const projectData = {
   // ========================================
   // TAGS/TECHNOLOGIES
   // ========================================
-  tags: ['ROS', 'Gazebo', 'DAVE Simulator', 'Control Theory', 'Sonar', 'AUV', 'Obstacle Avoidance', 'Real-Time Systems'],
+  tags: ['ROS', 'Gazebo', 'Sonar', 'AUV', 'Obstacle Avoidance', 'Real-Time Systems'],
   
   // ========================================
   // LINKS (Set to null if not available)
