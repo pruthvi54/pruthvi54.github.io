@@ -46,7 +46,8 @@ export default function ProjectsPage() {
         tags: ['Robotics', 'Path Planning', 'Research'],
         status: 'Ongoing',
         details: 'Novel approach for efficient robot operating area optimization. Details available in published arXiv paper.',
-        detailsLink: '/projects/eroas'
+        detailsLink: '/projects/eroas',
+        image: '/projects/eroas/images/coral_rexrov.png'
       }
     ],
     2024: [
@@ -169,7 +170,7 @@ export default function ProjectsPage() {
 
   return (
     <Layout>
-      <section className="py-12">
+      <section className="pt-4 pb-2">
         <div className="space-y-4 mb-16">
           <h1 className="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white">Projects</h1>
           

@@ -49,7 +49,7 @@ export default function PublicationsPage() {
 
   return (
     <Layout>
-      <section className="py-12">
+      <section className="pt-4 pb-2">
         <div className="space-y-4 mb-12">
           <h1 className="text-5xl font-bold">Publications</h1>
           <p className="text-lg text-slate-600 dark:text-slate-400">Academic contributions and research papers</p>

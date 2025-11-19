@@ -42,11 +42,9 @@ export default function Layout({ children }: LayoutProps) {
   const navItems = [
     { path: '/', label: 'Home' },
     { path: '/experience', label: 'Experience' },
-    { path: '/research', label: 'Research' },
     { path: '/projects', label: 'Projects' },
     { path: '/publications', label: 'Publications' },
     { path: '/me', label: 'Me' },
-    { path: '/contact', label: 'Contact' },
   ];
 
   const isActive = (path: string) => location === path;
@@ -138,12 +136,12 @@ export default function Layout({ children }: LayoutProps) {
       </nav>
 
       {/* Main Content */}
-      <main className="container mx-auto px-6 py-12 max-w-7xl">
+      <main className="container mx-auto px-6 pt-6 pb-4 max-w-7xl">
         {children}
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-200 dark:border-slate-800 mt-20 pt-12 pb-8 text-center text-slate-600 dark:text-slate-400">
+      <footer className="border-t border-slate-200 dark:border-slate-800 mt-8 pt-8 pb-6 text-center text-slate-600 dark:text-slate-400">
         <p className="mb-2">Designed and built with React, Tailwind CSS, and ❤️</p>
         <p className="text-sm">© {new Date().getFullYear()} Pruthviraj Mane. All rights reserved. Built with ❤️</p>
       </footer>

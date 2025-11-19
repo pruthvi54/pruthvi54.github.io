@@ -1,10 +1,10 @@
 import Layout from '@/components/Layout';
-import { Zap } from 'lucide-react';
+import { Zap, Mail, Linkedin, Github, Twitter } from 'lucide-react';
 
 export default function MePage() {
   return (
     <Layout>
-      <section className="py-12">
+      <section className="pt-4 pb-2">
         <div className="space-y-4 mb-12">
           <h1 className="text-5xl font-bold">About Me</h1>
           <p className="text-lg text-slate-600 dark:text-slate-400">Beyond research and code</p>
@@ -103,16 +103,69 @@ export default function MePage() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
 
-            <div className="bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl p-8 border border-green-200 dark:border-green-800">
-              <h3 className="font-bold text-lg mb-4">Beyond Work</h3>
-              <p className="text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
-                When I'm not building simulators or debugging control algorithms, I will either be on tennis court of football field or watching a movie.
-              </p>
-              <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
-                My journey till today has taught me the value of collaboration, innovation, and never stopping to learn. Always excited to work on challenging robotics problems!
-              </p>
+        {/* Research Interests Section */}
+        <div className="mt-16">
+          <h2 className="text-3xl font-bold mb-8">Research Interests</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="p-6 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 border border-slate-200 dark:border-slate-700">
+              <h3 className="font-bold text-xl mb-2 text-slate-900 dark:text-slate-100">Robotics and Autonomous Systems</h3>
             </div>
+            <div className="p-6 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 border border-slate-200 dark:border-slate-700">
+              <h3 className="font-bold text-xl mb-2 text-slate-900 dark:text-slate-100">Autonomous Marine Systems</h3>
+            </div>
+            <div className="p-6 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 border border-slate-200 dark:border-slate-700">
+              <h3 className="font-bold text-xl mb-2 text-slate-900 dark:text-slate-100">Modeling, Simulation and Digital Twins</h3>
+            </div>
+            <div className="p-6 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 border border-slate-200 dark:border-slate-700">
+              <h3 className="font-bold text-xl mb-2 text-slate-900 dark:text-slate-100">Vision Language Action models</h3>
+            </div>
+          </div>
+        </div>
+
+        {/* Contact Information */}
+        <div className="mt-16">
+          <h2 className="text-3xl font-bold mb-8">Get In Touch</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <a
+              href="mailto:pruthviraj3629@gmail.com"
+              className="group flex items-center justify-start gap-3 px-6 py-4 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all"
+            >
+              <Mail className="w-5 h-5 text-slate-600 dark:text-slate-400 shrink-0" />
+              <span className="text-slate-900 dark:text-slate-100 font-medium group-hover:underline">pruthviraj3629@gmail.com</span>
+            </a>
+
+            <a
+              href="https://linkedin.com/in/pruthviraj-mane"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center justify-start gap-3 px-6 py-4 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all"
+            >
+              <Linkedin className="w-5 h-5 text-slate-600 dark:text-slate-400 shrink-0" />
+              <span className="text-slate-900 dark:text-slate-100 font-medium group-hover:underline">pruthviraj-mane</span>
+            </a>
+
+            <a
+              href="https://github.com/pruthvi54"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center justify-start gap-3 px-6 py-4 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all"
+            >
+              <Github className="w-5 h-5 text-slate-600 dark:text-slate-400 shrink-0" />
+              <span className="text-slate-900 dark:text-slate-100 font-medium group-hover:underline">pruthvi54</span>
+            </a>
+
+            <a
+              href="https://x.com/pruthvi_mane_"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center justify-start gap-3 px-6 py-4 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all"
+            >
+              <Twitter className="w-5 h-5 text-slate-600 dark:text-slate-400 shrink-0" />
+              <span className="text-slate-900 dark:text-slate-100 font-medium group-hover:underline">@pruthvi_mane_</span>
+            </a>
           </div>
         </div>
       </section>
