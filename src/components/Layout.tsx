@@ -57,7 +57,7 @@ export default function Layout({ children }: LayoutProps) {
           ? 'bg-white/90 dark:bg-slate-950/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm' 
           : 'bg-transparent'
       }`}>
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="container mx-auto px-4 py-5 flex items-center justify-between">
           <button
             onClick={() => setLocation('/')}
             className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
@@ -142,8 +142,10 @@ export default function Layout({ children }: LayoutProps) {
 
       {/* Footer */}
       <footer className="border-t border-slate-200 dark:border-slate-800 mt-8 pt-8 pb-6 text-center text-slate-600 dark:text-slate-400">
-        <p className="mb-2">Designed and built with React, Tailwind CSS, and ❤️</p>
-        <p className="text-sm">© {new Date().getFullYear()} Pruthviraj Mane. All rights reserved. Built with ❤️</p>
+        <div className="container mx-auto px-6 max-w-7xl">
+          <p className="mb-2">Designed and built with React, Tailwind CSS, and ❤️</p>
+          <p className="text-sm">© {new Date().getFullYear()} Pruthviraj Mane. All rights reserved. Built with ❤️</p>
+        </div>
       </footer>
     </div>
   );

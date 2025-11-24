@@ -1,13 +1,20 @@
 import Layout from '@/components/Layout';
-import { Zap, Mail, Linkedin, Github, Twitter } from 'lucide-react';
+import { Zap, Mail, Linkedin, Github, Twitter, Download } from 'lucide-react';
 
 export default function MePage() {
   return (
     <Layout>
       <section className="pt-4 pb-2">
-        <div className="space-y-4 mb-12">
+        <div className="flex items-center justify-between mb-12">
           <h1 className="text-5xl font-bold">About Me</h1>
-          <p className="text-lg text-slate-600 dark:text-slate-400">Beyond research and code</p>
+          <a
+            href="/CV.pdf"
+            download="Pruthviraj_Mane_CV.pdf"
+            className="flex items-center gap-2 px-6 py-3 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 hover:bg-green-600 hover:text-white dark:hover:bg-green-600 rounded-lg font-medium transition-all border border-green-200 dark:border-green-800"
+          >
+            <Download className="w-5 h-5" />
+            Download CV
+          </a>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
@@ -108,20 +115,27 @@ export default function MePage() {
 
         {/* Research Interests Section */}
         <div className="mt-16">
-          <h2 className="text-3xl font-bold mb-8">Research Interests</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="p-6 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 border border-slate-200 dark:border-slate-700">
-              <h3 className="font-bold text-xl mb-2 text-slate-900 dark:text-slate-100">Robotics and Autonomous Systems</h3>
-            </div>
-            <div className="p-6 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 border border-slate-200 dark:border-slate-700">
-              <h3 className="font-bold text-xl mb-2 text-slate-900 dark:text-slate-100">Autonomous Marine Systems</h3>
-            </div>
-            <div className="p-6 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 border border-slate-200 dark:border-slate-700">
-              <h3 className="font-bold text-xl mb-2 text-slate-900 dark:text-slate-100">Modeling, Simulation and Digital Twins</h3>
-            </div>
-            <div className="p-6 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 border border-slate-200 dark:border-slate-700">
-              <h3 className="font-bold text-xl mb-2 text-slate-900 dark:text-slate-100">Vision Language Action models</h3>
-            </div>
+          <h2 className="text-3xl font-bold mb-6">Research Interests</h2>
+          <div className="flex flex-wrap gap-4">
+            <span className="text-lg text-slate-700 dark:text-slate-300">Robotics and Autonomous Systems</span>
+            <span className="text-slate-400 dark:text-slate-600">•</span>
+            <span className="text-lg text-slate-700 dark:text-slate-300">Autonomous Marine Systems</span>
+            <span className="text-slate-400 dark:text-slate-600">•</span>
+            <span className="text-lg text-slate-700 dark:text-slate-300">Modeling, Simulation and Digital Twins</span>
+            <span className="text-slate-400 dark:text-slate-600">•</span>
+            <span className="text-lg text-slate-700 dark:text-slate-300">Vision Language Action models</span>
+          </div>
+        </div>
+
+        {/* Beyond Research and Code Section */}
+        <div className="mt-16">
+          <h2 className="text-3xl font-bold mb-8">Beyond Research and Code</h2>
+          <div className="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
+            <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
+              When I'm not coding or debugging simulations, I'll be either playing some sports or on by bike. 
+              Lets play tennis sometime!
+              I believe in exploration because that gives you third person perspective of your own mess.
+            </p>
           </div>
         </div>
 

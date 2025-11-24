@@ -7,7 +7,7 @@ export default function HomePage() {
 
   return (
     <Layout>
-      <section className="pt-8 pb-2 min-h-[calc(100vh-21rem)]">
+      <section className="pt-12 pb-2 min-h-[calc(100vh-21rem)]">
         <div className="grid md:grid-cols-2 gap-12 items-center w-full">
           <div className="space-y-8">
             <div className="space-y-4">
