@@ -14,14 +14,14 @@ export default function ExperiencePage() {
       company: 'IIT Guwahati - Emobility Program',
       period: 'Aug 2020 - Jul 2022',
       description: 'Specialized in electric vehicle dynamics, stability analysis, and advanced control systems for automotive applications.',
-      highlights: ['EV torque vectoring research', 'LQR/MPC/SMC controllers', 'CGPA: 7.76', 'Inter IIT Tech Meet participation']
+      highlights: ['EV torque vectoring research', 'Lateral vehicle stability improvement', 'LQR/MPC/SMC controllers']
     },
     {
       title: 'Team Captain, Robocon',
       company: 'Walchand College of Engineering',
       period: 'Jan 2018 - May 2019',
       description: 'Led a 30-member interdisciplinary team in ABU Robocon 2018, achieving All India Rank 38 out of 107 participating teams.',
-      highlights: ['AIR 38/107 in Robocon 2018', '30-member team leadership', 'Autonomous agricultural robot', 'SolidWorks design and prototyping']
+      highlights: ['AIR 38/107 in Robocon 2018', '30-member team leadership', 'Autonomous agricultural robot', 'CAD design and prototyping']
     }
   ];
 

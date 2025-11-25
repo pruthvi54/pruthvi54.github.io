@@ -1,20 +1,21 @@
 import Layout from '@/components/Layout';
-import { Zap, Mail, Linkedin, Github, Twitter, Download } from 'lucide-react';
+import { Zap, Mail, Linkedin, Github, Twitter, FileText } from 'lucide-react';
+import { useLocation } from 'wouter';
 
 export default function MePage() {
+  const [, setLocation] = useLocation();
   return (
     <Layout>
       <section className="pt-4 pb-2">
         <div className="flex items-center justify-between mb-12">
           <h1 className="text-5xl font-bold">About Me</h1>
-          <a
-            href="/CV.pdf"
-            download="Pruthviraj_Mane_CV.pdf"
+          <button
+            onClick={() => setLocation('/request-cv')}
             className="flex items-center gap-2 px-6 py-3 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 hover:bg-green-600 hover:text-white dark:hover:bg-green-600 rounded-lg font-medium transition-all border border-green-200 dark:border-green-800"
           >
-            <Download className="w-5 h-5" />
-            Download CV
-          </a>
+            <FileText className="w-5 h-5" />
+            Request CV
+          </button>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">

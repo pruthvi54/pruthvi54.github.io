@@ -6,6 +6,8 @@ import ExperiencePage from "@/pages/ExperiencePage";
 import ProjectsPage from "@/pages/ProjectsPage";
 import PublicationsPage from "@/pages/PublicationsPage";
 import MePage from "@/pages/MePage";
+import RequestCVPage from "@/pages/RequestCVPage";
+import RequestSuccessPage from "@/pages/RequestSuccessPage";
 
 // Project detail pages
 import AuvSimulationProject from "@/pages/projects/auv-simulation";
@@ -66,6 +68,8 @@ function Router() {
       
       <Route path="/publications" component={PublicationsPage} />
       <Route path="/me" component={MePage} />
+      <Route path="/request-cv" component={RequestCVPage} />
+      <Route path="/request-success" component={RequestSuccessPage} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
