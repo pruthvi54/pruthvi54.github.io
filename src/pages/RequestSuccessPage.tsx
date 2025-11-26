@@ -17,26 +17,15 @@ export default function RequestSuccessPage() {
           {/* Success Message */}
           <h1 className="text-5xl font-bold mb-6">Request Submitted!</h1>
           
-          <div className="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 rounded-2xl p-8 md:p-12 border border-slate-200 dark:border-slate-700 shadow-lg mb-8">
+          <div className="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 rounded-2xl p-8 md:p-12 border border-slate-200 dark:border-slate-700 shadow-lg mb-8 text-left">
             <Mail className="w-10 h-10 text-green-600 dark:text-green-400 mx-auto mb-4" />
             <p className="text-xl text-slate-700 dark:text-slate-300 leading-relaxed mb-4">
               Your CV request has been submitted successfully.
             </p>
-            <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+            <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
               I will get back to you soon with my CV and additional information.
             </p>
-          </div>
-
-          {/* What's Next */}
-          <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800 mb-8">
-            <h2 className="text-lg font-semibold mb-3 text-slate-800 dark:text-slate-200">
-              What happens next?
-            </h2>
-            <ul className="text-left space-y-2 text-slate-600 dark:text-slate-400">
-              <li className="flex items-start gap-2">
-                <span className="text-green-600 dark:text-green-400 mt-1">✓</span>
-                <span>You'll receive my CV via email within 24-48 hours</span>
-              </li>
+            <ul className="space-y-2 text-slate-600 dark:text-slate-400">
               <li className="flex items-start gap-2">
                 <span className="text-green-600 dark:text-green-400 mt-1">✓</span>
                 <span>Check your spam folder if you don't see it in your inbox</span>
@@ -60,7 +49,7 @@ export default function RequestSuccessPage() {
             
             <button
               onClick={() => setLocation('/me')}
-              className="flex items-center justify-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-all shadow-md"
+              className="flex items-center justify-center gap-2 px-6 py-3 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600 rounded-lg font-medium transition-all"
             >
               Learn More About Me
             </button>
