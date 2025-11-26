@@ -1,7 +1,61 @@
 import Layout from '@/components/Layout';
-import { FileText, Mail, Building2, MessageSquare } from 'lucide-react';
+import { FileText, Mail, Building2, MessageSquare, AlertCircle } from 'lucide-react';
+import { useLocation } from 'wouter';
+import { useState } from 'react';
+
+// ⚠️ SETUP REQUIRED: Replace this with your actual Formspree Form ID
+// Get it from: https://formspree.io/ → Create Form → Copy the ID (e.g., "mabcd1234")
+const FORMSPREE_ENDPOINT = "xjkdqabv";
+const IS_TEST_MODE = FORMSPREE_ENDPOINT === "YOUR_FORMSPREE_ID";
 
 export default function RequestCVPage() {
+  const [, setLocation] = useLocation();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    if (IS_TEST_MODE) {
+      // Test mode: Just redirect to success page for UI testing
+      // In production, replace FORMSPREE_ENDPOINT with your actual Formspree ID
+      setIsSubmitting(true);
+      setTimeout(() => {
+        setLocation('/request-success');
+      }, 500);
+      return;
+    }
+
+    // Real mode: Submit to Formspree
+    setIsSubmitting(true);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    
+    // Add redirect URL for Formspree
+    formData.append('_redirect', `${window.location.origin}/request-success`);
+    
+    try {
+      const response = await fetch(`https://formspree.io/f/${FORMSPREE_ENDPOINT}`, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        // Redirect to success page
+        setLocation('/request-success');
+      } else {
+        const data = await response.json();
+        alert(`Error: ${data.error || 'Form submission failed. Please try again or email me directly.'}`);
+        setIsSubmitting(false);
+      }
+    } catch (error) {
+      alert('Network error. Please try again or email me directly at pruthviraj3629@gmail.com');
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <Layout>
       <section className="pt-4 pb-2">
@@ -17,29 +71,27 @@ export default function RequestCVPage() {
             </p>
           </div>
 
+          {/* Test Mode Notice */}
+          {IS_TEST_MODE && (
+            <div className="mb-6 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl p-4 flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 text-yellow-600 dark:text-yellow-400 shrink-0 mt-0.5" />
+              <div className="text-sm">
+                <p className="font-semibold text-yellow-800 dark:text-yellow-300 mb-1">
+                  Test Mode Active
+                </p>
+                <p className="text-yellow-700 dark:text-yellow-400">
+                  Form submissions are currently in test mode. To enable email notifications, please set up Formspree and update the <code className="bg-yellow-100 dark:bg-yellow-900/40 px-1 rounded">FORMSPREE_ENDPOINT</code> in <code className="bg-yellow-100 dark:bg-yellow-900/40 px-1 rounded">RequestCVPage.tsx</code>
+                </p>
+              </div>
+            </div>
+          )}
+
           {/* Form Card */}
           <div className="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 rounded-2xl p-8 md:p-12 border border-slate-200 dark:border-slate-700 shadow-lg">
             <form 
-              action="https://formspree.io/f/YOUR_FORMSPREE_ID" 
-              method="POST"
+              onSubmit={handleSubmit}
               className="space-y-6"
             >
-              {/* 
-                SETUP INSTRUCTIONS:
-                1. Go to https://formspree.io/ and sign up (free)
-                2. Create a new form
-                3. Copy your form endpoint ID (looks like: mabcd1234)
-                4. Replace "YOUR_FORMSPREE_ID" above with your actual ID
-                5. Update the _redirect URL below to match your GitHub Pages domain
-              */}
-              
-              {/* Hidden redirect field - Update with your actual domain */}
-              <input 
-                type="hidden" 
-                name="_redirect" 
-                value="https://pruthvi54.github.io/request-success" 
-              />
-              
               {/* Email Field */}
               <div>
                 <label 
@@ -113,10 +165,11 @@ export default function RequestCVPage() {
               <div className="pt-4">
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900"
+                  disabled={isSubmitting}
+                  className="w-full flex items-center justify-center gap-3 px-8 py-4 bg-green-600 hover:bg-green-700 disabled:bg-green-400 disabled:cursor-not-allowed text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900"
                 >
                   <FileText className="w-5 h-5" />
-                  Submit Request
+                  {isSubmitting ? 'Submitting...' : 'Submit Request'}
                 </button>
               </div>
 

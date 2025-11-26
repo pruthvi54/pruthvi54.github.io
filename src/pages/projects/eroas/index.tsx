@@ -452,7 +452,7 @@ export default function Eroas() {
                           className="block text-blue-600 dark:text-blue-400 hover:underline"
                         >
                           {work.title}
-                        </a>
+                          </a>
                       ))}
                     </div>
                   </div>

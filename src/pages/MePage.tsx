@@ -128,18 +128,6 @@ export default function MePage() {
           </div>
         </div>
 
-        {/* Beyond Research and Code Section */}
-        <div className="mt-16">
-          <h2 className="text-3xl font-bold mb-8">Beyond Research and Code</h2>
-          <div className="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
-            <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
-              When I'm not coding or debugging simulations, I'll be either playing some sports or on by bike. 
-              Lets play tennis sometime!
-              I believe in exploration because that gives you third person perspective of your own mess.
-            </p>
-          </div>
-        </div>
-
         {/* Contact Information */}
         <div className="mt-16">
           <h2 className="text-3xl font-bold mb-8">Get In Touch</h2>
