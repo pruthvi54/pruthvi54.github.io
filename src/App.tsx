@@ -8,6 +8,7 @@ import PublicationsPage from "@/pages/PublicationsPage";
 import MePage from "@/pages/MePage";
 import RequestCVPage from "@/pages/RequestCVPage";
 import RequestSuccessPage from "@/pages/RequestSuccessPage";
+import InsightsPage from "@/pages/InsightsPage";
 
 // Project detail pages
 import AuvSimulationProject from "@/pages/projects/auv-simulation";
@@ -68,6 +69,7 @@ function Router() {
       
       <Route path="/publications" component={PublicationsPage} />
       <Route path="/me" component={MePage} />
+      <Route path="/insights" component={InsightsPage} />
       <Route path="/request-cv" component={RequestCVPage} />
       <Route path="/request-success" component={RequestSuccessPage} />
       <Route path="/404" component={NotFound} />

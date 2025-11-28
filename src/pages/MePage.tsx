@@ -54,7 +54,7 @@ export default function MePage() {
           </div>
 
           <div className="space-y-6">
-            <div className="bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-800">
+            <div className="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700">
               <h3 className="font-bold text-lg mb-6">Quick Facts</h3>
               <div className="space-y-4">
                 <div className="flex justify-between items-start gap-4">

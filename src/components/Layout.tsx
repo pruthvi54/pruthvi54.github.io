@@ -44,6 +44,7 @@ export default function Layout({ children }: LayoutProps) {
     { path: '/experience', label: 'Experience' },
     { path: '/projects', label: 'Projects' },
     { path: '/publications', label: 'Publications' },
+    { path: '/insights', label: 'Insights' },
     { path: '/me', label: 'Me' },
   ];
 
