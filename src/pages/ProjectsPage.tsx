@@ -173,7 +173,9 @@ export default function ProjectsPage() {
       <section className="pt-4 pb-2">
         <div className="space-y-4 mb-16">
           <h1 className="text-5xl md:text-6xl font-bold text-slate-900 dark:text-white">Projects</h1>
-          
+          <p className="text-sm md:text-base text-slate-600 dark:text-slate-400">
+            (Website is under construction and content is being uploaded.)
+          </p>
         </div>
 
         {/* Year-wise project listing */}

@@ -63,7 +63,7 @@ export default function HomePage() {
             <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-400 rounded-2xl opacity-20 blur-3xl"></div>
             <div className="relative w-64 h-100 rounded-2xl overflow-hidden shadow-2xl border-4 border-blue-500/20">
               <img 
-                src="/pruthvi.jpg" 
+                src="/pruthvi_bgless.png" 
                 alt="Pruthviraj Mane" 
                 className="w-full h-full object-cover"
               />

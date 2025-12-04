@@ -12,7 +12,7 @@ const insights = [
   },
   {
     title: 'Bridging ROS-Gazebo physics with Unreal Engine 5 visuals for underwater robotics',
-    date: 'January 2024',
+    date: 'December 2024',
     summary:
       'Explained how pairing ROS-Gazebo dynamics with UE5 visuals unlocks better perception research and sim-to-real workflows for underwater vehicles.',
     link: 'https://www.linkedin.com/posts/pruthviraj-mane_simulation-unrealengine-rosgazebo-activity-7273612559923003393-Y8wh?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAB7p0l0BJtwvHhI4dkaV0q11qltxWLgJvCc',
@@ -26,13 +26,9 @@ export default function InsightsPage() {
       <section className="pt-4 pb-2">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <p className="text-sm uppercase tracking-widest text-slate-500 dark:text-slate-400">
-              Field Notes & Updates
-            </p>
             <h1 className="text-5xl font-bold">Insights</h1>
             <p className="mt-3 text-lg text-slate-600 dark:text-slate-400 max-w-2xl">
-              A running log of thoughts, demos, and experiments that I share publicly. Latest posts appear
-              first—expect deep dives on simulation, sim-to-real autonomy, and robotics research culture.
+              A running log of thoughts, demos, and experiments that I share publicly.
             </p>
           </div>
         </div>
