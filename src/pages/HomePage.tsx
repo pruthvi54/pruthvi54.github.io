@@ -18,7 +18,7 @@ export default function HomePage() {
                   Hi, I'm <span className="bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">Pruthviraj Mane</span>
                 </h1>
                 <p className="text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
-                Robotics engineer focused on high-fidelity system modeling, simulation, and autonomy for robotics platforms especially marine vehicles. My work integrates real-time robotics frameworks with physics-accurate simulation environments for development, testing, and validation.
+                Robotics engineer focused on high-fidelity modeling, simulation, and autonomous systems for marine vehicles. I integrate real-time robotics frameworks with physics-accurate simulation environments to enable rigorous development, testing, and validation. These environments serve as the foundation for designing and evaluating advanced autonomy algorithms for marine platforms.
                 </p>
             </div>
 
@@ -59,13 +59,13 @@ export default function HomePage() {
           </div>
 
           {/* Hero Image */}
-          <div className="relative h-96 md:h-full flex items-center justify-center">
+          <div className="relative h-[28rem] md:h-full flex items-center justify-center">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-400 rounded-2xl opacity-20 blur-3xl"></div>
-            <div className="relative w-64 h-100 rounded-2xl overflow-hidden shadow-2xl border-4 border-blue-500/20">
+            <div className="relative w-96 h-96">
               <img 
                 src="/pruthvi_bgless.png" 
                 alt="Pruthviraj Mane" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover rounded-2xl"
               />
             </div>
           </div>
