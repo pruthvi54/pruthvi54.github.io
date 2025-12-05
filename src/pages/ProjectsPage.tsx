@@ -81,7 +81,8 @@ export default function ProjectsPage() {
         tags: ['Gazebo', 'Unreal Engine 5', 'Simulation', 'Dataset'],
         status: 'Completed',
         details: 'Integrated Gazebo physics simulation with Unreal Engine 5 photorealistic rendering for generating high-quality co-registered datasets.',
-        detailsLink: '/projects/auv-gazebo-unreal'
+        detailsLink: '/projects/auv-gazebo-unreal',
+        image: '/projects/auv-gazebo-unreal/images/900.png'
       },
       {
         title: 'Underwater Synthetic Dataset Generation',

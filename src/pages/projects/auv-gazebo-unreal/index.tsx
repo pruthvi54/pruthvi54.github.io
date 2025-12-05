@@ -1,15 +1,9 @@
-// TEMPLATE: Copy this file to create new project pages
-// 1. Copy this entire folder to: src/pages/projects/your-project-name/
-// 2. Update data.ts with your content
-// 3. Rename component below to match your project
-// 4. Add to App.tsx routing and ProjectsPage.tsx
-
 import { useLocation } from 'wouter';
 import { ArrowLeft, Github, ExternalLink, Play } from 'lucide-react';
 import Layout from '@/components/Layout';
 import { projectData } from './data';
 
-export default function ProjectTemplate() {
+export default function AuvGazeboUnreal() {
   const [, setLocation] = useLocation();
 
   return (
@@ -29,7 +23,7 @@ export default function ProjectTemplate() {
           <div className="flex justify-between items-start">
             <div>
               <h1 className="text-5xl font-bold mb-4">{projectData.title}</h1>
-              <p className="text-xl text-slate-600 dark:text-slate-400">
+              <p className="text-xl text-slate-700 dark:text-white">
                 {projectData.shortDescription}
               </p>
             </div>
@@ -84,13 +78,25 @@ export default function ProjectTemplate() {
         <div className="grid md:grid-cols-3 gap-8">
           {/* Left Column - Content */}
           <div className="md:col-span-2 space-y-8">
-            {/* Overview */}
+            
+            {/* VIDEO FIRST - Before Overview */}
+            {projectData.media.demoVideo.url && (
+              <div className="mb-8">
+                <video controls className="w-full rounded-xl shadow-lg">
+                  <source src={projectData.media.demoVideo.url} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <p className="text-sm text-slate-600 dark:text-slate-200 text-center mt-3 italic">
+                  {projectData.media.demoVideo.caption}
+                </p>
+              </div>
+            )}
+
+            {/* Overview - With Justified Text */}
             <div>
               <h2 className="text-3xl font-bold mb-4">Overview</h2>
               {projectData.overview.paragraphs.map((para, i) => (
-                <p key={i} className="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
-                  {para}
-                </p>
+                <p key={i} className="text-slate-900 dark:text-slate-100 leading-relaxed mb-4 text-justify" dangerouslySetInnerHTML={{ __html: para }} />
               ))}
             </div>
 
@@ -101,7 +107,7 @@ export default function ProjectTemplate() {
                 {projectData.features.map((feature, idx) => (
                   <div key={idx} className={`p-4 rounded-lg border-l-4 border-${feature.color}-500 bg-${feature.color}-50 dark:bg-${feature.color}-900/20`}>
                     <h3 className="font-bold mb-2">{feature.title}</h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">
+                    <p className="text-sm text-slate-900 dark:text-slate-100 text-justify">
                       {feature.description}
                     </p>
                   </div>
@@ -116,7 +122,7 @@ export default function ProjectTemplate() {
                 {projectData.technicalDetails.map((section, idx) => (
                   <div key={idx}>
                     <h3 className="text-xl font-semibold mb-2">{section.title}</h3>
-                    <ul className="list-disc list-inside space-y-2 text-slate-600 dark:text-slate-400 ml-4">
+                    <ul className="list-disc list-inside space-y-2 text-slate-900 dark:text-slate-100 ml-4">
                       {section.points.map((point, i) => (
                         <li key={i} dangerouslySetInnerHTML={{ __html: point }} />
                       ))}
@@ -126,65 +132,34 @@ export default function ProjectTemplate() {
               </div>
             </div>
 
-            {/* Media Section */}
-            <div>
-              <h2 className="text-3xl font-bold mb-4">Media</h2>
-              
-              {/* Demo Video */}
-              {projectData.media.demoVideo.url ? (
-                <div className="mb-6">
-                  <video controls className="w-full rounded-xl mb-4">
-                    <source src={projectData.media.demoVideo.url} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 text-center">
-                    {projectData.media.demoVideo.caption}
-                  </p>
+            {/* Co-Registered Dataset Images - RGB, Depth, Sonar in one row */}
+            {projectData.media.images.length > 0 && (
+              <div>
+                <h2 className="text-3xl font-bold mb-4">Co-Registered Dataset Views</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                  {projectData.media.images.map((img, idx) => (
+                    img.url ? (
+                      <div key={idx}>
+                        <img 
+                          src={img.url} 
+                          alt={img.alt}
+                          className="w-full h-64 object-cover rounded-lg shadow-md"
+                        />
+                        <p className="text-xs text-slate-600 dark:text-slate-200 mt-2 text-center">
+                          {img.caption}
+                        </p>
+                      </div>
+                    ) : null
+                  ))}
                 </div>
-              ) : (
-                <div className="mb-6">
-                  <div className="aspect-video bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mb-4">
-                    <div className="text-center text-white">
-                      <Play className="w-16 h-16 mx-auto mb-4 opacity-80" />
-                      <p className="text-xl font-semibold">Demo Video Coming Soon</p>
-                    </div>
-                  </div>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 text-center">
-                    {projectData.media.demoVideo.caption}
-                  </p>
-                </div>
-              )}
-
-              {/* Screenshots */}
-              <div className="grid grid-cols-2 gap-4">
-                {projectData.media.images.map((img, idx) => (
-                  img.url ? (
-                    <div key={idx}>
-                      <img 
-                        src={img.url} 
-                        alt={img.alt}
-                        className="w-full h-full object-cover rounded-lg"
-                      />
-                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 text-center">
-                        {img.caption}
-                      </p>
-                    </div>
-                  ) : (
-                    <div key={idx} className="aspect-video bg-slate-200 dark:bg-slate-800 rounded-lg flex items-center justify-center">
-                      <p className="text-slate-500 dark:text-slate-400 text-sm text-center px-4">
-                        {img.caption}
-                      </p>
-                    </div>
-                  )
-                ))}
               </div>
-            </div>
+            )}
 
             {/* Results */}
             <div>
               <h2 className="text-3xl font-bold mb-4">Results & Impact</h2>
               <div className="bg-slate-50 dark:bg-slate-900 p-6 rounded-xl">
-                <ul className="space-y-3 text-slate-600 dark:text-slate-400">
+                <ul className="space-y-3 text-slate-900 dark:text-slate-100">
                   {projectData.results.map((result, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <span className="text-green-500 mt-1">✓</span>
