@@ -116,9 +116,10 @@ export default function ProjectsPage() {
         title: 'EV Torque Vectoring Control',
         desc: 'Lateral stability improvement through differential torque control',
         tags: ['Control Theory', 'LQR', 'MPC', 'SMC', 'EV Dynamics'],
-        status: 'Published',
+        status: 'Completed',
         details: 'Analyzed and compared LQR, MPC, and SMC controllers for differential torque vectoring to improve lateral stability of four-wheel electric vehicles.',
-        detailsLink: '/projects/ev-torque-vectoring'
+        detailsLink: '/projects/ev-torque-vectoring',
+        image: '/projects/ev-torque-vectoring/images/Torque_Vectoring.png'
       }
     ],
     2021: [

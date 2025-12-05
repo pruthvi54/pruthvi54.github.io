@@ -1,16 +1,16 @@
-// TEMPLATE: Copy this file to create new project pages
-// 1. Copy this entire folder to: src/pages/projects/your-project-name/
-// 2. Update data.ts with your content
-// 3. Rename component below to match your project
-// 4. Add to App.tsx routing and ProjectsPage.tsx
-
 import { useLocation } from 'wouter';
-import { ArrowLeft, Github, ExternalLink, Play } from 'lucide-react';
+import { ArrowLeft, Github, ExternalLink, FileText } from 'lucide-react';
 import Layout from '@/components/Layout';
 import { projectData } from './data';
+import { useEffect } from 'react';
 
-export default function ProjectTemplate() {
+export default function EvTorqueVectoring() {
   const [, setLocation] = useLocation();
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Layout>
@@ -29,7 +29,7 @@ export default function ProjectTemplate() {
           <div className="flex justify-between items-start">
             <div>
               <h1 className="text-5xl font-bold mb-4">{projectData.title}</h1>
-              <p className="text-xl text-slate-600 dark:text-slate-400">
+              <p className="text-xl text-slate-700 dark:text-white">
                 {projectData.shortDescription}
               </p>
             </div>
@@ -62,17 +62,11 @@ export default function ProjectTemplate() {
                 GitHub
               </a>
             )}
-            {!projectData.githubUrl && (
-              <button className="flex items-center gap-2 px-4 py-2 bg-slate-800 dark:bg-slate-700 text-white rounded-lg opacity-50 cursor-not-allowed">
-                <Github className="w-4 h-4" />
-                GitHub (Coming Soon)
-              </button>
-            )}
-            {projectData.documentationUrl && (
-              <a href={projectData.documentationUrl} target="_blank" rel="noopener noreferrer"
-                 className="flex items-center gap-2 px-4 py-2 border-2 border-slate-300 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors">
-                <ExternalLink className="w-4 h-4" />
-                Documentation
+            {projectData.paperUrl && (
+              <a href={projectData.paperUrl} target="_blank" rel="noopener noreferrer"
+                 className="flex items-center gap-2 px-4 py-2 bg-blue-600 dark:bg-blue-700 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors">
+                <FileText className="w-4 h-4" />
+                Paper
               </a>
             )}
           </div>
@@ -84,28 +78,281 @@ export default function ProjectTemplate() {
         <div className="grid md:grid-cols-3 gap-8">
           {/* Left Column - Content */}
           <div className="md:col-span-2 space-y-8">
-            {/* Overview */}
+            
+            {/* Overview - With Justified Text */}
             <div>
               <h2 className="text-3xl font-bold mb-4">Overview</h2>
               {projectData.overview.paragraphs.map((para, i) => (
-                <p key={i} className="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
-                  {para}
-                </p>
+                <p key={i} className="text-slate-900 dark:text-slate-100 leading-relaxed mb-4 text-justify" dangerouslySetInnerHTML={{ __html: para }} />
               ))}
             </div>
 
-            {/* Key Features */}
+            {/* Vehicle Dynamics Model */}
             <div>
-              <h2 className="text-3xl font-bold mb-4">Key Features</h2>
-              <div className="space-y-4">
-                {projectData.features.map((feature, idx) => (
-                  <div key={idx} className={`p-4 rounded-lg border-l-4 border-${feature.color}-500 bg-${feature.color}-50 dark:bg-${feature.color}-900/20`}>
-                    <h3 className="font-bold mb-2">{feature.title}</h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">
-                      {feature.description}
+              <h2 className="text-3xl font-bold mb-4">Vehicle Dynamics Model</h2>
+              <p className="text-slate-900 dark:text-slate-100 leading-relaxed mb-4 text-justify">
+                The vehicle is represented using a <strong>lateral dynamics model</strong> with key inputs:
+              </p>
+              <ul className="list-disc list-inside space-y-2 text-slate-900 dark:text-slate-100 ml-4 mb-4">
+                <li>Steering angle</li>
+                <li>Vehicle geometry</li>
+                <li>Tire behavior</li>
+                <li>Mass distribution</li>
+              </ul>
+              <p className="text-slate-900 dark:text-slate-100 leading-relaxed mb-4 text-justify">
+                The maneuver used for evaluation is a <strong>double lane-change</strong>, a challenging test designed to expose instability at higher speeds. Before applying controllers, the baseline behavior is examined.
+              </p>
+              
+              {/* Steering Input Image */}
+              {projectData.media.images[1] && (
+                <div className="mb-6">
+                  <img 
+                    src={projectData.media.images[1].url} 
+                    alt={projectData.media.images[1].alt}
+                    className="w-full h-auto object-contain rounded-lg shadow-md"
+                  />
+                  <p className="text-xs text-slate-600 dark:text-slate-200 mt-2 text-center">
+                    {projectData.media.images[1].caption}
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* System Response Without Control - Content then Images */}
+            <div>
+              <h2 className="text-3xl font-bold mb-4">System Response Without Control</h2>
+              <p className="text-slate-900 dark:text-slate-100 leading-relaxed mb-4 text-justify">
+                When the vehicle performs the lane-change maneuver with <strong>no control</strong>:
+              </p>
+              <ul className="list-disc list-inside space-y-2 text-slate-900 dark:text-slate-100 ml-4 mb-4">
+                <li>Yaw rate becomes oscillatory, showing poor directional tracking</li>
+                <li>Side-slip increases rapidly, indicating lateral instability</li>
+                <li>At high speeds, both effects become significantly worse</li>
+              </ul>
+              <p className="text-slate-900 dark:text-slate-100 leading-relaxed mb-4 text-justify">
+                This motivates the need for active yaw-moment generation.
+              </p>
+              
+              {/* Uncontrolled Images - Grouped together */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                {projectData.media.images[2] && (
+                  <div>
+                    <img 
+                      src={projectData.media.images[2].url} 
+                      alt={projectData.media.images[2].alt}
+                      className="w-full h-64 object-contain rounded-lg shadow-md"
+                    />
+                    <p className="text-xs text-slate-600 dark:text-slate-200 mt-2 text-center">
+                      {projectData.media.images[2].caption}
                     </p>
                   </div>
-                ))}
+                )}
+                {projectData.media.images[3] && (
+                  <div>
+                    <img 
+                      src={projectData.media.images[3].url} 
+                      alt={projectData.media.images[3].alt}
+                      className="w-full h-64 object-contain rounded-lg shadow-md"
+                    />
+                    <p className="text-xs text-slate-600 dark:text-slate-200 mt-2 text-center">
+                      {projectData.media.images[3].caption}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Control Strategies Introduction */}
+            <div>
+              <h2 className="text-3xl font-bold mb-4">Control Strategies for Yaw Moment Computation</h2>
+              <p className="text-slate-900 dark:text-slate-100 leading-relaxed mb-4 text-justify">
+                Three controllers are evaluated to compute the stabilizing yaw moment using torque vectoring. Each one regulates the variables differently and produces a distinct response profile.
+              </p>
+            </div>
+
+            {/* SMC - Content then Images */}
+            <div>
+              <h2 className="text-3xl font-bold mb-4">1. Sliding Mode Control (SMC)</h2>
+              <p className="text-slate-900 dark:text-slate-100 leading-relaxed mb-4 text-justify">
+                {projectData.features[0].description}
+              </p>
+              
+              <div className="mb-4">
+                <h3 className="text-xl font-semibold mb-2">Characteristics</h3>
+                <ul className="list-disc list-inside space-y-2 text-slate-900 dark:text-slate-100 ml-4">
+                  {projectData.features[0].characteristics.map((char, i) => (
+                    <li key={i}>{char}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mb-6">
+                <h3 className="text-xl font-semibold mb-2">What Happens in the Maneuver</h3>
+                <ul className="list-disc list-inside space-y-2 text-slate-900 dark:text-slate-100 ml-4">
+                  {projectData.features[0].whatHappens.map((point, i) => (
+                    <li key={i}>{point}</li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* SMC Images - Grouped together */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                {projectData.media.images[4] && (
+                  <div>
+                    <img 
+                      src={projectData.media.images[4].url} 
+                      alt={projectData.media.images[4].alt}
+                      className="w-full h-64 object-contain rounded-lg shadow-md"
+                    />
+                    <p className="text-xs text-slate-600 dark:text-slate-200 mt-2 text-center">
+                      {projectData.media.images[4].caption}
+                    </p>
+                  </div>
+                )}
+                {projectData.media.images[5] && (
+                  <div>
+                    <img 
+                      src={projectData.media.images[5].url} 
+                      alt={projectData.media.images[5].alt}
+                      className="w-full h-64 object-contain rounded-lg shadow-md"
+                    />
+                    <p className="text-xs text-slate-600 dark:text-slate-200 mt-2 text-center">
+                      {projectData.media.images[5].caption}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* LQR - Content then Images */}
+            <div>
+              <h2 className="text-3xl font-bold mb-4">2. Linear Quadratic Regulator (LQR)</h2>
+              <p className="text-slate-900 dark:text-slate-100 leading-relaxed mb-4 text-justify">
+                {projectData.features[1].description}
+              </p>
+              
+              <div className="mb-4">
+                <h3 className="text-xl font-semibold mb-2">Characteristics</h3>
+                <ul className="list-disc list-inside space-y-2 text-slate-900 dark:text-slate-100 ml-4">
+                  {projectData.features[1].characteristics.map((char, i) => (
+                    <li key={i}>{char}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mb-6">
+                <h3 className="text-xl font-semibold mb-2">What Happens in the Maneuver</h3>
+                <ul className="list-disc list-inside space-y-2 text-slate-900 dark:text-slate-100 ml-4">
+                  {projectData.features[1].whatHappens.map((point, i) => (
+                    <li key={i}>{point}</li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* LQR Images - Grouped together */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                {projectData.media.images[6] && (
+                  <div>
+                    <img 
+                      src={projectData.media.images[6].url} 
+                      alt={projectData.media.images[6].alt}
+                      className="w-full h-64 object-contain rounded-lg shadow-md"
+                    />
+                    <p className="text-xs text-slate-600 dark:text-slate-200 mt-2 text-center">
+                      {projectData.media.images[6].caption}
+                    </p>
+                  </div>
+                )}
+                {projectData.media.images[7] && (
+                  <div>
+                    <img 
+                      src={projectData.media.images[7].url} 
+                      alt={projectData.media.images[7].alt}
+                      className="w-full h-64 object-contain rounded-lg shadow-md"
+                    />
+                    <p className="text-xs text-slate-600 dark:text-slate-200 mt-2 text-center">
+                      {projectData.media.images[7].caption}
+                    </p>
+                  </div>
+                )}
+                {projectData.media.images[8] && (
+                  <div>
+                    <img 
+                      src={projectData.media.images[8].url} 
+                      alt={projectData.media.images[8].alt}
+                      className="w-full h-64 object-contain rounded-lg shadow-md"
+                    />
+                    <p className="text-xs text-slate-600 dark:text-slate-200 mt-2 text-center">
+                      {projectData.media.images[8].caption}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* MPC - Content then Images */}
+            <div>
+              <h2 className="text-3xl font-bold mb-4">3. Model Predictive Control (MPC)</h2>
+              <p className="text-slate-900 dark:text-slate-100 leading-relaxed mb-4 text-justify">
+                {projectData.features[2].description}
+              </p>
+              
+              <div className="mb-4">
+                <h3 className="text-xl font-semibold mb-2">Characteristics</h3>
+                <ul className="list-disc list-inside space-y-2 text-slate-900 dark:text-slate-100 ml-4">
+                  {projectData.features[2].characteristics.map((char, i) => (
+                    <li key={i}>{char}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mb-6">
+                <h3 className="text-xl font-semibold mb-2">What Happens in the Maneuver</h3>
+                <ul className="list-disc list-inside space-y-2 text-slate-900 dark:text-slate-100 ml-4">
+                  {projectData.features[2].whatHappens.map((point, i) => (
+                    <li key={i}>{point}</li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* MPC Images - Grouped together */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                {projectData.media.images[9] && (
+                  <div>
+                    <img 
+                      src={projectData.media.images[9].url} 
+                      alt={projectData.media.images[9].alt}
+                      className="w-full h-64 object-contain rounded-lg shadow-md"
+                    />
+                    <p className="text-xs text-slate-600 dark:text-slate-200 mt-2 text-center">
+                      {projectData.media.images[9].caption}
+                    </p>
+                  </div>
+                )}
+                {projectData.media.images[10] && (
+                  <div>
+                    <img 
+                      src={projectData.media.images[10].url} 
+                      alt={projectData.media.images[10].alt}
+                      className="w-full h-64 object-contain rounded-lg shadow-md"
+                    />
+                    <p className="text-xs text-slate-600 dark:text-slate-200 mt-2 text-center">
+                      {projectData.media.images[10].caption}
+                    </p>
+                  </div>
+                )}
+                {projectData.media.images[11] && (
+                  <div>
+                    <img 
+                      src={projectData.media.images[11].url} 
+                      alt={projectData.media.images[11].alt}
+                      className="w-full h-64 object-contain rounded-lg shadow-md"
+                    />
+                    <p className="text-xs text-slate-600 dark:text-slate-200 mt-2 text-center">
+                      {projectData.media.images[11].caption}
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -116,7 +363,7 @@ export default function ProjectTemplate() {
                 {projectData.technicalDetails.map((section, idx) => (
                   <div key={idx}>
                     <h3 className="text-xl font-semibold mb-2">{section.title}</h3>
-                    <ul className="list-disc list-inside space-y-2 text-slate-600 dark:text-slate-400 ml-4">
+                    <ul className="list-disc list-inside space-y-2 text-slate-900 dark:text-slate-100 ml-4">
                       {section.points.map((point, i) => (
                         <li key={i} dangerouslySetInnerHTML={{ __html: point }} />
                       ))}
@@ -126,65 +373,11 @@ export default function ProjectTemplate() {
               </div>
             </div>
 
-            {/* Media Section */}
-            <div>
-              <h2 className="text-3xl font-bold mb-4">Media</h2>
-              
-              {/* Demo Video */}
-              {projectData.media.demoVideo.url ? (
-                <div className="mb-6">
-                  <video controls className="w-full rounded-xl mb-4">
-                    <source src={projectData.media.demoVideo.url} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 text-center">
-                    {projectData.media.demoVideo.caption}
-                  </p>
-                </div>
-              ) : (
-                <div className="mb-6">
-                  <div className="aspect-video bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mb-4">
-                    <div className="text-center text-white">
-                      <Play className="w-16 h-16 mx-auto mb-4 opacity-80" />
-                      <p className="text-xl font-semibold">Demo Video Coming Soon</p>
-                    </div>
-                  </div>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 text-center">
-                    {projectData.media.demoVideo.caption}
-                  </p>
-                </div>
-              )}
-
-              {/* Screenshots */}
-              <div className="grid grid-cols-2 gap-4">
-                {projectData.media.images.map((img, idx) => (
-                  img.url ? (
-                    <div key={idx}>
-                      <img 
-                        src={img.url} 
-                        alt={img.alt}
-                        className="w-full h-full object-cover rounded-lg"
-                      />
-                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 text-center">
-                        {img.caption}
-                      </p>
-                    </div>
-                  ) : (
-                    <div key={idx} className="aspect-video bg-slate-200 dark:bg-slate-800 rounded-lg flex items-center justify-center">
-                      <p className="text-slate-500 dark:text-slate-400 text-sm text-center px-4">
-                        {img.caption}
-                      </p>
-                    </div>
-                  )
-                ))}
-              </div>
-            </div>
-
             {/* Results */}
             <div>
-              <h2 className="text-3xl font-bold mb-4">Results & Impact</h2>
+              <h2 className="text-3xl font-bold mb-4">Key Takeaways</h2>
               <div className="bg-slate-50 dark:bg-slate-900 p-6 rounded-xl">
-                <ul className="space-y-3 text-slate-600 dark:text-slate-400">
+                <ul className="space-y-3 text-slate-900 dark:text-slate-100">
                   {projectData.results.map((result, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <span className="text-green-500 mt-1">✓</span>
@@ -268,4 +461,3 @@ export default function ProjectTemplate() {
     </Layout>
   );
 }
-
