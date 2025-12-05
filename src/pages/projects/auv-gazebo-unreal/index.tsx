@@ -2,9 +2,15 @@ import { useLocation } from 'wouter';
 import { ArrowLeft, Github, ExternalLink, Play } from 'lucide-react';
 import Layout from '@/components/Layout';
 import { projectData } from './data';
+import { useEffect } from 'react';
 
 export default function AuvGazeboUnreal() {
   const [, setLocation] = useLocation();
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <Layout>
