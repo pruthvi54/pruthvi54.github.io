@@ -1,0 +1,9 @@
+---
+interface Props { text: string; label?: string }
+const { text, label = 'Copy' } = Astro.props;
+---
+<copy-text data-copy={text}>
+  <button type="button" hidden>{label}</button>
+  <span class="copy-status" role="status" aria-live="polite"></span>
+  <input class="copy-fallback" type="text" readonly value={text} aria-label="Text to copy" hidden />
+</copy-text>

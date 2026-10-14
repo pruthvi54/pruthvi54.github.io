@@ -1,0 +1,206 @@
+---
+title: "EV Torque Vectoring Control"
+studyTitle: "Intelligent Torque Vectoring for Electric Vehicle Stability"
+summary: "Lateral stability improvement through differential torque control"
+details: "Analyzed and compared LQR, MPC, and SMC controllers for differential torque vectoring to improve lateral stability of four-wheel electric vehicles."
+kind: "full"
+year: 2022
+domain: "Control Theory / EV Dynamics"
+tags: ["Control Theory","LQR","MPC","SMC","EV Dynamics","Torque Vectoring","Vehicle Stability","MATLAB","Simulink"]
+links: []
+info: {"duration":"2020 - 2022","institution":"IIT Guwahati","role":"Researcher","teamSize":"1"}
+preview: {"url":"/thumbs/ev-torque-vectoring.webp","alt":"EV Torque Vectoring Control preview","caption":"Lateral stability improvement through differential torque control"}
+lead: "Comparative analysis of Sliding Mode Control, LQR, and MPC for lateral stability improvement through differential torque control in four-wheel electric vehicles."
+sections: ["Overview","Vehicle Dynamics Model","System Response Without Control","Control Strategies for Yaw Moment Computation","1. Sliding Mode Control (SMC)","2. Linear Quadratic Regulator (LQR)","3. Model Predictive Control (MPC)","Technical Implementation","Key Takeaways"]
+---
+
+## Overview
+
+Electric vehicles with **four in-wheel motors** unlock a new dimension of control. Instead of relying on mechanical differentials or passive stability aids, the vehicle can **actively distribute torque** between wheels to create a stabilizing **yaw moment**. This allows the EV to correct its orientation, maintain stability, and respond intelligently during high-speed lane changes, emergency maneuvers, and sharp cornering.
+
+During aggressive maneuvers, two variables dictate lateral stability: **side-slip angle** (how much the vehicle slides laterally) and **yaw rate** (how fast the vehicle rotates). If left uncontrolled, these variables can diverge quickly, causing understeer, oversteer, or total loss of control.
+
+This project investigates how three controllers compute the **external yaw moment** needed to stabilize the vehicle: **Sliding Mode Control (SMC)**, **Linear Quadratic Regulator (LQR)**, and **Model Predictive Control (MPC)**. Each method brings a unique approach to stabilizing the vehicle using torque vectoring.
+
+## Vehicle Dynamics Model
+
+The vehicle is represented using a **lateral dynamics model** with key inputs:
+
+- Steering angle
+- Vehicle geometry
+- Tire behavior
+- Mass distribution
+
+The maneuver used for evaluation is a **double lane-change**, a challenging test designed to expose instability at higher speeds. Before applying controllers, the baseline behavior is examined.
+
+<figure className="study-figure">
+  <a href="/projects/ev-torque-vectoring/images/Lane-Change%20Steering%20Input.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Steering Input Profile – Double Lane Change">
+    <img src="/projects/ev-torque-vectoring/display/Lane-Change-Steering-Input.webp" alt="Steering Input Profile – Double Lane Change" width="922" height="557" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 01</span> Steering Input Profile – Double Lane Change Maneuver</figcaption>
+</figure>
+
+## System Response Without Control
+
+When the vehicle performs the lane-change maneuver with **no control**:
+
+- Yaw rate becomes oscillatory, showing poor directional tracking
+- Side-slip increases rapidly, indicating lateral instability
+- At high speeds, both effects become significantly worse
+
+This motivates the need for active yaw-moment generation.
+
+<div className="figure-group figure-group-2" style="max-width: min(100%, 979px)">
+<figure className="study-figure" style="--ar: 1.3333">
+  <a href="/projects/ev-torque-vectoring/images/Side%20Slip%20Uncontrolled.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Side-Slip Response - Uncontrolled">
+    <img src="/projects/ev-torque-vectoring/display/Side-Slip-Uncontrolled.webp" alt="Side-Slip Response - Uncontrolled" width="480" height="360" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 02</span> Side-Slip Response – Uncontrolled Vehicle</figcaption>
+</figure>
+<figure className="study-figure" style="--ar: 1.4109">
+  <a href="/projects/ev-torque-vectoring/images/High-Speed%20Instability%20Snapshot.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: High-Speed Instability Snapshot">
+    <img src="/projects/ev-torque-vectoring/display/High-Speed-Instability-Snapshot.webp" alt="High-Speed Instability Snapshot" width="491" height="348" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 03</span> High-Speed Instability Snapshot</figcaption>
+</figure>
+</div>
+
+## Control Strategies for Yaw Moment Computation
+
+Three controllers are evaluated to compute the stabilizing yaw moment using torque vectoring. Each one regulates the variables differently and produces a distinct response profile.
+
+## 1. Sliding Mode Control (SMC)
+
+SMC is known for its robustness and ability to handle uncertainties. Its focus here is the stabilization of side-slip angle through a switching-based approach.
+
+### Characteristics
+
+- Forces the system states onto a designed sliding surface
+- Reacts quickly to disturbances
+- Primarily targets one variable (side-slip)
+
+### What Happens in the Maneuver
+
+- Side-slip is handled well, preventing the vehicle from drifting outward
+- Yaw rate remains largely uncontrolled, making rotation behavior inconsistent
+- Speed variations magnify yaw-rate fluctuations
+
+<div className="figure-group figure-group-2" style="max-width: min(100%, 921px)">
+<figure className="study-figure" style="--ar: 1.2979">
+  <a href="/projects/ev-torque-vectoring/images/SMC%20Side-Slip%20Response.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: SMC Side-Slip Response">
+    <img src="/projects/ev-torque-vectoring/display/SMC-Side-Slip-Response.webp" alt="SMC Side-Slip Response" width="440" height="339" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 04</span> SMC Side-Slip Response</figcaption>
+</figure>
+<figure className="study-figure" style="--ar: 1.3485">
+  <a href="/projects/ev-torque-vectoring/images/SMC%20Yaw%20Rate%20Response.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: SMC Yaw Rate Response">
+    <img src="/projects/ev-torque-vectoring/display/SMC-Yaw-Rate-Response.webp" alt="SMC Yaw Rate Response" width="503" height="373" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 05</span> SMC Yaw Rate Response</figcaption>
+</figure>
+</div>
+
+## 2. Linear Quadratic Regulator (LQR)
+
+LQR optimizes the control action by minimizing a cost function that balances performance and effort.
+
+### Characteristics
+
+- Controls both yaw rate and side-slip
+- Produces smooth and continuous control inputs
+- Requires higher control effort than SMC
+
+### What Happens in the Maneuver
+
+- Yaw rate becomes more predictable
+- Side-slip decreases significantly
+- The yaw moment required is larger, meaning the motors must work harder
+
+<div className="figure-group figure-group-3" style="max-width: min(100%, 1335px)">
+<figure className="study-figure" style="--ar: 1.3323">
+  <a href="/projects/ev-torque-vectoring/images/LQR%20Yaw%20moment%20output.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: LQR Yaw Moment Output">
+    <img src="/projects/ev-torque-vectoring/display/LQR-Yaw-moment-output.webp" alt="LQR Yaw Moment Output" width="429" height="322" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 06</span> LQR Yaw Moment Output</figcaption>
+</figure>
+<figure className="study-figure" style="--ar: 1.3324">
+  <a href="/projects/ev-torque-vectoring/images/LQR%20Yaw%20rate%20Response.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: LQR Yaw Rate Response">
+    <img src="/projects/ev-torque-vectoring/display/LQR-Yaw-rate-Response.webp" alt="LQR Yaw Rate Response" width="453" height="340" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 07</span> LQR Yaw Rate Response</figcaption>
+</figure>
+<figure className="study-figure" style="--ar: 1.3314">
+  <a href="/projects/ev-torque-vectoring/images/LQR%20Side-Slip%20Response.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: LQR Side-Slip Response">
+    <img src="/projects/ev-torque-vectoring/display/LQR-Side-Slip-Response.webp" alt="LQR Side-Slip Response" width="458" height="344" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 08</span> LQR Side-Slip Response</figcaption>
+</figure>
+</div>
+
+## 3. Model Predictive Control (MPC)
+
+MPC is the most sophisticated controller tested. It predicts future vehicle behavior and optimizes control over a receding time horizon.
+
+### Characteristics
+
+- Considers constraints (torque limits, states)
+- Predicts and avoids future instability
+- Minimizes unnecessary control effort
+
+### What Happens in the Maneuver
+
+- Yaw rate becomes smooth and well controlled
+- Side-slip stays within safe bounds
+- Yaw moment required is notably lower, resulting in efficient, graceful stability control
+
+<div className="figure-group figure-group-3" style="max-width: min(100%, 1478px)">
+<figure className="study-figure" style="--ar: 1.4163">
+  <a href="/projects/ev-torque-vectoring/images/MPC%20Yaw%20moment%20Output.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: MPC Yaw Moment Output">
+    <img src="/projects/ev-torque-vectoring/display/MPC-Yaw-moment-Output.webp" alt="MPC Yaw Moment Output" width="575" height="406" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 09</span> MPC Yaw Moment Output</figcaption>
+</figure>
+<figure className="study-figure" style="--ar: 1.4160">
+  <a href="/projects/ev-torque-vectoring/images/MPC%20Yaw%20rate%20Response.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: MPC Yaw Rate Response">
+    <img src="/projects/ev-torque-vectoring/display/MPC-Yaw-rate-Response.webp" alt="MPC Yaw Rate Response" width="497" height="351" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 10</span> MPC Yaw Rate Response</figcaption>
+</figure>
+<figure className="study-figure" style="--ar: 1.3607">
+  <a href="/projects/ev-torque-vectoring/images/MPC%20Side-slip%20Response.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: MPC Side-Slip Response">
+    <img src="/projects/ev-torque-vectoring/display/MPC-Side-slip-Response.webp" alt="MPC Side-Slip Response" width="464" height="341" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 11</span> MPC Side-Slip Response</figcaption>
+</figure>
+</div>
+
+## Technical Implementation
+
+### Torque Vectoring Architecture
+
+- Four independent in-wheel motors enable active torque distribution between wheels.
+- The system generates an external yaw moment by applying differential torque to left and right wheels.
+- This software-based approach replaces mechanical differentials and passive stability aids.
+- Enables rapid corrective actions during high-speed maneuvers and emergency situations.
+
+### Control Strategy Comparison
+
+- **SMC:** Robust switching-based control focusing on side-slip stabilization, but struggles with yaw rate control.
+- **LQR:** Optimizes both yaw rate and side-slip simultaneously, requiring higher control effort but providing balanced performance.
+- **MPC:** Predictive control with constraint handling, delivering the smoothest and most efficient stability control.
+
+### System Response Analysis
+
+- Baseline analysis shows uncontrolled vehicle exhibits oscillatory yaw rate and rapidly increasing side-slip.
+- High-speed scenarios amplify instability, demonstrating the critical need for active control.
+- Comparative evaluation reveals trade-offs between control effort, stability performance, and computational complexity.
+- MPC demonstrates superior performance with lower yaw moment requirements and smoother state trajectories.
+
+## Key Takeaways
+
+- Torque vectoring enables stability through software, allowing rapid corrective yaw moments without mechanical components.
+- Without control, the vehicle becomes unstable during fast maneuvers, especially at higher speeds.
+- SMC provides strong side-slip control but cannot manage yaw rate effectively.
+- LQR stabilizes both variables but demands higher yaw moment and thus more torque.
+- MPC provides the most refined behavior—smooth, stable, and efficient with lower control effort requirements.
+- Comparative analysis demonstrates clear trade-offs between robustness, performance, and computational complexity.

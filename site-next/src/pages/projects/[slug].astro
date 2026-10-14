@@ -1,0 +1,49 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import StudyLayout from '../../layouts/StudyLayout.astro';
+import data from '../../data/content.json';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  const titles = new Map(projects.map((p) => [p.id, p.data.title]));
+  const order = data.projectOrder;
+  return projects.map((project) => {
+    const index = order.indexOf(project.id);
+    const link = (slug?: string) => slug ? { slug, title: titles.get(slug)! } : undefined;
+    return { params: { slug: project.id }, props: {
+      project,
+      previous: index > 0 ? link(order[index-1]) : undefined,
+      next: index >= 0 ? link(order[index+1]) : undefined
+    } };
+  });
+}
+type Neighbor = { slug: string; title: string } | undefined;
+interface Props { project: CollectionEntry<'projects'>; previous: Neighbor; next: Neighbor }
+const { project, previous, next } = Astro.props;
+const { Content } = await render(project);
+const item = project.data;
+---
+{item.kind === 'full' ?
+  <StudyLayout project={project} previous={previous} next={next}><Content /></StudyLayout> :
+  <SiteLayout title={item.title} description={item.summary} current="projects">
+    <div class="brief-page page-width">
+      <div class="study-header">
+        <a class="study-back" href="/projects/">← All projects</a>
+        <h1>{item.title}</h1>
+        <p class="study-lead">{item.summary}</p>
+      </div>
+      <article class="brief-content"><Content /></article>
+      <dl class:list={["brief-meta", { "brief-meta-no-status": !item.status }]}>
+        <div><dt class="meta-label">Year</dt><dd>{item.year}</dd></div>
+        {item.status && <div><dt class="meta-label">Status</dt><dd>{item.status}</dd></div>}
+        <div><dt class="meta-label">Tags</dt><dd>{item.tags.join(', ')}</dd></div>
+      </dl>
+      {item.links.length > 0 && <nav class="study-links brief-links" aria-label="Project sources">{item.links.map((link) => <a href={link.url} target="_blank" rel="noopener noreferrer">{link.label} ↗</a>)}</nav>}
+      <nav class="study-pagination" aria-label="Other projects">
+        <span>{previous && <a href={`/projects/${previous.slug}/`}>← {previous.title}</a>}</span>
+        <span>{next && <a href={`/projects/${next.slug}/`}>{next.title} →</a>}</span>
+      </nav>
+    </div>
+  </SiteLayout>
+}

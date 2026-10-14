@@ -1,0 +1,227 @@
+---
+title: "AUV Dynamics Modeling"
+studyTitle: "A Comprehensive Study on Modelling and Control of Autonomous Underwater Vehicle"
+summary: "Complete 6-DoF dynamics modeling in MATLAB/Simulink"
+details: "Comprehensive mathematical modeling of AUV dynamics including hydrodynamic coefficients, added mass, and environmental disturbances using MATLAB/Simulink."
+kind: "full"
+year: 2023
+status: "Completed"
+domain: "MATLAB"
+tags: ["MATLAB","Simulink","Dynamics","Modeling"]
+links: [{"label": "Book chapter (CRC Press)", "url": "https://doi.org/10.1201/9781003434412-14"}, {"label": "arXiv", "url": "https://arxiv.org/abs/2312.02690"}]
+info: {"institution":"Indian Institute of Science (IISc), Bengaluru"}
+relatedWork: [{"title": "Rajini Makam, Pruthviraj Mane, Suresh Sundaram, P.B. Sujit — A Comprehensive Study on Modelling and Control of Autonomous Underwater Vehicle. In Assistive Robotics, CRC Press, 2026, pp. 264–296", "url": "https://doi.org/10.1201/9781003434412-14"}, {"title": "arXiv preprint arXiv:2312.02690", "url": "https://arxiv.org/abs/2312.02690"}]
+preview: {"url":"/thumbs/auv-dynamics-modeling.webp","alt":"AUV Dynamics Modeling preview","caption":"Complete 6-DoF dynamics modeling in MATLAB/Simulink"}
+lead: "Comprehensive mathematical modeling of AUV dynamics including hydrodynamic coefficients, added mass, and environmental disturbances using MATLAB/Simulink."
+sections: ["Overview","Research Vehicle","6-DoF Mathematical Model","Level Flight Dynamics","Linear Controllers","Nonlinear Control","SMC vs Conventional: Lawn-Mowing Manoeuvre","Conclusions"]
+---
+
+## Overview
+
+Autonomous underwater vehicles (AUV) have become the de facto vehicle for remote operations involving oceanography, inspection, and monitoring tasks. These vehicles operate in different and often challenging environments; hence, the design and development of the AUV involving hydrodynamics and control systems need to be designed in detail.
+
+This work presents a study on the modelling and robust control of a research vehicle in the presence of uncertainties. The vehicle’s dynamic behaviour is modelled using a 6-degree-of-freedom approach, considering the effect of ocean currents. The level flight requirements for different speeds are derived, and the resulting model is decomposed into horizontal and vertical subsystems for linear analysis.
+
+The simulation results focus on the efficacy of linear controllers within three key subsystems: depth, yaw, and speed. Level-flight outcomes are demonstrated for a speed of 4 knots. The nonlinear control strategies encompass conventional and sliding-mode control (SMC), designed against ocean currents, parameter uncertainty, CG (centre of gravity) deviation and buoyancy variation, and compared in a lawn-mowing manoeuvre.
+
+## Research Vehicle
+
+The hull profile of the research vehicle is based on the Myring hull profile, designed for a minimal drag coefficient at the required length-to-diameter ratio. The profile is defined by the nose, mid-hull and tail section lengths, the maximum diameter, the included tail angle and a shape parameter. The moments of inertia are taken about the centre of buoyancy (CB), located 0.611 m from the vehicle’s nose.
+
+| Parameter | Unit | Value |
+| --- | --- | --- |
+| Vehicle mass (m) | kg | 30.5 |
+| Seawater density (ρ) | kg/m³ | 1030 |
+| Vehicle buoyancy (B) | N | 306 |
+| MOI about x-axis (Ixx) | kg·m² | 0.177 |
+| MOI about z-axis (Izz) | kg·m² | 3.45 |
+| Centre of gravity w.r.t. CB (x, y, z) | m | 0, 0, 0.0192 |
+
+## 6-DoF Mathematical Model
+
+Following SNAME (Society of Naval Architects and Marine Engineers) conventions, the AUV is modelled in two coordinate systems: a body-fixed reference frame and an earth-fixed North-East-Down frame. The body-fixed velocities are the surge, sway and heave velocities (u, v, w) and the roll, pitch and yaw rates (p, q, r); the earth-fixed position and orientation are (x, y, z, ϕ, θ, ψ).
+
+The dynamics consist of kinematics, which defines the vehicle’s motion in terms of position, orientation and velocity, and kinetics, which defines the six degrees of freedom with the forces and torques acting on the AUV — hydrodynamic effects, buoyancy, thrust forces and external disturbances. The equations of motion are derived with the Newton–Euler formulation, and the effect of ocean currents is included in the vehicle’s dynamic behaviour.
+
+## Level Flight Dynamics
+
+Level flight, also known as the trim condition, is where a constant set of inputs is given to the vehicle without any disturbances and the vehicle maintains fixed velocity and orientation. All forces and moments must balance, giving zero acceleration and zero rates of rotation about all three axes. Using the two sterns and two rudders independently, the roll motion is nullified, which leaves five control inputs for level flight: four control-surface settings and a single propeller RPM.
+
+The nonlinear model was linearized at an operating speed of U = 4 knots. The estimated level-flight values for the research vehicle are:
+
+| Variable | Symbol | Units | Value |
+| --- | --- | --- | --- |
+| Body-frame surge velocity | u | m/s | 2.0577 |
+| Body-frame sway velocity | v | m/s | 0.001 |
+| Body-frame heave velocity | w | m/s | −0.011 |
+| Earth-frame roll | ϕ | deg | −2.5941 |
+| Earth-frame pitch | θ | deg | −0.72 |
+| Propeller rotation rate | n | rpm | 1413 |
+| Angle of attack | α | deg | −0.72 |
+| Angle of sideslip | β | deg | −0.0276 |
+| Propeller inflow rate | uₚ | m/s | 1.2936 |
+| Stern angle 1 / 2 | δs1 / δs2 | deg | −1.4 |
+| Rudder angle 1 / 2 | δr1 / δr2 | deg | −0.05 |
+
+With these values as initial conditions and constant control inputs, the AUV sustains constant velocities, moves steadily along the x-direction with no variation along y and z, and keeps all angular velocities at zero. The roll angle stays at −2.594° and the pitch at −0.72°, while yaw remains at 0°.
+
+<div className="figure-group figure-group-2" style="max-width: min(100%, 1659px)">
+<figure className="study-figure" style="--ar: 0.9584">
+  <a href="/projects/auv-dynamics-modeling/images/fig09a-linear-velocities.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Body-frame linear velocities u, v and w at trim">
+    <img src="/projects/auv-dynamics-modeling/display/fig09a-linear-velocities.webp" alt="Body-frame linear velocities u, v and w at trim" width="875" height="913" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 01</span> Body-frame linear velocities u, v and w at trim</figcaption>
+</figure>
+<figure className="study-figure" style="--ar: 1.1034">
+  <a href="/projects/auv-dynamics-modeling/images/fig09b-earth-frame-motion.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: AUV motion in the earth-fixed frame">
+    <img src="/projects/auv-dynamics-modeling/display/fig09b-earth-frame-motion.webp" alt="AUV motion in the earth-fixed frame" width="875" height="793" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 02</span> AUV motion in the earth-fixed frame</figcaption>
+</figure>
+</div>
+
+<div className="figure-group figure-group-2" style="max-width: min(100%, 1749px)">
+<figure className="study-figure" style="--ar: 1.0555">
+  <a href="/projects/auv-dynamics-modeling/images/fig10a-angular-velocities.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Body-frame angular velocities p, q and r">
+    <img src="/projects/auv-dynamics-modeling/display/fig10a-angular-velocities.webp" alt="Body-frame angular velocities p, q and r" width="875" height="829" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 03</span> Body-frame angular velocities p, q and r</figcaption>
+</figure>
+<figure className="study-figure" style="--ar: 1.0258">
+  <a href="/projects/auv-dynamics-modeling/images/fig10b-angular-positions.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Earth-frame angular positions ϕ, θ and ψ">
+    <img src="/projects/auv-dynamics-modeling/display/fig10b-angular-positions.webp" alt="Earth-frame angular positions ϕ, θ and ψ" width="875" height="853" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 04</span> Earth-frame angular positions ϕ, θ and ψ</figcaption>
+</figure>
+</div>
+
+## Linear Controllers
+
+The linearized model is split into the vertical (depth–pitch), horizontal (yaw) and speed subsystems, each with its own controller.
+
+### Depth–pitch subsystem
+
+The depth control system has an outer depth loop and an inner pitch loop. The depth command is smoothed by a first-order low-pass filter; a PD controller on the depth error gives the desired pitch angle, and a second PD controller on the pitch error gives the stern-angle command. Because the depth changes are small, the maximum required stern angle remains around 5 degrees.
+
+<figure className="study-figure">
+  <a href="/projects/auv-dynamics-modeling/images/fig03-depth-pitch-controller.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Schematic of the depth–pitch subsystem with controller">
+    <img src="/projects/auv-dynamics-modeling/display/fig03-depth-pitch-controller.webp" alt="Schematic of the depth–pitch subsystem with controller" width="1856" height="429" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 05</span> Schematic of the depth–pitch subsystem with controller</figcaption>
+</figure>
+
+<figure className="study-figure">
+  <a href="/projects/auv-dynamics-modeling/images/fig04-depth-pitch-response.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Depth, pitch and stern angle of the depth subsystem">
+    <img src="/projects/auv-dynamics-modeling/display/fig04-depth-pitch-response.webp" alt="Depth, pitch and stern angle of the depth subsystem" width="875" height="853" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 06</span> Depth, pitch and stern angle of the depth subsystem</figcaption>
+</figure>
+
+### Yaw subsystem
+
+The yaw controller follows the same architecture, with an inner yaw loop and an outer lateral-position loop. For a demand of zero to 20 metres in around one minute at a constant speed of 3 knots, a maximum yaw angle of 15 degrees is required and followed accurately.
+
+<figure className="study-figure">
+  <a href="/projects/auv-dynamics-modeling/images/fig05-yaw-controller.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Schematic of the yaw subsystem with controller">
+    <img src="/projects/auv-dynamics-modeling/display/fig05-yaw-controller.webp" alt="Schematic of the yaw subsystem with controller" width="2801" height="604" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 07</span> Schematic of the yaw subsystem with controller</figcaption>
+</figure>
+
+<figure className="study-figure">
+  <a href="/projects/auv-dynamics-modeling/images/fig06-yaw-response.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Lateral position, yaw and rudder angle of the yaw subsystem">
+    <img src="/projects/auv-dynamics-modeling/display/fig06-yaw-response.webp" alt="Lateral position, yaw and rudder angle of the yaw subsystem" width="875" height="852" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 08</span> Lateral position, yaw and rudder angle of the yaw subsystem</figcaption>
+</figure>
+
+### Speed subsystem
+
+The error between the desired and actual speed is fed to a PD controller, which generates the propeller RPM needed to reach the specified speed. The required RPM shows the control effort exerted on the propulsion system.
+
+<figure className="study-figure">
+  <a href="/projects/auv-dynamics-modeling/images/fig07-speed-controller.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Schematic of the speed subsystem">
+    <img src="/projects/auv-dynamics-modeling/display/fig07-speed-controller.webp" alt="Schematic of the speed subsystem" width="1407" height="237" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 09</span> Schematic of the speed subsystem</figcaption>
+</figure>
+
+<figure className="study-figure">
+  <a href="/projects/auv-dynamics-modeling/images/fig08-speed-rpm.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Speed and RPM of the vehicle">
+    <img src="/projects/auv-dynamics-modeling/display/fig08-speed-rpm.webp" alt="Speed and RPM of the vehicle" width="1225" height="1273" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 10</span> Speed and RPM of the vehicle</figcaption>
+</figure>
+
+## Nonlinear Control
+
+The nonlinear model is implemented in MATLAB-Simulink. A references block provides the desired speed, y-position, z-position and roll angle; a controller block with four independent controllers computes the control commands; and the AUV dynamics block combines them with state feedback to estimate the next state. The controller block is either the conventional controller or SMC.
+
+<figure className="study-figure">
+  <a href="/projects/auv-dynamics-modeling/images/fig11-nonlinear-model-block-diagram.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Block diagram of the nonlinear AUV model">
+    <img src="/projects/auv-dynamics-modeling/display/fig11-nonlinear-model-block-diagram.webp" alt="Block diagram of the nonlinear AUV model" width="751" height="286" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 11</span> Block diagram of the nonlinear AUV model</figcaption>
+</figure>
+
+### Centre-of-gravity variation
+
+The conventional controller was compared with and without a shift in the CG location (xcg = 8 mm), for references of 4 knots speed and 60 m depth. The stern and rudder commands are combined to nullify roll: the roll angle moves from its initial −2.59° to zero after a minor undershoot, and the vehicle reaches the desired depth and speed in both cases.
+
+<figure className="study-figure">
+  <a href="/projects/auv-dynamics-modeling/images/fig12-cg-variation.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Conventional controller performance with and without variation in CG location">
+    <img src="/projects/auv-dynamics-modeling/display/fig12-cg-variation.webp" alt="Conventional controller performance with and without variation in CG location" width="1225" height="1273" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 12</span> Conventional controller performance with and without variation in CG location</figcaption>
+</figure>
+
+### Ocean currents
+
+An ocean-current model was added to the same simulation. The current starts at 0.5 m/s and settles at 0.25 m/s; after a brief transient, the controller maintains the desired speed and the depth follows the command.
+
+<figure className="study-figure">
+  <a href="/projects/auv-dynamics-modeling/images/fig13-ocean-currents.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Simulation results with ocean currents">
+    <img src="/projects/auv-dynamics-modeling/display/fig13-ocean-currents.webp" alt="Simulation results with ocean currents" width="644" height="617" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 13</span> Simulation results with ocean currents</figcaption>
+</figure>
+
+## SMC vs Conventional: Lawn-Mowing Manoeuvre
+
+Sliding mode controllers are used for the inner pitch and yaw loops, with a saturation function in the control law to reduce chattering; the conventional controller architecture is unchanged and serves as the benchmark. A classical lawn-mowing manoeuvre — used for underwater object detection, search and rescue and environmental surveys — is run at 4 knots and a depth of 60 m. Both controllers execute the planned manoeuvre.
+
+<figure className="study-figure">
+  <a href="/projects/auv-dynamics-modeling/images/fig14-lawn-mowing.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Lawn mowing in the XY plane with SMC and conventional controller">
+    <img src="/projects/auv-dynamics-modeling/display/fig14-lawn-mowing.webp" alt="Lawn mowing in the XY plane with SMC and conventional controller" width="653" height="546" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 14</span> Lawn mowing in the XY plane with SMC and conventional controller</figcaption>
+</figure>
+
+Varying one parameter at a time, the root-mean-square error (RMSE) in the y-direction was recorded:
+
+| Controller | Xu\|u\| −25% | 0% | +25% | Muw −25% | 0% | +25% | Zuw −25% | 0% | +25% |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Conventional | 0.506 | 0.504 | 0.504 | 0.502 | 0.504 | 0.507 | 0.503 | 0.504 | 0.507 |
+| SMC | 1.600 | 1.614 | 1.623 | 1.613 | 1.614 | 1.611 | 1.600 | 1.614 | 1.611 |
+
+| Controller | (B−W)/g = 100 g | 340 g | 650 g | 1000 g |
+| --- | --- | --- | --- | --- |
+| Conventional | 0.513 | 0.505 | 0.495 | 0.483 |
+| SMC | 1.613 | 1.614 | 1.612 | 1.613 |
+
+The error with the conventional controller is lower, but with SMC the change in error under parameter variation is minimal.
+
+With several disturbances applied together — a CG shift (xcg = 8 mm), a 50% change in the axial drag coefficient Xu|u| and a constant ocean current of 0.1 m/s at a side-slip angle of 20° — the conventional controller deviates noticeably from the second cycle onward, while the SMC trajectory stays close to the intended path. The RMSE values are **3.694** for the conventional controller and **1.632** for SMC.
+
+<figure className="study-figure">
+  <a href="/projects/auv-dynamics-modeling/images/fig15-lawn-mowing-parameter-variations.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Lawn mowing in the XY plane of SMC and conventional controller with parameter variations">
+    <img src="/projects/auv-dynamics-modeling/display/fig15-lawn-mowing-parameter-variations.webp" alt="Lawn mowing in the XY plane of SMC and conventional controller with parameter variations" width="875" height="656" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 15</span> Lawn mowing in the XY plane of SMC and conventional controller with parameter variations</figcaption>
+</figure>
+
+## Conclusions
+
+The dynamic behaviour of the vehicle was represented with a 6-DoF model accounting for ocean currents; level-flight requirements were derived, and the model was decomposed into horizontal and vertical subsystems for linear analysis. Linear depth, yaw and speed controllers were demonstrated, including level flight at 4 knots.
+
+Conventional and sliding-mode nonlinear controllers were designed against ocean currents, parameter fluctuations, CG deviations and buoyancy variations. The lawn-mowing comparison showed SMC’s enhanced robustness against disturbances and parameter uncertainties, at the cost of added complexity in its design and implementation, including the management of chattering.

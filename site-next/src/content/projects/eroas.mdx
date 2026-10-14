@@ -1,0 +1,170 @@
+---
+title: "EROAS"
+studyTitle: "EROAS: Forward-Looking Sonar Based AUV Obstacle Avoidance"
+summary: "Efficient Reactive Obstacle Avoidance System (See IEEE JOE paper)"
+details: "Novel approach for efficient 3-D reactive obstacle avoidance for AUVs using 2.5-D forward-looking sonar. Details available in the published IEEE Journal of Oceanic Engineering paper."
+kind: "full"
+year: 2025
+status: "Published"
+domain: "Robotics / Path Planning"
+tags: ["ROS","Gazebo","Sonar","AUV","Obstacle Avoidance","Real-Time Systems"]
+links: [{"label": "GitHub", "url": "https://github.com/AIRLabIISc/EROAS"}, {"label": "Paper (IEEE JOE)", "url": "https://doi.org/10.1109/JOE.2026.3693585"}, {"label": "arXiv", "url": "https://arxiv.org/abs/2411.05516"}]
+info: {"duration":"2023 - 2024","institution":"Indian Institute of Science, Bangalore","role":"Research Associate","teamSize":"4 Members"}
+relatedWork: [{"title": "EROAS: 3-D Efficient Reactive Obstacle Avoidance System for Autonomous Underwater Vehicles Using 2.5-D Forward-Looking Sonar — IEEE Journal of Oceanic Engineering, 2026", "url": "https://doi.org/10.1109/JOE.2026.3693585"}, {"title": "EROAS: 3D Efficient Reactive Obstacle Avoidance System for Autonomous Underwater Vehicles using 2.5 D Forward-Looking Sonar", "url": "https://arxiv.org/abs/2411.05516"}]
+preview: {"url":"/thumbs/eroas.webp","alt":"EROAS preview","caption":"Efficient Reactive Obstacle Avoidance System (See IEEE JOE paper)"}
+lead: "Intelligent Navigation Beneath the Waves - A real-time, computationally lightweight obstacle avoidance framework for AUVs using forward-looking sonar"
+sections: ["Overview","Reinventing Sonar Perception","Architecture of EROAS","Simulation Environment and Experiments","Efficiency and Real-Time Performance","Technical Implementation","Conclusion","Results & Impact"]
+---
+
+<figure className="study-video">
+  <video controls playsInline preload="none" width="1016" height="576" poster="/projects/eroas/videos/poster.webp">
+    <source src="/projects/eroas/videos/EROAS_Demo.mp4" type="video/mp4" />
+    Your browser does not support embedded video.
+  </video>
+  <figcaption>EROAS in action - Watch the AUV scanning, detecting, and dynamically avoiding underwater obstacles within a simulated environment</figcaption>
+</figure>
+
+## Overview
+
+Autonomous Underwater Vehicles (AUVs) are transforming how we explore and operate beneath the surface—supporting missions in inspection, surveillance, and environmental monitoring. Yet, the underwater world remains one of the hardest environments for autonomy: low visibility, dynamic currents, and unpredictable obstacles make safe navigation a constant challenge.
+
+EROAS (Efficient Reactive Obstacle Avoidance Strategy) is an innovative solution developed at the Indian Institute of Science (IISc), Bangalore) to address precisely this problem. It introduces a real-time, computationally lightweight obstacle avoidance framework for AUVs using a forward-looking sonar (FLS)—a sensor robust to poor visibility and suitable for deep-sea operation.
+
+## Reinventing Sonar Perception
+
+Unlike cameras or lidars, sonar remains reliable in turbid or dark underwater conditions. However, conventional FLS systems provide only 2D range information, lacking vertical awareness of obstacles. EROAS overcomes this limitation through a mechanically pivoted sonar setup that allows the FLS to sweep vertically, transforming 2D scans into a 2.5D spatial perception. This enables the AUV to recognize elevation gaps in its surroundings, helping it decide whether to turn, rise, or dive safely. This compact sensing strategy delivers depth context without the computational load of full 3D sonar systems—making EROAS both energy-efficient and real-time capable.
+
+<div className="figure-group figure-group-2" style="max-width: min(100%, 2208px)">
+<figure className="study-figure" style="--ar: 1.3136">
+  <a href="/projects/eroas/images/sonar_beam_structure.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Forward-looking sonar beam structure">
+    <img src="/projects/eroas/display/sonar_beam_structure.webp" alt="Forward-looking sonar beam structure" width="1642" height="1250" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 01</span> Forward-looking sonar beam structure - The mechanical pivoting mechanism enables vertical scanning for 2.5D perception</figcaption>
+</figure>
+<figure className="study-figure" style="--ar: 1.5904">
+  <a href="/projects/eroas/images/auv_navigating.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: AUV navigating a cluttered simulated underwater environment">
+    <img src="/projects/eroas/display/auv_navigating.webp" alt="AUV navigating a cluttered simulated underwater environment" width="1196" height="752" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 02</span> AUV navigating a cluttered simulated underwater environment - Demonstrating real-time obstacle avoidance capabilities</figcaption>
+</figure>
+</div>
+
+## Architecture of EROAS
+
+EROAS operates through a three-part architecture that allows an AUV to sense, decide, and react efficiently during navigation.
+
+### Sonar Profile-Guided Directional Decision Control (SPD²C)
+
+This module analyzes sonar range profiles to identify feasible navigation directions. It detects gaps between obstacles and classifies them as safe or unsafe, generating velocity commands for both horizontal and vertical maneuvers. SPD²C also adapts intelligently to the curvature of obstacles—distinguishing between convex and concave surfaces—to prevent entrapment.
+
+<figure className="study-figure">
+  <a href="/projects/eroas/images/Block_diagram_final_2.jpeg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: EROAS control framework schematic">
+    <img src="/projects/eroas/display/Block_diagram_final_2.webp" alt="EROAS control framework schematic" width="3184" height="1305" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 03</span> EROAS control framework schematic - Architecture showing SPD²C, SCG, and ST-CBF modules working together</figcaption>
+</figure>
+
+### Spatial Context Generator (SCG)
+
+Underwater sonar perception is limited by a narrow field of view. SCG mitigates this by maintaining a local memory map of recently detected obstacles. This memory helps the vehicle maintain situational awareness even when objects temporarily move out of the sonar's view, ensuring continuous safe navigation.
+
+<figure className="study-figure">
+  <a href="/projects/eroas/images/spatial_context.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Spatial context memory maintained by SCG">
+    <img src="/projects/eroas/display/spatial_context.webp" alt="Spatial context memory maintained by SCG" width="2315" height="2122" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 04</span> Spatial context memory maintained by SCG - Local memory map of recently detected obstacles for continuous awareness</figcaption>
+</figure>
+
+### Spatio-Temporal Control Barrier Function (ST-CBF)
+
+The ST-CBF layer ensures mathematical safety guarantees for all motion commands. It filters velocity inputs from SPD²C to maintain a safe distance from detected obstacles, ensuring smooth, collision-free trajectories in dynamic simulated environments.
+
+## Simulation Environment and Experiments
+
+All evaluations of EROAS were conducted in a high-fidelity underwater simulation setup using the DAVE simulator (ROS + Gazebo). The experiments used the REXROV2 AUV model, navigating through environments populated with multiple static and non-convex obstacles to test the framework's reactivity and safety.
+
+<div className="figure-group figure-group-2" style="max-width: min(100%, 2024px)">
+<figure className="study-figure" style="--ar: 1.2500">
+  <a href="/projects/eroas/images/simulated_environment.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Simulated 3D environment with cluttered obstacles">
+    <img src="/projects/eroas/display/simulated_environment.webp" alt="Simulated 3D environment with cluttered obstacles" width="1000" height="800" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 05</span> Simulated 3D environment with cluttered obstacles - High-fidelity DAVE simulator setup for comprehensive testing</figcaption>
+</figure>
+<figure className="study-figure" style="--ar: 1.2500">
+  <a href="/projects/eroas/images/auv_trajectory.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: AUV trajectory in simulation demonstrating avoidance behavior">
+    <img src="/projects/eroas/display/auv_trajectory.webp" alt="AUV trajectory in simulation demonstrating avoidance behavior" width="1000" height="800" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 06</span> AUV trajectory in simulation demonstrating avoidance behavior - Smooth, collision-free path through complex obstacles</figcaption>
+</figure>
+</div>
+
+Performance metrics such as trajectory length, navigation time, and control smoothness were measured against widely used baseline methods like the Dynamic Window Approach (DWA) and Artificial Potential Field (APF).
+
+Results demonstrated that EROAS achieved:
+
+- 10–16% shorter trajectories,
+- 13–27% faster navigation times, and
+- significantly smoother control commands (lower yaw rate oscillations).
+
+These results confirm that EROAS can perform real-time, safe obstacle avoidance using only sonar data, with computational efficiency suitable for onboard embedded systems.
+
+<div className="figure-group figure-group-2" style="max-width: min(100%, 2352px)">
+<figure className="study-figure" style="--ar: 1.5491">
+  <a href="/projects/eroas/images/EROAS_Fig_11_a.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: EROAS Figure 11 - Top view of trajectory results">
+    <img src="/projects/eroas/display/EROAS_Fig_11_a.webp" alt="EROAS Figure 11 - Top view of trajectory results" width="1089" height="703" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 07</span> Figure 11: EROAS trajectory results - Top view</figcaption>
+</figure>
+<figure className="study-figure" style="--ar: 1.7624">
+  <a href="/projects/eroas/images/side.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: EROAS side view of trajectory results">
+    <img src="/projects/eroas/display/side.webp" alt="EROAS side view of trajectory results" width="1558" height="884" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 08</span> Side view: EROAS trajectory results - Side perspective</figcaption>
+</figure>
+</div>
+
+## Efficiency and Real-Time Performance
+
+EROAS's lightweight architecture was designed with computational simplicity in mind. Its control and decision-making modules maintain steady real-time performance (≈8 Hz)—faster than the sonar's 4 Hz acquisition rate—making it feasible for embedded AUV deployment.
+
+This ensures that the framework can operate continuously and efficiently during long-duration missions, where energy and timing constraints are critical.
+
+## Technical Implementation
+
+### Simulation Environment
+
+- High-fidelity underwater simulation using DAVE simulator (ROS + Gazebo)
+- REXROV2 AUV model for realistic dynamics
+- Multiple static and non-convex obstacles for comprehensive testing
+- Performance metrics: trajectory length, navigation time, control smoothness
+
+### Real-Time Performance
+
+- Control and decision-making modules maintain steady real-time performance (≈8 Hz)
+- Faster than sonar's 4 Hz acquisition rate
+- Lightweight architecture suitable for embedded AUV deployment
+- Energy-efficient operation for long-duration missions
+
+### Performance Results
+
+- 10–16% shorter trajectories compared to baseline methods
+- 13–27% faster navigation times
+- Significantly smoother control commands (lower yaw rate oscillations)
+- Outperforms Dynamic Window Approach (DWA) and Artificial Potential Field (APF)
+
+## Conclusion
+
+EROAS represents a new step forward in sonar-driven autonomy for AUVs. By fusing efficient perception, reactive control, and guaranteed safety, it provides a scalable foundation for real-time underwater obstacle avoidance—without relying on expensive sensors or large computational budgets.
+
+The framework's modular design and open-source implementation enable researchers to extend it for broader tasks like underwater mapping, inspection, and mission planning.
+
+With its balance of simplicity, safety, and performance, EROAS brings us closer to a future where AUVs can operate independently in the vast, unseen world beneath the waves.
+
+## Results & Impact
+
+- 10–16% shorter trajectories compared to baseline methods (DWA, APF)
+- 13–27% faster navigation times in cluttered environments
+- Significantly smoother control commands with lower yaw rate oscillations
+- Real-time performance (≈8 Hz) suitable for embedded AUV deployment
+- Energy-efficient operation enabling long-duration missions
+- Open-source implementation enabling research extensions for underwater mapping and inspection

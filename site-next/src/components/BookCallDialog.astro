@@ -1,0 +1,25 @@
+---
+import data from '../data/content.json';
+const { calLink, durationMinutes } = data.profile.booking;
+const email = data.profile.contact.email;
+---
+<dialog class="book-dialog" id="book-call" aria-labelledby="book-call-title" data-booking-link={calLink} data-duration={durationMinutes}>
+  <div class="book-dialog-head">
+    <div>
+      <h2 id="book-call-title">Book a {durationMinutes}-minute call</h2>
+      <p class="book-dialog-note">
+        {calLink
+          ? 'Choose a time that suits you. Times are shown in your time zone, and you will get an email once the call is confirmed.'
+          : 'Online booking will be available here soon.'}
+      </p>
+    </div>
+    <button class="book-dialog-close" type="button" data-book-close aria-label="Close booking window">Close ✕</button>
+  </div>
+  {calLink
+    ? <div class="book-embed" id="book-call-embed"><p class="book-loading meta-label">Loading available times…</p></div>
+    : <div class="book-fallback">
+        <p>Until then, email me with two or three times that suit you and I’ll reply with a calendar invitation.</p>
+        <a class="text-link" href={`mailto:${email}?subject=${encodeURIComponent('Request for a 30-minute call')}`}>Email {email} →</a>
+      </div>}
+  <p class="book-status" role="status" aria-live="polite"></p>
+</dialog>

@@ -1,0 +1,12 @@
+---
+// A "Book a call" trigger. Without JavaScript it opens the Cal.com page (or email if
+// booking is not connected yet); with JavaScript it opens the on-site booking window.
+import data from '../data/content.json';
+interface Props { label?: string; class?: string }
+const { label = 'Book a call', class: className } = Astro.props;
+const { calLink } = data.profile.booking;
+const href = calLink
+  ? `https://cal.com/${calLink}`
+  : `mailto:${data.profile.contact.email}?subject=${encodeURIComponent('Request for a 30-minute call')}`;
+---
+<a class:list={['book-call-link', className]} href={href} data-book-call aria-haspopup="dialog">{label}</a>

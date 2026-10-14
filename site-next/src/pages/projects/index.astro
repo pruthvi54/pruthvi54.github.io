@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import data from '../../data/content.json';
+const entries = await getCollection('projects');
+const bySlug = new Map(entries.map((entry) => [entry.id, entry]));
+const projects = data.projectOrder.map((slug) => bySlug.get(slug)).filter((item) => item !== undefined);
+if (projects.length !== entries.length) throw new Error('Project order and content collection are out of sync');
+// Grouped by year, newest first, keeping the original order within each year.
+const years = [...new Set(projects.map((project) => project.data.year))];
+const groups = years.map((year) => ({ year, items: projects.filter((project) => project.data.year === year) }));
+---
+<SiteLayout title="Projects" description="Robotics, simulation, underwater autonomy, and vehicle control projects by Pruthviraj Mane, from 2019 to today." current="projects">
+  <div class="projects-page page-width">
+    <div class="page-intro"><h1 class="page-title">Projects</h1><p class="page-subtitle">Simulation, autonomy, and control.</p></div>
+    <div class="timeline">
+      {groups.map((group) => <section class="timeline-year" aria-labelledby={`year-${group.year}`}>
+        <h2 class="timeline-label" id={`year-${group.year}`}>{group.year}</h2>
+        <div class="timeline-items">
+          {group.items.map((project) => <a class:list={['project-row', { 'has-study': project.data.kind === 'full' }]} href={`/projects/${project.id}/`}>
+            <span class="project-text">
+              <span class="project-heading"><span class="project-title">{project.data.title}</span><span class="project-arrow" aria-hidden="true">→</span></span>
+              <span class="project-summary">{project.data.summary}</span>
+              <span class="project-meta meta-label">{project.data.tags.slice(0, 3).join(' / ')}{project.data.kind === 'full' && <span class="study-mark"> · Case study</span>}</span>
+            </span>
+            {project.data.preview && <img class="project-thumb" src={project.data.preview.url} alt="" width="1120" height="760" loading="lazy" decoding="async" />}
+          </a>)}
+        </div>
+      </section>)}
+    </div>
+  </div>
+</SiteLayout>

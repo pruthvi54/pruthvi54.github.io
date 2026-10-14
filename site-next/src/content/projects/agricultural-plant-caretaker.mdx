@@ -1,0 +1,165 @@
+---
+title: "Autonomous Agricultural Plant Caretaker"
+studyTitle: "Design and Development of Autonomous Small-Scale Agricultural Plant Caretaker"
+summary: "Small-scale prototype for automated sowing, sensing, and watering"
+details: "Designed and prototyped an autonomous system for sowing, moisture sensing, and watering with rail-based UTM mechanism. Team project for ABU Robocon 2018 (AIR 38/107)."
+kind: "full"
+year: 2019
+domain: "SolidWorks"
+tags: ["SolidWorks","Automation","Agriculture","Robocon"]
+links: []
+info: {"institution":"Walchand College of Engineering, Sangli"}
+preview: {"url":"/thumbs/agricultural-plant-caretaker.webp","alt":"Autonomous Agricultural Plant Caretaker preview","caption":"Small-scale prototype for automated sowing, sensing, and watering"}
+lead: "Designed and prototyped an autonomous system for sowing, moisture sensing, and watering with rail-based UTM mechanism. Team project for ABU Robocon 2018 (AIR 38/107)."
+sections: ["Overview","Problem Identification","System Definition","Mechanical Hardware","Electronics Hardware","Software","Discussion and Results","Conclusion and Future Scope","Team"]
+---
+
+<figure className="study-video study-video-embed">
+  <iframe src="https://www.youtube-nocookie.com/embed/dwbdpdVoCs8?start=121&rel=0" title="Smart Arduino Rpi based IoT Indoor Farming Project — video by The Blue Dot on YouTube" width="1280" height="720" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+  <figcaption>Smart Arduino Rpi based IoT Indoor Farming Project — video by The Blue Dot on YouTube · <a href="https://www.youtube.com/watch?v=dwbdpdVoCs8&t=121s" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></figcaption>
+</figure>
+
+## Overview
+
+With a growing population we must produce more food, and conventional agricultural techniques alone are not able to do so. Autonomous Small-Scale Agricultural Plant Caretaker is an attempt to automate agricultural activities with minimum human intervention, suitable for Indian farmers in commercial greenhouses and for domestic use.
+
+It has a drive system like a CNC machine, with a Universal Tool Mount in place of the cutting tool, and currently performs sowing and watering. Users control it through a web interface on the same network. Low power requirements and watering only as much as the moisture sensor calls for make it beneficial over manual labour. A Raspberry Pi acts as the server and bridge to an Arduino Due microcontroller.
+
+## Problem Identification
+
+FarmBot, the most widely used open-source CNC farming machine, costs around Rs. 3,50,000 or more for an Indian customer. Its tool mount has to travel to the end of the machine to pick up a tool for every process — and to pick up every seed, even of the same type — wasting time and making it impractical over long working areas. This design reworks that approach and keeps the cost low enough for middle-class farmers.
+
+## System Definition
+
+The robot is a gantry on tracks for X-axis movement, with similar tracks for the Y axis and a lead screw for the Z axis. Each axis is driven by a DC motor with an encoder, through belt and pulley (X, Y) or a flexible coupling and lead screw (Z). A Universal Tool Mount (UTM) at the end of the Z axis holds all tools in a circular pattern, so the robot changes tools by rotating instead of travelling to the end:
+
+1. Seeding tool connected to a vacuum pump for suction.
+2. Watering tool connected to a water pump.
+3. Moisture sensing tool.
+4. Weeding tool for future scope.
+
+A rotating seed box with different seeds is mounted on the X axis, and limit switches at the ends of each axis are used for calibration. The working area is 1 m (X) by 0.5 m (Y), with a 3-foot Z axis. On a sowing command, the tool picks the chosen seed, plants it at the given location, and waters it according to the moisture sensor readings.
+
+## Mechanical Hardware
+
+The bed is a precisely machined wooden platform holding the soil, with the gantry fixed to either side. The X-axis gantry uses 20×20 aluminium extrusions of 1.2192 m, and the Y axis a 0.8 m extrusion on a cross slide plate. Belts are fixed with 3D-printed PETG belt clips, followed by limit switches for calibration and safety.
+
+<div className="figure-group figure-group-2" style="max-width: min(100%, 1054px)">
+<figure className="study-figure" style="--ar: 1.4875">
+  <a href="/projects/agricultural-plant-caretaker/images/x-axis-drive.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: X axis drive (aluminium extrusion, guiding wheel, belt, acrylic plate)">
+    <img src="/projects/agricultural-plant-caretaker/display/x-axis-drive.webp" alt="X axis drive (aluminium extrusion, guiding wheel, belt, acrylic plate)" width="534" height="359" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 01</span> X axis drive (aluminium extrusion, guiding wheel, belt, acrylic plate)</figcaption>
+</figure>
+<figure className="study-figure" style="--ar: 1.3812">
+  <a href="/projects/agricultural-plant-caretaker/images/x-axis-motor.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: X-axis motor">
+    <img src="/projects/agricultural-plant-caretaker/display/x-axis-motor.webp" alt="X-axis motor" width="558" height="404" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 02</span> X-axis motor</figcaption>
+</figure>
+</div>
+
+The UTM is mounted on its motor shaft with all four tools in holders; the vacuum and water pumps sit on the Z-axis extrusion and the table, fed by a reservoir near the bed. The seed-box motor is mounted on the gantry with a stopper to fix its movement.
+
+<div className="figure-group figure-group-2" style="max-width: min(100%, 774px)">
+<figure className="study-figure" style="--ar: 1.4938">
+  <a href="/projects/agricultural-plant-caretaker/images/universal-tool-mount.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: UTM (seeder, shower, moisture sensor, weeder)">
+    <img src="/projects/agricultural-plant-caretaker/display/universal-tool-mount.webp" alt="UTM (seeder, shower, moisture sensor, weeder)" width="363" height="243" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 03</span> UTM (seeder, shower, moisture sensor, weeder)</figcaption>
+</figure>
+<figure className="study-figure" style="--ar: 1.5934">
+  <a href="/projects/agricultural-plant-caretaker/images/seed-box-mechanism.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Seed box mechanism">
+    <img src="/projects/agricultural-plant-caretaker/display/seed-box-mechanism.webp" alt="Seed box mechanism" width="529" height="332" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 04</span> Seed box mechanism</figcaption>
+</figure>
+</div>
+
+<figure className="study-figure">
+  <a href="/projects/agricultural-plant-caretaker/images/final-assembly.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Final assembly of the system">
+    <img src="/projects/agricultural-plant-caretaker/display/final-assembly.webp" alt="Final assembly of the system" width="332" height="414" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 05</span> Final assembly of the system</figcaption>
+</figure>
+
+## Electronics Hardware
+
+Closed-loop position control of the four encoder DC motors runs on an Arduino Due, chosen because every pin can be a hardware interrupt and for its high clock speed. A custom shield, designed in KiCad, carries all connections and a filtered 3.3 V / 5 V / 12 V supply. A Raspberry Pi 3 B hosts the web server over Wi-Fi and connects to the Arduino by USB, with an LCD showing system status. L298N drivers run the motors, and a 12 V, 10 A supply covers the roughly 9 A peak load.
+
+<figure className="study-figure">
+  <a href="/projects/agricultural-plant-caretaker/images/electronics-interfacing.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Interfacing of electronic components">
+    <img src="/projects/agricultural-plant-caretaker/display/electronics-interfacing.webp" alt="Interfacing of electronic components" width="601" height="440" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 06</span> Interfacing of electronic components</figcaption>
+</figure>
+
+## Software
+
+### Arduino Due
+
+The Arduino Due listens for instructions from the Raspberry Pi over serial, in packets holding the values each actuator should take — for example `{X: 100, Y: 100, Z: 2000, WaterPump: 0, VacuumPump: 0, Tool: W, Calibration: 5}`, where 2000 means “no motion” and a calibration value of 5 means “no calibration”.
+
+<figure className="study-figure">
+  <a href="/projects/agricultural-plant-caretaker/images/arduino-due-flowchart.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Arduino Due algorithm flowchart">
+    <img src="/projects/agricultural-plant-caretaker/display/arduino-due-flowchart.webp" alt="Arduino Due algorithm flowchart" width="244" height="761" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 07</span> Arduino Due algorithm flowchart</figcaption>
+</figure>
+
+### Raspberry Pi and web interface
+
+A Flask web app on Raspbian provides a login page and a controls page. The farming area is a canvas mapped to the real bed: clicking places a plant, drawn as a circle sized to its future spread, and planted positions are kept so the same spot is not replanted. A manual-control form calibrates axes, switches the pumps, selects tools, moves each axis and positions the seed box. Commands are posted to the server and processed in Python, with multiprocessing handling web data and Arduino communication together.
+
+<div className="figure-group figure-group-2" style="max-width: min(100%, 438px)">
+<figure className="study-figure" style="--ar: 0.4906">
+  <a href="/projects/agricultural-plant-caretaker/images/web-data-flowchart.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Web data handling flowchart">
+    <img src="/projects/agricultural-plant-caretaker/display/web-data-flowchart.webp" alt="Web data handling flowchart" width="236" height="481" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 08</span> Web data handling flowchart</figcaption>
+</figure>
+<figure className="study-figure" style="--ar: 0.3704">
+  <a href="/projects/agricultural-plant-caretaker/images/farming-activities-flowchart.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Handling farming activities">
+    <img src="/projects/agricultural-plant-caretaker/display/farming-activities-flowchart.webp" alt="Handling farming activities" width="250" height="675" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 09</span> Handling farming activities</figcaption>
+</figure>
+</div>
+
+Each activity, such as timed watering or planting a seed, is a function with its own list of packets, which makes new functions easy to add.
+
+<figure className="study-figure">
+  <a href="/projects/agricultural-plant-caretaker/images/plant-function-packets.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Various packets in the Plant function">
+    <img src="/projects/agricultural-plant-caretaker/display/plant-function-packets.webp" alt="Various packets in the Plant function" width="467" height="138" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 10</span> Various packets in the Plant function</figcaption>
+</figure>
+
+## Discussion and Results
+
+| Process | Average time (s) |
+| --- | --- |
+| X axis calibration | 28 |
+| Y axis calibration | 22 |
+| Z axis calibration | 15 |
+| Tool calibration | 5 |
+| Sowing one seed | 160 |
+
+Calibration times assume the axes start at the extreme ends, so they are the maximum.
+
+| Component | Max power rating (W) |
+| --- | --- |
+| Vacuum pump | 50 |
+| Water pump | 50 |
+| Motors | 12 |
+| Raspberry Pi | 10 |
+
+At any time the maximum power draw is around 80 W, low compared to the cost of manual labour.
+
+## Conclusion and Future Scope
+
+The set-up plants seeds according to the user’s preference and waters only as much as the moisture sensor calls for. Low power use and low cost make it economical for Indian farmers and for greenhouse farming, and longer X-axis rails extend it to backyards and larger greenhouses. Commands and data are saved for further study of farming methods. Improvements remain possible in weeding, sowing-tool shape and watering methods.
+
+## Team
+
+Shailesh Chillarge, Pruthviraj Mane, Sachin Aglave, Nilesh Sutar and Hitesh Somnathe, guided by Prof. R.M. Chanmanwar — Department of Mechanical Engineering, Walchand College of Engineering, Sangli.

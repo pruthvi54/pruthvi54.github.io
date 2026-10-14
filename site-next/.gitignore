@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+playwright-report/
+test-results/
+review/
+# Private source material: only the README notes in content-drafts are published.
+src/content-drafts/**
+!src/content-drafts/**/
+!src/content-drafts/**/README.md

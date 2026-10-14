@@ -1,0 +1,365 @@
+{
+  "profile": {
+    "name": "Pruthviraj Mane",
+    "role": "Robotics Engineer",
+    "company": "QibiTech",
+    "city": "Tokyo",
+    "country": "Japan",
+    "timezone": "Asia/Tokyo",
+    "home": {
+      "eyebrow": "ROBOTICS ENGINEER / TOKYO",
+      "heading": "Robotics, from model to motion.",
+      "desktopLines": [
+        "Robotics, from",
+        "model to motion."
+      ],
+      "italicWord": "motion",
+      "intro": "I build simulation environments and autonomous systems, connecting dynamics, perception, and control.",
+      "cta": {
+        "label": "Explore projects →",
+        "url": "/projects/"
+      },
+      "credentials": [
+        "Previously IISc AIRL",
+        "MS (Research), IIT Guwahati",
+        "5 publications"
+      ]
+    },
+    "about": [
+      "I’m a robotics engineer at QibiTech in Tokyo. My work connects modeling, simulation, perception, and control.",
+      "Previously, at IISc’s Artificial Intelligence and Robotics Laboratory, I worked on marine autonomy, underwater simulation, and sonar-guided navigation. My research at IIT Guwahati focused on electric-vehicle dynamics and control."
+    ],
+    "experienceIntro": "My professional journey in robotics, simulation, and autonomous systems",
+    "experience": [
+      {
+        "title": "Robotics Engineer",
+        "organization": "QibiTech",
+        "location": "Tokyo",
+        "date": "Mar 2026 – Present",
+        "groups": [
+          {
+            "heading": "",
+            "items": [
+              "Work on space robots, covering their control and simulation.",
+              "Model and simulate robotic systems in MATLAB, Simulink and Simscape.",
+              "Build robot simulations in NVIDIA Isaac Sim.",
+              "Write scripts that automate simulation pipelines, fast-forwarding the simulation process."
+            ]
+          }
+        ],
+        "tags": [
+          "Space Robotics",
+          "Control",
+          "MATLAB",
+          "Simulink",
+          "Simscape",
+          "Isaac Sim",
+          "Simulation Automation"
+        ]
+      },
+      {
+        "title": "Project Associate",
+        "organization": "AIRL (Artificial Intelligence & Robotics Lab), IISc Bangalore",
+        "location": "",
+        "date": "Aug 2022 – Jan 2026",
+        "groups": [
+          {
+            "heading": "Modeling and Control",
+            "items": [
+              "Designed and simulated an underactuated AUV model in MATLAB/Simulink, ensuring stable 6-DOF control and validating behavior in ROS–Gazebo, while exploring cascaded PID, SMC, and MPC controllers; also worked on path planning, obstacle avoidance, and object detection with the same AUV.",
+              "Integrated IMU, camera, DVL, sonar to collect synthetic data for training navigation models."
+            ]
+          },
+          {
+            "heading": "Path Planning and Autonomous Navigation",
+            "items": [
+              "Developed EROAS, a real-time sonar-guided 3D obstacle-avoidance system for AUVs, by combining a 2.5D sonar sensing approach with a Control Barrier Function (CBF) safety filter to enable safe navigation in cluttered underwater environments.",
+              "Implemented a physics informed neural network with CBF for efficient obstacle avoidance of AUV."
+            ]
+          },
+          {
+            "heading": "Simulation Platforms and Synthetic Data Generation",
+            "items": [
+              "Built a high-fidelity underwater AUV simulation environment using Unreal Engine 5, enabling photorealistic synthetic visual dataset generation for subsea vision tasks like image enhancement, scene reconstruction, etc.",
+              "Created a ROS-Gazebo-Unreal ecosystem for generating co-registered datasets and testing navigation algorithms.",
+              "Developed a maritime ship simulator in Unreal Engine for dynamic behavior modeling and multimodal synthetic data collection as well as testing visual navigation models."
+            ]
+          },
+          {
+            "heading": "Fabrication and Field Testing of Research ASV",
+            "items": [
+              "Designed and built a research ASV with integrated propulsion, sensors, and control hardware.",
+              "Conducted field trials in lake to validate waypoint navigation, stability, and overall system reliability."
+            ]
+          }
+        ],
+        "tags": [
+          "MATLAB",
+          "Simulink",
+          "ROS",
+          "Gazebo",
+          "Unreal Engine 5",
+          "PID",
+          "SMC",
+          "MPC",
+          "CBF",
+          "PINN",
+          "Sonar",
+          "IMU",
+          "DVL"
+        ]
+      }
+    ],
+    "education": [
+      {
+        "title": "MS (Research), E-mobility",
+        "organization": "Indian Institute of Technology (IIT), Guwahati",
+        "location": "",
+        "date": "Aug 2020 – Jul 2022",
+        "groups": [
+          {
+            "heading": "MS Thesis: Lateral dynamics and stability of electric vehicle (Torque Vectoring)",
+            "items": [
+              "Analyzed torque-vectoring techniques for lateral stability of a four-wheel electric vehicle by controlling yaw moment, and modeled comparative controllers—including LQR, MPC, and SMC—to evaluate their effectiveness.",
+              "Advisor: Dr. B. S. Reddy, Assistant Professor, Dept of Mechanical Engineering IITG"
+            ]
+          }
+        ],
+        "tags": [
+          "LQR",
+          "MPC",
+          "SMC",
+          "MATLAB",
+          "Simulink"
+        ]
+      },
+      {
+        "title": "B.Tech in Mechanical Engineering",
+        "organization": "Walchand College of Engineering, Sangli",
+        "location": "",
+        "date": "2015 – 2019",
+        "groups": [
+          {
+            "heading": "Team Captain, Robocon · Jan 2018 – May 2019",
+            "items": [
+              "Led a 30-member interdisciplinary college team in Robocon 2018, overseeing design and execution of the project, resulting in an All-India Rank 38 out of 107 teams."
+            ]
+          }
+        ],
+        "tags": []
+      }
+    ],
+    "tools": [
+      {
+        "domain": "Dynamics & control",
+        "items": [
+          "MATLAB",
+          "Simulink",
+          "PID / PI",
+          "SMC",
+          "LQR",
+          "MPC",
+          "CBF",
+          "6-DoF modeling"
+        ]
+      },
+      {
+        "domain": "Robotics & perception",
+        "items": [
+          "ROS / ROS2",
+          "Gazebo",
+          "Sonar",
+          "Sensor integration",
+          "PyTorch",
+          "PINNs"
+        ]
+      },
+      {
+        "domain": "Simulation & design",
+        "items": [
+          "Unreal Engine 5",
+          "Isaac Sim",
+          "SolidWorks",
+          "Synthetic data"
+        ]
+      },
+      {
+        "domain": "Software & workflow",
+        "items": [
+          "Python",
+          "C / C++",
+          "Git",
+          "Docker"
+        ]
+      }
+    ],
+    "contact": {
+      "email": "pruthviraj3629@gmail.com",
+      "github": "https://github.com/pruthvi54",
+      "linkedin": "https://linkedin.com/in/pruthviraj-mane",
+      "x": "https://x.com/pruthvi_mane_",
+      "requestCV": "mailto:pruthviraj3629@gmail.com?subject=CV%20request"
+    },
+    "booking": {
+      "_comment": "Set calLink to your Cal.com event, e.g. \"pruthviraj-mane/30min\". Leave empty to fall back to email.",
+      "calLink": "pruthviraj-mane/30min",
+      "durationMinutes": 30
+    }
+  },
+  "publications": [
+    {
+      "id": "eroas",
+      "title": "EROAS: 3-D Efficient Reactive Obstacle Avoidance System for Autonomous Underwater Vehicles Using 2.5-D Forward-Looking Sonar",
+      "authors": [
+        "Mane, Pruthviraj",
+        "George, Allen Jacob",
+        "Makam, Rajini",
+        "Gurikar, Subhash",
+        "Majumder, Rudrashis",
+        "Sundaram, Suresh"
+      ],
+      "venue": "IEEE Journal of Oceanic Engineering",
+      "abstract": "Autonomous Underwater Vehicles (AUVs) have advanced significantly in obstacle detection and path planning. This paper proposes EROAS, a lightweight framework that augments a standard 2D FLS with a pivoting mechanism, effectively transforming it into a cost-efficient 2.5D sonar. The system integrates SPD2C for rapid gap detection, SCG for maintaining short-term obstacle memory, and ST-CBF for enforcing safety constraints.",
+      "year": 2026,
+      "links": {
+        "paper": "https://doi.org/10.1109/JOE.2026.3693585",
+        "arxiv": "https://arxiv.org/abs/2411.05516",
+        "github": "https://github.com/AIRLabIISc/EROAS"
+      },
+      "citation": "Mane, Pruthviraj and George, Allen Jacob and Makam, Rajini and Gurikar, Subhash and Majumder, Rudrashis and Sundaram, Suresh. EROAS: 3-D Efficient Reactive Obstacle Avoidance System for Autonomous Underwater Vehicles Using 2.5-D Forward-Looking Sonar. IEEE Journal of Oceanic Engineering, 2026. https://doi.org/10.1109/JOE.2026.3693585"
+    },
+    {
+      "id": "auv-modeling",
+      "title": "A Comprehensive Study on Modelling and Control of Autonomous Underwater Vehicle",
+      "authors": [
+        "Makam, Rajini",
+        "Mane, Pruthviraj",
+        "Sundaram, Suresh",
+        "Sujit, P.B."
+      ],
+      "venue": "Assistive Robotics (CRC Press), book chapter, pp. 264–296",
+      "abstract": "This comprehensive study presents modeling and robust control of autonomous underwater vehicles in the presence of uncertainties. The vehicle uses a 6-DOF approach considering ocean currents. The study compares conventional and sliding-mode control (SMC) methodologies, showcasing robustness against disturbances and parameter fluctuations.",
+      "year": 2026,
+      "links": {
+        "paper": "https://doi.org/10.1201/9781003434412-14",
+        "arxiv": "https://arxiv.org/abs/2312.02690"
+      },
+      "citation": "Makam, Rajini and Mane, Pruthviraj and Sundaram, Suresh and Sujit, P.B.. A Comprehensive Study on Modelling and Control of Autonomous Underwater Vehicle. In Assistive Robotics, CRC Press, pp. 264–296, 2026. https://doi.org/10.1201/9781003434412-14"
+    },
+    {
+      "id": "snatus",
+      "title": "SNATUS: Safe Navigation with Accurate Tracking for Underactuated Slender-body Autonomous Underwater Vehicles",
+      "authors": [
+        "Nair, Abhishek",
+        "Makam, Rajini",
+        "Mane, Pruthviraj",
+        "Majumder, Rudrashis",
+        "Sundaram, Suresh"
+      ],
+      "venue": "2025 Eleventh Indian Control Conference (ICC)",
+      "abstract": "In underwater navigation, precise trajectory tracking and reliable obstacle avoidance are crucial for the safe and efficient operation of Autonomous Underwater Vehicles (AUVs), especially in cluttered or complex environments. This paper introduces a novel framework SNATUS that integrates Nonlinear Model Predictive Control (NMPC) with Control Barrier Functions (CBF) to address these needs for slender-body AUVs. These AUVs face unique challenges due to under-actuation and actuator limitations. To ensure smooth control transitions and respect actuator constraints, a regularization term is added to the NMPC cost function that helps avoid abrupt changes in control actions. Safe navigation around obstacles is further enhanced through higher-order CBFs, providing a robust barrier against potential collisions. Additionally, ocean currents are introduced as external disturbances to test the robustness of the proposed approach under real-world conditions. Through a series of simulations, SNATUS architecture demonstrates the AUV’s capability to handle these disturbances, avoid obstacles effectively, and stay on course, proving its effectiveness for reliable underwater navigation.",
+      "year": 2025,
+      "links": {
+        "paper": "https://ieeexplore.ieee.org/document/11372255"
+      },
+      "citation": "Nair, Abhishek and Makam, Rajini and Mane, Pruthviraj and Majumder, Rudrashis and Sundaram, Suresh. SNATUS: Safe Navigation with Accurate Tracking for Underactuated Slender-body Autonomous Underwater Vehicles. 2025 Eleventh Indian Control Conference (ICC), pp. 376–381, 2025. https://doi.org/10.1109/ICC69100.2025.11372255"
+    },
+    {
+      "id": "aquanav",
+      "title": "AquaNav-Unmanned Surface Vehicle Simulator Using Unreal Engine 5",
+      "authors": [
+        "Mane, Pruthviraj",
+        "George, Allen",
+        "Khonde, Aditya",
+        "Sundaram, Suresh"
+      ],
+      "venue": "OCEANS 2025 Brest",
+      "abstract": "A high-fidelity Unmanned Surface Vehicle (USV) simulator built using Unreal Engine 5 for testing and validation of autonomous navigation algorithms in realistic maritime environments. The simulator provides photorealistic rendering, dynamic environmental control, and ROS integration for seamless sim-to-real transfer.",
+      "year": 2025,
+      "links": {
+        "paper": "https://ieeexplore.ieee.org/abstract/document/11104589",
+        "github": "https://github.com/AIRLabIISc/AquaNav"
+      },
+      "citation": "Mane, Pruthviraj and George, Allen and Khonde, Aditya and Sundaram, Suresh. AquaNav-Unmanned Surface Vehicle Simulator Using Unreal Engine 5. OCEANS 2025 Brest, 2025. https://ieeexplore.ieee.org/abstract/document/11104589"
+    },
+    {
+      "id": "pinn",
+      "title": "Safe navigation of autonomous underwater vehicles using physics-informed neural networks",
+      "authors": [
+        "Majumder, Rudrashis",
+        "Makam, Rajini",
+        "Mane, Pruthviraj",
+        "KS, Bharathwaj",
+        "Sundaram, Suresh"
+      ],
+      "venue": "OCEANS 2024-Singapore",
+      "abstract": "This paper presents a novel approach to safe navigation of autonomous underwater vehicles using physics-informed neural networks (PINNs). The method combines data-driven learning with physical constraints to ensure safe and robust navigation in complex underwater environments.",
+      "year": 2024,
+      "links": {
+        "paper": "https://ieeexplore.ieee.org/document/10682406",
+        "github": "https://github.com/AIRLabIISc/Vertical_PINN"
+      },
+      "citation": "Majumder, Rudrashis and Makam, Rajini and Mane, Pruthviraj and KS, Bharathwaj and Sundaram, Suresh. Safe navigation of autonomous underwater vehicles using physics-informed neural networks. OCEANS 2024-Singapore, 2024. https://ieeexplore.ieee.org/document/10682406"
+    }
+  ],
+  "technicalNotes": [
+    {
+      "title": "Simulations are the need of the time — building UE5 Marine Surface Simulator",
+      "date": "November 2025",
+      "summary": "A look at AquaNav’s marine environments, multimodal data generation, and ROS integration.",
+      "link": "https://www.linkedin.com/posts/pruthviraj-mane_simulation-unrealengine-ros-activity-7400065303352889344-EbUk?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAB7p0l0BJtwvHhI4dkaV0q11qltxWLgJvCc",
+      "platform": "LinkedIn"
+    },
+    {
+      "title": "Bridging ROS-Gazebo physics with Unreal Engine 5 visuals for underwater robotics",
+      "date": "December 2024",
+      "summary": "How ROS–Gazebo dynamics and Unreal Engine 5 rendering work together for underwater simulation.",
+      "link": "https://www.linkedin.com/posts/pruthviraj-mane_simulation-unrealengine-rosgazebo-activity-7273612559923003393-Y8wh?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAB7p0l0BJtwvHhI4dkaV0q11qltxWLgJvCc",
+      "platform": "LinkedIn"
+    }
+  ],
+  "projectOrder": [
+    "aquanav-surface-simulator",
+    "asv-manufacturing",
+    "eroas",
+    "auv-path-planning-ros",
+    "mpc-cbf-auv",
+    "pinn-obstacle-avoidance",
+    "auv-gazebo-unreal",
+    "underwater-synthetic-dataset",
+    "vodsonar",
+    "auv-dynamics-modeling",
+    "ev-torque-vectoring",
+    "adaptive-cruise-control",
+    "ev-drive-cycle-analysis",
+    "covid-mask-sports",
+    "self-coordinating-robots",
+    "agricultural-plant-caretaker"
+  ],
+  "compatibility": [
+    {
+      "from": "/me/",
+      "to": "/about/"
+    },
+    {
+      "from": "/insights/",
+      "to": "/publications/#notes"
+    },
+    {
+      "from": "/request-cv/",
+      "to": "/about/#contact"
+    },
+    {
+      "from": "/request-success/",
+      "to": "/about/#contact"
+    },
+    {
+      "from": "/contact/",
+      "to": "/about/#contact"
+    },
+    {
+      "from": "/projects/auv-simulation/",
+      "to": "/projects/auv-dynamics-modeling/"
+    }
+  ]
+}

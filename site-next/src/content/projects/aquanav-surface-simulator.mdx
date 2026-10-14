@@ -1,0 +1,179 @@
+---
+title: "AquaNav Surface Vehicle Simulator"
+studyTitle: "AquaNav: High-Fidelity Marine Vehicle Simulator"
+summary: "Advanced surface vehicle simulation framework for maritime robotics"
+details: "Development of a comprehensive surface vehicle simulator for testing and validation of autonomous navigation algorithms in realistic maritime environments."
+kind: "full"
+year: 2025
+status: "Published"
+domain: "Simulation / Maritime"
+tags: ["Unreal Engine 5","ROS","Computer Vision","Maritime Robotics","Simulation","Deep Learning","Synthetic Data"]
+links: [{"label":"GitHub","url":"https://github.com/AIRLabIISc/AquaNav"},{"label":"Paper","url":"https://ieeexplore.ieee.org/abstract/document/11104589"}]
+info: {"duration":"2023 - 2024","institution":"Indian Institute of Science, Bangalore","role":"Research Associate","teamSize":"3 Members"}
+preview: {"url":"/thumbs/aquanav-surface-simulator.webp","alt":"AquaNav Surface Vehicle Simulator preview","caption":"Advanced surface vehicle simulation framework for maritime robotics"}
+lead: "Reimagining maritime robotics through simulation - A visually stunning, physically accurate USV simulator built on Unreal Engine 5"
+sections: ["Overview","Crafting Realism: From Waves to Light","Generating Knowledge: The Power of Synthetic Data","From Simulation to Real Systems: ROS Integration","Performance in Action: Vision Meets the Sea","Technical Implementation","Towards Smarter Oceans","Results & Impact"]
+---
+
+<figure className="study-video">
+  <video controls playsInline preload="none" width="1280" height="720" poster="/projects/aquanav-surface-simulator/videos/poster.webp">
+    <source src="/projects/aquanav-surface-simulator/videos/AquaNav_demo.mp4" type="video/mp4" />
+    Your browser does not support embedded video.
+  </video>
+  <figcaption>AquaNav simulation demo - Watch the simulated waters come alive as waves respond to autonomous navigation algorithms</figcaption>
+</figure>
+
+## Overview
+
+The ocean is one of humanity's last great frontiers—vast, unpredictable, and full of potential. From search-and-rescue missions to scientific exploration, surface and underwater vehicles play an increasingly vital role in unlocking its mysteries. Yet, developing and testing these autonomous maritime systems safely and cost-effectively is a persistent challenge.
+
+AquaNav was born out of this very problem. Designed and developed at the Indian Institute of Science, Bangalore, AquaNav is a high-fidelity Unmanned Surface Vehicle (USV) simulator built on Unreal Engine 5. It provides researchers, engineers, and enthusiasts a visually stunning, physically accurate virtual ocean world where algorithms can learn, adapt, and thrive—before they ever touch real water.
+
+At the heart of AquaNav lies Unreal Engine 5's real-time rendering capabilities. Every ripple, reflection, and shaft of sunlight has been meticulously modeled to replicate the complexities of natural aquatic environments. The simulator includes diverse environments—from calm rivers and docks to dynamic coastal settings—each responding realistically to weather and wave physics.
+
+## Crafting Realism: From Waves to Light
+
+### Photorealistic Rendering
+
+Built on Unreal Engine 5's cutting-edge real-time rendering, AquaNav delivers stunning visual fidelity with accurate wave physics, dynamic lighting, and realistic water surface interactions that mirror real ocean conditions.
+
+<div className="figure-group figure-group-2" style="max-width: min(100%, 2813px)">
+<figure className="study-figure" style="--ar: 1.6559">
+  <a href="/projects/aquanav-surface-simulator/images/river.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Simulator environment - River scene">
+    <img src="/projects/aquanav-surface-simulator/display/river.webp" alt="Simulator environment - River scene" width="1492" height="901" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 01</span> Simulator environment (River) - Calm river setting with realistic water dynamics</figcaption>
+</figure>
+<figure className="study-figure" style="--ar: 1.4395">
+  <a href="/projects/aquanav-surface-simulator/images/dock.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Simulator environment - Dock scene">
+    <img src="/projects/aquanav-surface-simulator/display/dock.webp" alt="Simulator environment - Dock scene" width="1500" height="1042" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 02</span> Simulator environment (Dock) - Maritime dock environment with complex structures</figcaption>
+</figure>
+</div>
+
+### Dynamic Environmental Control
+
+Control geography and time with precision. Select specific latitude, longitude, and time of day, or change lighting conditions in real-time to test visual perception under bright daylight, dusky evenings, or fog-laden mornings.
+
+This flexibility doesn't just make AquaNav visually impressive—it makes it scientifically valuable. By replicating different times and environments, AquaNav provides an unparalleled playground for testing vision-based navigation algorithms.
+
+## Generating Knowledge: The Power of Synthetic Data
+
+Collecting real-world ocean data is expensive and risky. AquaNav bridges this gap by generating synthetic, co-registered RGB and depth imagery, enabling AI models to train effectively in simulated conditions that closely mirror reality.
+
+### Synthetic Data Generation
+
+Generate thousands of high-quality, co-registered RGB and depth imagery frames in a single run. The simulator produces synthetic datasets with ~800 labeled images across object categories like ships, buoys, and survivors.
+
+<figure className="study-figure">
+  <a href="/projects/aquanav-surface-simulator/images/scene_change.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Varied environmental conditions for ship class">
+    <img src="/projects/aquanav-surface-simulator/display/scene_change.webp" alt="Varied environmental conditions for ship class" width="1920" height="1080" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 03</span> Varied environmental conditions for ship class detection across different scenarios</figcaption>
+</figure>
+
+AquaNav's dataset currently includes around 800 labeled images across object categories like ship, buoy, and survivor. Each frame contributes to creating robust computer vision systems capable of handling real-world uncertainty—a crucial step in bridging the sim-to-real gap in autonomous navigation research.
+
+## From Simulation to Real Systems: ROS Integration
+
+### ROS Integration
+
+Seamlessly integrates with Robot Operating System (ROS) for real-world applicability. Teleoperate virtual USVs manually or run autonomous navigation via ROS nodes, enabling rapid prototyping and testing before real deployment.
+
+Users can teleoperate the virtual USV manually or let it run autonomously via ROS nodes sending velocity commands and receiving sensor feedback. This setup allows for rapid prototyping and testing of perception and navigation systems before any real deployment, dramatically cutting both risk and cost.
+
+### Multi-Modal Perception
+
+Complete sensor suite including RGB cameras, depth sensors, GPS, and IMU. Perfect for training AI models in detection, segmentation, object tracking, and multimodal perception tasks.
+
+<figure className="study-figure">
+  <a href="/projects/aquanav-surface-simulator/images/combined_image.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: RGB and depth imagery at different times of day">
+    <img src="/projects/aquanav-surface-simulator/display/combined_image.webp" alt="RGB and depth imagery at different times of day" width="5184" height="736" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 04</span> Simulator generated RGB images at different times of day with corresponding depth maps</figcaption>
+</figure>
+
+## Performance in Action: Vision Meets the Sea
+
+AquaNav isn't just theoretical—it performs. In experimental tests, models trained entirely on AquaNav-generated data demonstrated reliable object detection in complex maritime conditions.
+
+<div className="figure-group figure-group-2" style="max-width: min(100%, 2358px)">
+<figure className="study-figure" style="--ar: 1.4109">
+  <a href="/projects/aquanav-surface-simulator/images/ship_detected.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Object detection - Ship class">
+    <img src="/projects/aquanav-surface-simulator/display/ship_detected.webp" alt="Object detection - Ship class" width="1504" height="1066" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 05</span> Object detection – Ship class identified in complex maritime scene</figcaption>
+</figure>
+<figure className="study-figure" style="--ar: 1.3420">
+  <a href="/projects/aquanav-surface-simulator/images/survivor.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Object detection - Survivor">
+    <img src="/projects/aquanav-surface-simulator/display/survivor.webp" alt="Object detection - Survivor" width="1138" height="848" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 06</span> Object detection – Survivor identified for search-and-rescue operations</figcaption>
+</figure>
+</div>
+
+### Sim-to-Real Transfer
+
+Models trained entirely on AquaNav-generated data demonstrate reliable object detection in real maritime conditions, effectively bridging the sim-to-real gap with high performance in field deployments.
+
+When connected to ROS for real-time inference, these systems successfully identified survivors and obstacles in dynamically changing environments. The ability to replicate such variability—lighting, weather, and geography—allows developers to refine algorithms iteratively, achieving faster innovation cycles and higher reliability when deployed in the field.
+
+## Technical Implementation
+
+### Unreal Engine 5 Integration
+
+- Real-time photorealistic rendering with Lumen global illumination
+- Custom water surface physics and wave simulation
+- Dynamic weather and lighting systems with time-of-day control
+- Multiple environment presets: rivers, docks, coastal scenes
+- Optimized performance for both high-end and mid-range hardware
+
+### ROS (Robot Operating System) Integration
+
+- Bidirectional communication between Unreal Engine and ROS
+- Real-time sensor data streaming (RGB, depth, GPS, IMU)
+- Manual teleoperation via ROS velocity commands
+- Autonomous navigation support through ROS nodes
+- Compatible with ROS Noetic and ROS2 distributions
+
+### Synthetic Dataset Generation
+
+- Co-registered RGB and depth image pairs with pixel-perfect alignment
+- Automated labeling for object detection and segmentation
+- ~800 labeled images across multiple object classes (ship, buoy, survivor)
+- Configurable data export formats (COCO, YOLO, Pascal VOC)
+- Diverse lighting and weather conditions for robust training
+
+### Computer Vision Pipeline
+
+- Object detection models trained on AquaNav synthetic data
+- Real-time inference integration with ROS
+- Multi-class detection: ships, survivors, buoys, obstacles
+- Depth-aware perception for collision avoidance
+- Performance validation in simulation before field deployment
+
+### Environmental Simulation
+
+- Geographic coordinate system (latitude/longitude) for precise location
+- Dynamic time-of-day with realistic sun position calculations
+- Weather variations: clear, foggy, overcast conditions
+- Wave height and frequency controls
+- Customizable environmental parameters via configuration files
+
+## Towards Smarter Oceans
+
+AquaNav is more than just a simulator—it's a gateway to smarter, safer, and more autonomous maritime systems. It empowers developers to explore, experiment, and innovate within an endlessly controllable digital ocean.
+
+With future updates, the platform aims to expand environmental diversity and integrate new sensors, further strengthening its position as a cornerstone tool for next-generation USV research.
+
+## Results & Impact
+
+- Successfully generated **~800 labeled images** across multiple maritime object classes (ship, buoy, survivor)
+- Achieved **reliable object detection performance** with models trained entirely on synthetic AquaNav data
+- Demonstrated successful **sim-to-real transfer** with field validation on real USV platforms
+- Enabled **rapid prototyping and testing** of navigation algorithms without expensive real-world deployments
+- Reduced development costs and risks by providing a **safe, controllable testing environment**
+- Integrated with ROS for **seamless transition** from simulation to real robotic systems
+- Created diverse environmental conditions replicating various **lighting, weather, and geographic scenarios**
+- Empowered researchers with **infinite data generation capabilities** for training robust AI models

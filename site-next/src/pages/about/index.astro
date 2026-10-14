@@ -1,0 +1,34 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import CopyButton from '../../components/CopyButton.astro';
+import BookCallLink from '../../components/BookCallLink.astro';
+import data from '../../data/content.json';
+const profile = data.profile;
+const contact = profile.contact;
+---
+<SiteLayout title="About" description="Pruthviraj Mane is a robotics engineer at QibiTech in Tokyo. Explore his background, working tools, and contact links." current="about">
+  <div class="about-page page-width">
+    <div class="page-intro"><h1 class="page-title">About</h1></div>
+    <div class="about-intro"><div class="about-copy">{profile.about.map((paragraph) => <p>{paragraph}</p>)}</div></div>
+    <section class="about-section" aria-labelledby="tools-title">
+      <h2 id="tools-title">Working tools</h2>
+      <div class="about-section-body">{profile.tools.map((group) => <div class="tool-row">
+        <span class="meta-label">{group.domain}</span>
+        <p>{group.items.join(', ')}</p>
+      </div>)}</div>
+    </section>
+    <section class="about-section" id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact</h2>
+      <div class="about-section-body contact-lines">
+        <div class="contact-email"><a href={`mailto:${contact.email}`}>{contact.email}</a><CopyButton text={contact.email} /></div>
+        <nav class="contact-links" aria-label="Contact links">
+          <a href={contact.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <a href={contact.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+          <a href={contact.x} target="_blank" rel="noopener noreferrer">X ↗</a>
+          <a href={contact.requestCV}>Request CV ↗</a>
+        </nav>
+        <p class="contact-book">Prefer to talk? <BookCallLink label="Book a 30-minute call →" class="text-link" /></p>
+      </div>
+    </section>
+  </div>
+</SiteLayout>

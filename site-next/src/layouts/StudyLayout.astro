@@ -1,0 +1,54 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { slug as headingId } from 'github-slugger';
+import SiteLayout from './SiteLayout.astro';
+import 'katex/dist/katex.min.css';
+type Neighbor = { slug: string; title: string } | undefined;
+interface Props { project: CollectionEntry<'projects'>; previous: Neighbor; next: Neighbor }
+const { project, previous, next } = Astro.props;
+const item = project.data;
+// A study title may contain \n to force a line break (for titles built from one long hyphenated name).
+const heading = item.studyTitle ?? item.title;
+const headingLines = heading.split('\n');
+const headingText = headingLines.join(' ');
+const info = ([
+  ['Duration', item.info?.duration],
+  ['Institution', item.info?.institution],
+  ['Role', item.info?.role],
+  ['Team size', item.info?.teamSize],
+  ['Status', item.status]
+] as ReadonlyArray<readonly [string, string | undefined]>).filter((entry): entry is readonly [string, string] => Boolean(entry[1]));
+---
+<SiteLayout title={headingText} description={item.lead ?? item.summary} current="projects" type="article" image={item.preview?.url}>
+  <div class="study-page page-width">
+    <header class="study-header">
+      <a class="study-back" href="/projects/">← All projects</a>
+      <h1>{headingLines.map((line, i) => <>{i > 0 && <br />}{line}</>)}</h1>
+      <p class="study-lead">{item.lead}</p>
+      {item.links.length > 0 && <nav class="study-links" aria-label="Study sources">{item.links.map((link) => <a href={link.url} target="_blank" rel="noopener noreferrer">{link.label} ↗</a>)}</nav>}
+      <dl class="study-info">
+        {info.map(([term, value]) => <div><dt class="meta-label">{term}</dt><dd>{value}</dd></div>)}
+      </dl>
+      <p class="study-tags"><span class="meta-label">Tags</span> {item.tags.join(', ')}</p>
+    </header>
+    <div class="study-grid">
+      <study-contents class="study-toc">
+        <span class="meta-label">On this page</span>
+        <nav aria-label="Study contents">{item.sections?.map((section) => <a href={`#${headingId(section)}`}>{section}</a>)}</nav>
+      </study-contents>
+      <details class="study-toc-mobile">
+        <summary>On this page</summary>
+        <nav aria-label="Study contents">{item.sections?.map((section) => <a href={`#${headingId(section)}`}>{section}</a>)}</nav>
+      </details>
+      <article class="study-article"><slot /></article>
+      {item.relatedWork && item.relatedWork.length > 0 && <aside class="study-related" aria-labelledby="related-title">
+        <h2 id="related-title" class="meta-label">Related work</h2>
+        {item.relatedWork.map((work) => <a href={work.url} target="_blank" rel="noopener noreferrer">{work.title} ↗</a>)}
+      </aside>}
+    </div>
+    <nav class="study-pagination" aria-label="Other projects">
+      <span>{previous && <a href={`/projects/${previous.slug}/`}>← {previous.title}</a>}</span>
+      <span>{next && <a href={`/projects/${next.slug}/`}>{next.title} →</a>}</span>
+    </nav>
+  </div>
+</SiteLayout>

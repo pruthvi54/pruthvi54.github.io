@@ -1,0 +1,36 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import data from '../data/content.json';
+import BookCallLink from '../components/BookCallLink.astro';
+const profile = data.profile;
+const home = profile.home;
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  jobTitle: profile.role,
+  worksFor: { '@type': 'Organization', name: profile.company },
+  address: { '@type': 'PostalAddress', addressLocality: profile.city, addressCountry: profile.country },
+  alumniOf: ['Indian Institute of Technology Guwahati', 'Walchand College of Engineering, Sangli'],
+  email: `mailto:${profile.contact.email}`,
+  url: 'https://pruthvi54.github.io/',
+  sameAs: [profile.contact.github, profile.contact.linkedin, profile.contact.x]
+};
+---
+<SiteLayout title="Home" description="Pruthviraj Mane is a robotics engineer in Tokyo working across simulation, autonomy, perception, and control." jsonLd={person} current="home">
+  <section class="home-cover page-width" aria-labelledby="home-title">
+    <p class="meta-label">{home.eyebrow}</p>
+    <h1 id="home-title">Robotics, from<br class="desktop-break" /> model to <em>motion.</em></h1>
+    <div class="home-copy">
+      <p>{home.intro}</p>
+      <div class="home-links">
+        <a class="text-link" href={home.cta.url}>{home.cta.label}</a>
+        <a class="text-link" href="/publications/">Read the research →</a>
+        <BookCallLink label="Book a call →" class="text-link" />
+      </div>
+      <ul class="home-credentials meta-label" aria-label="Background">
+        {home.credentials.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+</SiteLayout>

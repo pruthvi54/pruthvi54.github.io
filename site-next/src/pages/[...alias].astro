@@ -1,0 +1,26 @@
+---
+import data from '../data/content.json';
+
+export function getStaticPaths() {
+  return data.compatibility.map((route) => ({
+    params: { alias: route.from.replace(/^\/|\/$/g, '') },
+    props: { destination: route.to }
+  }));
+}
+interface Props { destination: string }
+const { destination } = Astro.props;
+const canonical = new URL(destination.split('#')[0], Astro.site);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content={`0;url=${destination}`} />
+    <link rel="canonical" href={canonical.href} />
+    <title>Page moved — Pruthviraj Mane</title>
+    <style>body{margin:0;padding:40px;background:#fbf8f0;color:#0c0e0b;font:400 16px/1.7 system-ui,sans-serif}a{color:#2e4a40;text-underline-offset:4px}</style>
+  </head>
+  <body><main><h1 style="font:400 32px Georgia,serif">Page moved</h1><p>This page now lives at <a href={destination}>{destination}</a>.</p></main></body>
+</html>

@@ -1,0 +1,19 @@
+---
+import BookCallLink from './BookCallLink.astro';
+interface Props { current?: 'home' | 'experience' | 'research' | 'projects' | 'about' }
+const { current } = Astro.props;
+const links = [
+  { label: 'Home', href: '/', id: 'home' },
+  { label: 'Experience', href: '/experience/', id: 'experience' },
+  { label: 'Research', href: '/publications/', id: 'research' },
+  { label: 'Projects', href: '/projects/', id: 'projects' },
+  { label: 'About me', href: '/about/', id: 'about' }
+] as const;
+---
+<header class="site-header page-width">
+  <a class="wordmark" href="/" aria-label="Pruthviraj Mane, home">Pruthviraj Mane</a>
+  <nav class="site-nav" aria-label="Main navigation">
+    {links.map((link) => <a href={link.href} class:list={[{ active: current === link.id }]} aria-current={current === link.id ? 'page' : undefined}>{link.label}</a>)}
+  </nav>
+  <BookCallLink class="header-book" />
+</header>

@@ -1,0 +1,70 @@
+/* Implementation reference. Import into site-next/src/styles/global.css. */
+:root {
+  color-scheme: light;
+  --canvas: #fbf8f0;
+  --ink: #0c0e0b;
+  --secondary: #30342e;
+  --metadata: #434940;
+  --line: #d8dcd3;
+  --accent: #2e4a40;
+  --trace: #426358;
+  --font-editorial: Charter, "Charis SIL", "Iowan Old Style", Georgia, serif;
+  --font-body: "JetBrains Mono", Menlo, Consolas, monospace;
+  --font-meta: "JetBrains Mono", Menlo, Consolas, monospace;
+  --weight-display: 300;
+  --weight-text: 400;
+  --text-cover: clamp(2.625rem, 6.2vw, 5.5rem);
+  --text-page: clamp(2.5rem, 4.1vw, 3.75rem);
+  --text-project: clamp(1.75rem, 2.5vw, 2.5rem);
+  --text-section: clamp(1.625rem, 2.25vw, 2rem);
+  --text-body: 0.9375rem;
+  --text-small: 0.875rem;
+  --text-meta: 0.8125rem;
+  --leading-display: 1.04;
+  --leading-body: 1.7;
+  --tracking-display: -0.02em;
+  --tracking-meta: 0.03em;
+  --space-1: 0.5rem;
+  --space-2: 0.75rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+  --space-7: 4.5rem;
+  --space-8: 6rem;
+  --max-page: 75rem;
+  --max-reading: 42rem;
+  --page-gutter: clamp(1.25rem, 5vw, 5rem);
+  --grid-gap: 1.5rem;
+  --rule: 1px solid var(--line);
+  --duration-preview: 140ms;
+  --duration-navigation: 120ms;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html {
+  background: var(--canvas);
+  color: var(--ink);
+  font-synthesis: none;
+  -webkit-text-size-adjust: 100%;
+}
+body { margin: 0; font: 400 var(--text-body)/var(--leading-body) var(--font-body); }
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-editorial);
+  font-weight: var(--weight-display);
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+button, input, select, textarea { font: inherit; }
+button, a, label, summary, th, b, strong { font-weight: 400; }
+b, strong { color: var(--ink); }
+a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1px; }
+img, video { max-width: 100%; height: auto; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+::selection { background: #dce5dc; color: var(--ink); }
+.page-width { width: min(calc(100% - 2 * var(--page-gutter)), var(--max-page)); margin-inline: auto; }
+.meta { font: 400 var(--text-meta)/1.6 var(--font-meta); letter-spacing: var(--tracking-meta); color: var(--metadata); }
+@media (max-width: 767px) { :root { --text-body: 0.875rem; --grid-gap: 1rem; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0s !important; transition-duration: 0s !important; }
+}

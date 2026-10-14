@@ -1,0 +1,103 @@
+---
+title: "AUV Gazebo-Unreal Engine Integration"
+studyTitle: "AUV Gazebo–Unreal Engine Integration"
+summary: "Co-registered dataset generation using Gazebo and Unreal Engine"
+details: "Integrated Gazebo physics simulation with Unreal Engine 5 photorealistic rendering for generating high-quality co-registered datasets."
+kind: "full"
+year: 2024
+domain: "Gazebo / Unreal Engine 5"
+tags: ["ROS","ROS 2","Gazebo","Unreal Engine 5","Simulation","AUV","Underwater Robotics","Co-registered Dataset"]
+links: []
+info: {"duration":"2024","institution":"Indian Institute of Science (IISc), Bengaluru","role":"Research Engineer – Underwater Robotics & Simulation","teamSize":"1–2 Members"}
+relatedWork: [{"title":"Bridging ROS-Gazebo physics with Unreal Engine 5 visuals for underwater robotics","url":"https://www.linkedin.com/posts/pruthviraj-mane_simulation-unrealengine-rosgazebo-activity-7273612559923003393-Y8wh?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAB7p0l0BJtwvHhI4dkaV0q11qltxWLgJvCc"}]
+preview: {"url":"/thumbs/auv-gazebo-unreal.webp","alt":"AUV Gazebo-Unreal Engine Integration preview","caption":"Co-registered dataset generation using Gazebo and Unreal Engine"}
+lead: "Bridging Gazebo physics and Unreal Engine 5 visuals to generate co-registered underwater datasets for AUV perception and sim-to-real research."
+sections: ["Overview","Key Features","Technical Implementation","Co-Registered Dataset Views","Results & Impact"]
+---
+
+<figure className="study-video">
+  <video controls playsInline preload="none" width="1280" height="720" poster="/projects/auv-gazebo-unreal/videos/poster.webp">
+    <source src="/projects/auv-gazebo-unreal/videos/UE5_Gazebo_Underwater.mp4" type="video/mp4" />
+    Your browser does not support embedded video.
+  </video>
+  <figcaption>Demo of the Gazebo–UE5 bridge showing an AUV navigating an underwater scene while generating co-registered visual data.</figcaption>
+</figure>
+
+## Overview
+
+This project builds a bridge between **Gazebo** and **Unreal Engine 5 (UE5)** to combine accurate underwater physics with high-fidelity rendering for autonomous underwater vehicle (AUV) research. The goal is to create a repeatable pipeline for generating **co-registered multimodal datasets** that can be used for perception, control, and sim-to-real transfer.
+
+Gazebo is used as the source of truth for **vehicle dynamics, sensor poses, and ground-truth labels**, while UE5 handles **photorealistic underwater visuals, lighting, and scene composition**. A custom bridge synchronizes the two simulators so that each Gazebo timestep corresponds to an identically posed camera and scene in UE5.
+
+The resulting datasets enable training and evaluation of underwater perception algorithms (e.g., image enhancement, depth estimation, detection) under controlled conditions while staying physically meaningful. This forms a key building block in a larger pipeline for **sim-to-real AUV autonomy**.
+
+## Key Features
+
+### Dual-Simulator Architecture
+
+Uses Gazebo for dynamics and ground truth, and Unreal Engine 5 for photorealistic underwater rendering, combining the strengths of both simulators.
+
+### Time-Synchronized Pose Bridging
+
+Implements a bridge that forwards AUV and sensor poses from Gazebo to UE5 with consistent timestamps, ensuring perfectly aligned frames.
+
+### Co-Registered Dataset Generation
+
+Generates synchronized RGB frames, depth, segmentation, and metadata suitable for training and benchmarking underwater perception models.
+
+### Configurable Underwater Scenarios
+
+Supports different scenes, lighting conditions, and water properties to simulate varied underwater environments and mission profiles.
+
+## Technical Implementation
+
+### Gazebo Underwater World & AUV Model
+
+- Modeled the AUV and its sensors in Gazebo with realistic underwater dynamics and buoyancy.
+- Defined sensor frames and topics for cameras and other perception modules.
+- Used Gazebo as the authoritative source for vehicle state, ground truth, and control inputs.
+- Exposed all required transforms via ROS/ROS 2 for downstream logging and bridging.
+
+### Unreal Engine 5 Rendering Pipeline
+
+- Built an underwater UE5 scene with appropriate lighting, fog, and material properties.
+- Configured virtual cameras in UE5 to match the intrinsics and extrinsics of Gazebo sensors.
+- Used UE5’s rendering capabilities to produce high-resolution RGB frames for each pose.
+- Exported rendered frames and metadata for offline dataset packaging.
+
+### ROS–Gazebo–UE5 Bridge & Dataset Tooling
+
+- Implemented a bridge node that subscribes to Gazebo poses and forwards them to UE5.
+- Ensured consistent time stamps and indexing across Gazebo logs and UE5 renders.
+- Created scripts to assemble RGB, depth/labels (when available), and ground truth into a coherent dataset.
+- Designed the pipeline so it can be reused for future underwater simulation and perception projects.
+
+## Co-Registered Dataset Views
+
+<div className="figure-group figure-group-3" style="max-width: min(100%, 2395px)">
+<figure className="study-figure" style="--ar: 1.7778">
+  <a href="/projects/auv-gazebo-unreal/images/RGB.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: RGB underwater view from the co-registered dataset">
+    <img src="/projects/auv-gazebo-unreal/display/RGB.webp" alt="RGB underwater view from the co-registered dataset" width="1280" height="720" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 01</span> RGB underwater view from the co-registered dataset</figcaption>
+</figure>
+<figure className="study-figure" style="--ar: 1.7778">
+  <a href="/projects/auv-gazebo-unreal/images/Depth.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Depth map from the co-registered dataset">
+    <img src="/projects/auv-gazebo-unreal/display/Depth.webp" alt="Depth map from the co-registered dataset" width="1280" height="720" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 02</span> Depth map from the co-registered dataset</figcaption>
+</figure>
+<figure className="study-figure" style="--ar: 1.3333">
+  <a href="/projects/auv-gazebo-unreal/images/sonar.jpg" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Sonar view from the co-registered dataset">
+    <img src="/projects/auv-gazebo-unreal/display/sonar.webp" alt="Sonar view from the co-registered dataset" width="640" height="480" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 03</span> Sonar view from the co-registered dataset</figcaption>
+</figure>
+</div>
+
+## Results & Impact
+
+- Established a reusable pipeline for generating co-registered underwater datasets using Gazebo and Unreal Engine 5.
+- Enabled controlled experiments for underwater perception tasks such as image enhancement, depth estimation, and detection.
+- Provided a simulation backbone that can be extended towards end-to-end sim-to-real AUV autonomy workflows.
+- Documented the integration steps so that future projects in the lab can build on the same Gazebo–UE5 bridge.

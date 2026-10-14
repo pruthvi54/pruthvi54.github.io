@@ -1,0 +1,31 @@
+---
+import CopyButton from './CopyButton.astro';
+import data from '../data/content.json';
+type Paper = typeof data.publications[number];
+interface Props { paper: Paper }
+const { paper } = Astro.props;
+function displayName(name: string) {
+  const [last, first] = name.split(', ');
+  return first ? `${first} ${last}` : name;
+}
+---
+<article class="publication-row">
+  <span class="publication-year meta-label">{paper.year}</span>
+  <div>
+    <h2 class="publication-title">{paper.title}</h2>
+    <p class="publication-authors">
+      {paper.authors.map((name, index) => <Fragment>
+        {index > 0 && ', '}
+        {name === 'Mane, Pruthviraj' ? <u>{displayName(name)}</u> : displayName(name)}
+      </Fragment>)}
+    </p>
+    <span class="publication-venue meta-label">{paper.venue}</span>
+    <div class="publication-actions">
+      <a href={paper.links.paper} target="_blank" rel="noopener noreferrer">Paper ↗</a>
+      {'arxiv' in paper.links && paper.links.arxiv && <a href={paper.links.arxiv} target="_blank" rel="noopener noreferrer">arXiv ↗</a>}
+      {'github' in paper.links && paper.links.github && <a href={paper.links.github} target="_blank" rel="noopener noreferrer">Code ↗</a>}
+      <details class="abstract"><summary>Abstract +</summary><p>{paper.abstract}</p></details>
+      <CopyButton text={paper.citation} label="Copy citation" />
+    </div>
+  </div>
+</article>
