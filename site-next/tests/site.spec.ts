@@ -7,7 +7,11 @@ const data = JSON.parse(fs.readFileSync(new URL('../src/data/content.json', impo
 };
 
 const core = ['/', '/projects/', '/publications/', '/experience/', '/about/'];
-const allProjects = data.projectOrder.map((slug) => `/projects/${slug}/`);
+// Projects marked `hidden: true` in their frontmatter are commented out: no page, not listed.
+const isHidden = (slug: string) => /^hidden: true/m.test(fs.readFileSync(new URL(`../src/content/projects/${slug}.mdx`, import.meta.url), 'utf8').split('\n---')[0]);
+const visibleOrder = data.projectOrder.filter((slug) => !isHidden(slug));
+const hiddenProjects = data.projectOrder.filter(isHidden);
+const allProjects = visibleOrder.map((slug) => `/projects/${slug}/`);
 const screenshots = path.resolve('review');
 
 test('every canonical page has a direct static route and one heading', async ({ page }) => {
@@ -24,9 +28,15 @@ test('every canonical page has a direct static route and one heading', async ({ 
   await page.goto('/projects/');
   // Projects appear in the owner's original timeline order, grouped by year (newest first).
   const hrefs = await page.locator('.project-row').evaluateAll((rows) => rows.map((row) => row.getAttribute('href')));
-  expect(hrefs).toEqual(data.projectOrder.map((slug) => `/projects/${slug}/`));
-  await expect(page.locator('.timeline-label')).toHaveText(['2025', '2024', '2023', '2022', '2021', '2020', '2019']);
-  await expect(page.locator('.project-row.has-study')).toHaveCount(8);
+  expect(hrefs).toEqual(visibleOrder.map((slug) => `/projects/${slug}/`));
+  await expect(page.locator('.timeline-label')).toHaveText(['2025', '2024', '2023', '2022', '2019']);
+  // Commented-out projects are neither listed nor published.
+  expect(hiddenProjects.length).toBe(7);
+  for (const slug of hiddenProjects) {
+    expect(hrefs).not.toContain(`/projects/${slug}/`);
+    expect((await page.request.get(`/projects/${slug}/`)).status()).toBe(404);
+  }
+  await expect(page.locator('.project-row.has-study')).toHaveCount(9);
   await page.goto('/publications/');
   await expect(page.locator('.publication-row')).toHaveCount(5);
   await expect(page.locator('.technical-note')).toHaveCount(2);
@@ -38,8 +48,8 @@ test('navigation, keyboard, citation and browser history work', async ({ page, c
   await page.keyboard.press('Enter');
   await expect(page).toHaveURL(/\/projects\/eroas\/$/);
   await expect(page.locator('main h1')).toHaveText('EROAS: Forward-Looking Sonar Based AUV Obstacle Avoidance');
-  await expect(page.locator('.study-pagination')).toContainText('← ASV Manufacturing');
-  await expect(page.locator('.study-pagination')).toContainText('AUV Path Planning with ROS Gazebo →');
+  await expect(page.locator('.study-pagination')).toContainText('← AquaNav Surface Vehicle Simulator');
+  await expect(page.locator('.study-pagination')).toContainText('MPC-CBF Framework for AUV Obstacle Avoidance →');
   await page.goBack();
   await expect(page).toHaveURL(/\/projects\/$/);
   await page.goForward();
@@ -89,7 +99,7 @@ test('content and links survive without JavaScript', async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
   const page = await context.newPage();
   await page.goto('http://127.0.0.1:4321/projects/');
-  await expect(page.locator('.project-row')).toHaveCount(16);
+  await expect(page.locator('.project-row')).toHaveCount(visibleOrder.length);
   await expect(page.locator('.project-thumb').first()).toBeVisible();
   await page.locator('.project-row').first().click();
   await expect(page).toHaveURL(/\/projects\/aquanav-surface-simulator\/$/);
@@ -261,4 +271,33 @@ test('background AUV: a cursor dropped right in front of it does not freeze it; 
   }
   expect(reversed).toBeTruthy();
   expect(Math.hypot(state.x - start.x, state.y - start.y)).toBeGreaterThan(80); // it got going again
+});
+
+test('a figure on its own is centred at its real width, with the caption wrapping to the image', async ({ page }) => {
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const slug of ['mpc-cbf-auv', 'auv-dynamics-modeling']) {
+      await page.goto(`/projects/${slug}/`);
+      const figures = await page.evaluate(() => {
+        const column = document.querySelector('.study-article')!.getBoundingClientRect();
+        return [...document.querySelectorAll('.study-article > .study-figure')].map((figure) => {
+          const image = figure.querySelector('img')!;
+          const box = image.getBoundingClientRect();
+          const caption = figure.querySelector('figcaption')!.getBoundingClientRect();
+          return {
+            width: box.width,
+            expected: Math.min(Number(image.getAttribute('width')), column.width),
+            offCentre: Math.abs((box.left + box.right) / 2 - (column.left + column.right) / 2),
+            captionDiff: Math.abs(caption.width - box.width)
+          };
+        });
+      });
+      expect(figures.length).toBeGreaterThan(0);
+      for (const f of figures) {
+        expect(Math.abs(f.width - f.expected)).toBeLessThan(2); // never collapsed, never wider than the column
+        expect(f.offCentre).toBeLessThan(2);
+        expect(f.captionDiff).toBeLessThan(2);
+      }
+    }
+  }
 });

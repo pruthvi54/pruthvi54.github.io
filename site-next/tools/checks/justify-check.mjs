@@ -1,7 +1,9 @@
 import { chromium } from '@playwright/test';
 import fs from 'node:fs';
 const data = JSON.parse(fs.readFileSync('src/data/content.json', 'utf8'));
-const routes = ['/', '/projects/', '/publications/', '/experience/', '/about/', ...data.projectOrder.map((s) => `/projects/${s}/`)];
+// Projects marked `hidden: true` in their frontmatter are commented out: no page, not listed.
+const visibleOrder = data.projectOrder.filter((s) => !/^hidden: true/m.test(fs.readFileSync(`src/content/projects/${s}.mdx`, 'utf8').split('\n---')[0]));
+const routes = ['/', '/projects/', '/publications/', '/experience/', '/about/', ...visibleOrder.map((s) => `/projects/${s}/`)];
 const b = await chromium.launch({ channel: 'chrome' });
 const found = new Set();
 for (const width of [1440, 390]) {

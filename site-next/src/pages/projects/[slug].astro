@@ -5,9 +5,10 @@ import StudyLayout from '../../layouts/StudyLayout.astro';
 import data from '../../data/content.json';
 
 export async function getStaticPaths() {
-  const projects = await getCollection('projects');
+  // Hidden ("commented out") projects get no page and are skipped in previous/next links.
+  const projects = await getCollection('projects', (p) => !p.data.hidden);
   const titles = new Map(projects.map((p) => [p.id, p.data.title]));
-  const order = data.projectOrder;
+  const order = data.projectOrder.filter((slug) => titles.has(slug));
   return projects.map((project) => {
     const index = order.indexOf(project.id);
     const link = (slug?: string) => slug ? { slug, title: titles.get(slug)! } : undefined;

@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import data from '../../data/content.json';
-const entries = await getCollection('projects');
+const entries = await getCollection('projects', (entry) => !entry.data.hidden); // hidden = commented out
 const bySlug = new Map(entries.map((entry) => [entry.id, entry]));
 const projects = data.projectOrder.map((slug) => bySlug.get(slug)).filter((item) => item !== undefined);
 if (projects.length !== entries.length) throw new Error('Project order and content collection are out of sync');

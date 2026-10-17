@@ -411,3 +411,8 @@ main :is(h1, h2, h3), .page-title, .publication-title, .project-title { text-wra
 /* Background AUV survey with a CBF safety filter around the cursor (src/scripts/backdrop.ts). Sits under page content and never takes clicks. */
 .backdrop { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; display: block; }
 @media print { .backdrop { display: none; } }
+/* A figure on its own (not in a side-by-side group) is centred: one grid column sized to the image
+   (natural width, capped at the column); contain: inline-size keeps long captions from widening it,
+   so the caption wraps to the image's width. */
+.study-article > .study-figure { display: grid; grid-template-columns: minmax(0, auto); justify-content: center; }
+.study-article > .study-figure figcaption { contain: inline-size; }

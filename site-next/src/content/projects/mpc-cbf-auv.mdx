@@ -1,11 +1,121 @@
 ---
 title: "MPC-CBF Framework for AUV Obstacle Avoidance"
+studyTitle: "SNATUS: Safe Navigation with Accurate Tracking for Underactuated Slender-body Autonomous Underwater Vehicles"
 summary: "Model Predictive Control with Control Barrier Functions for safe navigation"
-kind: "brief"
+kind: "full"
 year: 2024
+status: "Published"
 domain: "MPC"
-tags: ["MPC", "CBF", "Safety", "Control Theory"]
-links: []
+tags: ["MPC","CBF","Safety","Control Theory"]
+links: [{"label":"Paper (ICC 2025)","url":"https://doi.org/10.1109/ICC69100.2025.11372255"}]
+info: {"institution":"Indian Institute of Science (IISc), Bengaluru"}
+relatedWork: [{"title":"Abhishek Nair, Rajini Makam, Pruthviraj Mane, Rudrashis Majumder, Suresh Sundaram — SNATUS: Safe Navigation with Accurate Tracking for Underactuated Slender-body Autonomous Underwater Vehicles. 2025 Eleventh Indian Control Conference (ICC), pp. 376–381","url":"https://doi.org/10.1109/ICC69100.2025.11372255"}]
+preview: {"url":"/thumbs/mpc-cbf-auv.webp","alt":"MPC-CBF Framework for AUV Obstacle Avoidance preview","caption":"Model Predictive Control with Control Barrier Functions for safe navigation"}
+lead: "Developed a hybrid MPC-CBF control framework ensuring safe obstacle avoidance while maintaining optimal trajectory for underwater vehicles."
+sections: ["Overview","Vehicle Model","SNATUS Architecture","NMPC for Tracking","Higher-Order CBF for Safety","Simulation Setup","Results","Takeaways and Limits"]
 ---
 
-Developed a hybrid MPC-CBF control framework ensuring safe obstacle avoidance while maintaining optimal trajectory for underwater vehicles.
+## Overview
+
+Slender-body AUVs are efficient and agile but **underactuated**: heading changes only through the rudder and propeller, both with hard limits. SNATUS (Safe Navigation with Accurate Tracking for Underactuated Slender-body AUVs) splits the problem in two. A **Nonlinear Model Predictive Controller (NMPC)** tracks the trajectory within the actuator limits, using the prediction and constraint handling that PID, sliding-mode, adaptive and fuzzy controllers lack, and a **higher-order Control Barrier Function (CBF)** filters its commands to guarantee collision avoidance. The paper describes this as the first use of NMPC with higher-order CBFs on slender-body AUVs.
+
+## Vehicle Model
+
+The horizontal-plane (3-DoF) subsystem of the [6-DoF vehicle model](/projects/auv-dynamics-modeling/) is used, with propeller speed and rudder angle as inputs:
+
+$$
+x = \begin{bmatrix} u & v & r & x & y & \psi \end{bmatrix}^{T},
+\qquad
+\mathbf{u} = \begin{bmatrix} n_{\text{prop}} & \delta_r \end{bmatrix}^{T},
+\qquad
+\dot{x} = f(x) + g(x)\,\mathbf{u}
+$$
+
+$f(x)$ holds the nonlinear hydrodynamics (drag, damping and surge–sway–yaw coupling) and $g(x)$ maps propeller thrust and rudder force onto the states. Ocean currents of speed $U_c$ and sideslip $\beta_c$ enter through relative velocities $u_r = u - u_c$, $v_r = v - v_c$, adding a disturbance term $g_2(x,\mathbf{u})\,w$ with $w = [\,u_c \;\; v_c\,]^T$.
+
+## SNATUS Architecture
+
+Reference speed and heading go to the NMPC. Its rudder and propeller commands pass through the CBF filter, which changes them only when a collision is possible, and the vehicle states feed back to both.
+
+<figure className="study-figure">
+  <a href="/projects/mpc-cbf-auv/images/fig1-architecture.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: SNATUS architecture: NMPC for tracking, followed by the CBF safety filter">
+    <img src="/projects/mpc-cbf-auv/display/fig1-architecture.webp" alt="SNATUS architecture: NMPC for tracking, followed by the CBF safety filter" width="438" height="147" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 01</span> SNATUS architecture: NMPC for tracking, followed by the CBF safety filter</figcaption>
+</figure>
+
+## NMPC for Tracking
+
+Over a horizon $N_p$, the NMPC minimises tracking error (speed, heading and yaw rate), control effort and changes in the controls, within the actuator limits:
+
+$$
+J = \sum_{i=0}^{N_p-1}\Big( e_{x,i}^{T} W_x\, e_{x,i} + \mathbf{u}_i^{T} W_u\, \mathbf{u}_i + \Delta\mathbf{u}_i^{T} W_{sm}\, \Delta\mathbf{u}_i \Big),
+\qquad
+-0.5 \le \delta_{r} \le 0.5\ \text{rad},\quad 0 \le n \le 1550\ \text{RPM}
+$$
+
+The smoothness term $\Delta\mathbf{u}_i$ discourages abrupt rudder and propeller changes. My reading: for an underactuated vehicle it matters as much as tracking, since a jittery rudder wastes energy and excites the coupled sway–yaw dynamics.
+
+## Higher-Order CBF for Safety
+
+For an obstacle at $(x_{\text{obs}}, y_{\text{obs}})$ and safety radius $\delta_{\text{safe}}$, the vehicle is safe while $h(x) \ge 0$; keeping this set forward invariant means it never comes closer than $\delta_{\text{safe}}$:
+
+$$
+h(x) = (x - x_{\text{obs}})^2 + (y - y_{\text{obs}})^2 - \delta_{\text{safe}}^2
+$$
+
+The inputs do not appear in $\dot h$ (relative degree 2), so a higher-order CBF chains two conditions with gains $K_1, K_2 > 0$, giving a constraint linear in the inputs:
+
+$$
+\psi_1 = \dot{h} + K_1 h,\quad \dot{\psi}_1 + K_2\,\psi_1 \ge 0
+\;\;\Longrightarrow\;\;
+L_f^2 h + L_g L_f h\,\mathbf{u} + (K_1 + K_2)\,L_f h + K_1 K_2\, h \ge 0
+$$
+
+The applied command is the one closest to the NMPC’s that satisfies this constraint and the actuator limits:
+
+$$
+\mathbf{u}^{*} = \arg\min_{\mathbf{u}} \big\lVert \mathbf{u} - \mathbf{u}_{\text{NMPC}} \big\rVert^{2}
+\quad \text{s.t. the HOCBF constraint and actuator limits}
+$$
+
+With currents, the constraint gains the term $L_{g_2} L_f h \cdot w$.
+
+## Simulation Setup
+
+Simulated in Python (NumPy, SciPy) with the hydrodynamic coefficients of the [AUV dynamics study](/projects/auv-dynamics-modeling/), a reference speed of 2 m/s, obstacles of radius 3 m with $\delta_{\text{safe}} = 10$ m (positions assumed from a forward-looking sonar, as in [EROAS](/projects/eroas/)), and a constant current $U_c = 0.1$ m/s at $\beta_c = 170^\circ$.
+
+## Results
+
+**Tracking.** The lawn-mower path is followed with smooth turns. The vehicle reaches and holds the 2 m/s reference speed, even through the turns, with a speed error of about 0.009 m/s.
+
+**Obstacles.** The AUV swerves smoothly around three obstacles in turn, keeps the safety distance and realigns with the reference after each, with heading changes free of abrupt jumps.
+
+**Ocean current.** Under the 0.1 m/s current, tracking deviates only slightly (speed error about 0.015 m/s), and a single obstacle is still avoided with the safety buffer intact. The avoidance path differs slightly from the no-current case, and the surge speed stays close to nominal.
+
+<div className="figure-group figure-group-3">
+<figure className="study-figure" style="--ar: 1.3328">
+  <a href="/projects/mpc-cbf-auv/images/fig2-lawn-mowing.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Lawn-mower tracking: reference (dashed) and AUV (solid)">
+    <img src="/projects/mpc-cbf-auv/display/fig2-lawn-mowing.webp" alt="Lawn-mower tracking: reference (dashed) and AUV (solid)" width="1750" height="1313" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 02</span> Lawn-mower tracking: reference (dashed) and AUV (solid)</figcaption>
+</figure>
+<figure className="study-figure" style="--ar: 1.3328">
+  <a href="/projects/mpc-cbf-auv/images/fig4-three-obstacles.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Avoiding three obstacles in sequence">
+    <img src="/projects/mpc-cbf-auv/display/fig4-three-obstacles.webp" alt="Avoiding three obstacles in sequence" width="1750" height="1313" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 03</span> Avoiding three obstacles in sequence</figcaption>
+</figure>
+<figure className="study-figure" style="--ar: 1.3328">
+  <a href="/projects/mpc-cbf-auv/images/fig8-obstacle-current.png" target="_blank" rel="noopener noreferrer" aria-label="Open original image: Avoiding an obstacle in a 0.1 m/s current">
+    <img src="/projects/mpc-cbf-auv/display/fig8-obstacle-current.webp" alt="Avoiding an obstacle in a 0.1 m/s current" width="1750" height="1313" loading="lazy" decoding="async" />
+  </a>
+  <figcaption><span className="figure-number">Fig. 04</span> Avoiding an obstacle in a 0.1 m/s current</figcaption>
+</figure>
+</div>
+
+## Takeaways and Limits
+
+- **Tracking and safety, separated.** The NMPC handles prediction, actuator limits and smoothness; the higher-order CBF intervenes only near obstacles, and minimally.
+- **Relative degree handled properly.** A first-order CBF cannot act on the rudder and propeller directly; the higher-order form is what makes the guarantee apply to this vehicle.
+- **Scope (my reading).** A 3-DoF model, known obstacle positions, a constant current and simulation only. The paper’s next step is full 6-DoF, three-dimensional avoidance under time-varying currents.

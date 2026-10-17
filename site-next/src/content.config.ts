@@ -20,7 +20,8 @@ const projects = defineCollection({
     sections: z.array(z.string()).optional(),
     credits: z.string().optional(),
     info: z.object({ duration: z.string().optional(), institution: z.string().optional(), role: z.string().optional(), teamSize: z.string().optional() }).optional(),
-    relatedWork: z.array(z.object({ title: z.string(), url: z.url() })).optional()
+    relatedWork: z.array(z.object({ title: z.string(), url: z.url() })).optional(),
+    hidden: z.boolean().optional() // true = "commented out": no page, not listed; delete the line to bring it back
   }).refine((item) => item.kind === 'brief' ||
     Boolean(item.preview && item.lead && item.sections?.length),
     'Full studies require a preview, lead, and sections')

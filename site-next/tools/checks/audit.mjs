@@ -2,7 +2,9 @@ import { chromium } from '@playwright/test';
 import fs from 'node:fs';
 const base = 'http://127.0.0.1:4321';
 const data = JSON.parse(fs.readFileSync('src/data/content.json', 'utf8'));
-const routes = ['/', '/projects/', '/publications/', '/experience/', '/about/', '/404.html', ...data.projectOrder.map((s) => `/projects/${s}/`)];
+// Projects marked `hidden: true` in their frontmatter are commented out: no page, not listed.
+const visibleOrder = data.projectOrder.filter((s) => !/^hidden: true/m.test(fs.readFileSync(`src/content/projects/${s}.mdx`, 'utf8').split('\n---')[0]));
+const routes = ['/', '/projects/', '/publications/', '/experience/', '/about/', '/404.html', ...visibleOrder.map((s) => `/projects/${s}/`)];
 const b = await chromium.launch({ channel: 'chrome' });
 const issues = [];
 const seenLinks = new Set();
@@ -34,6 +36,8 @@ for (const width of [320, 390, 768, 1024, 1440]) {
       for (const a of document.querySelectorAll('a[href^="#"]')) { const id = decodeURIComponent(a.getAttribute('href').slice(1)); if (id && !document.getElementById(id)) out.push(`dead anchor ${a.getAttribute('href')}`); }
       if (width < 800) for (const el of document.querySelectorAll('a, button, summary')) {
         const cs = getComputedStyle(el); if (cs.display === 'none' || el.closest('[hidden]') || el.classList.contains('skip-link')) continue;
+        // WCAG 2.2 (2.5.8) exempts links inside running text: their size is set by the line of text.
+        if (el.tagName === 'A' && cs.display === 'inline' && el.parentElement?.closest('.study-article p, .study-article li')) continue;
         const rc = el.getBoundingClientRect(); if (rc.width && rc.height < 40) out.push(`small tap target (${Math.round(rc.height)}px): "${el.textContent.trim().slice(0, 30)}" <${el.tagName.toLowerCase()} class="${el.className}">`);
       }
       // Each video box must match its own video's shape (width/height attributes), so there are no bars.
