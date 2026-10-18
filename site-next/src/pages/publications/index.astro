@@ -15,16 +15,9 @@ const articles = {
   }))
 };
 ---
-<SiteLayout title="Research" description="Five research publications and two technical notes on marine robotics, underwater autonomy, simulation, and vehicle dynamics." current="research" jsonLd={articles}>
+<SiteLayout title="Research" description="Five research publications on marine robotics, underwater autonomy, simulation, and vehicle dynamics." current="research" jsonLd={articles}>
   <div class="research-page page-width">
-    <div class="page-intro"><h1 class="page-title">Research</h1><p class="page-subtitle">Publications and technical notes.</p></div>
+    <div class="page-intro"><h1 class="page-title">Research</h1><p class="page-subtitle">Publications.</p></div>
     <div aria-label="Publications">{data.publications.map((paper) => <ResearchEntry paper={paper} />)}</div>
-    <section class="technical-notes" id="notes" aria-labelledby="notes-title">
-      <h2 id="notes-title" class="section-title">Technical notes</h2>
-      {data.technicalNotes.map((note) => <article class="technical-note">
-        <span class="meta-label">{note.date}</span>
-        <div><h3>{note.title}</h3><p>{note.summary}</p><a class="quiet-link" href={note.link} target="_blank" rel="noopener noreferrer">Read on {note.platform} ↗</a></div>
-      </article>)}
-    </section>
   </div>
 </SiteLayout>

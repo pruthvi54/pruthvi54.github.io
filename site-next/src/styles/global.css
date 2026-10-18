@@ -66,7 +66,8 @@ copy-text button:hover { color: var(--ink); }
 .technical-notes { margin-top: 64px; scroll-margin-top: 24px; }
 .technical-note { display: grid; grid-template-columns: 150px minmax(0,1fr); gap: 24px; border-bottom: var(--rule); padding-block: 22px; }
 .technical-note:first-of-type { margin-top: 16px; border-top: var(--rule); }
-.technical-note h3 { font: 400 22px/1.25 var(--font-editorial); margin: 0; }
+.technical-note h2, .technical-note h3 { font: 400 22px/1.25 var(--font-editorial); margin: 0; }
+.blog-list { margin-top: 0; }
 .technical-note p { margin: 10px 0; max-width: 70ch; color: var(--secondary); font-size: 15px; }
 
 /* Professional record */
@@ -400,13 +401,13 @@ main :is(h1, h2, h3), .page-title, .publication-title, .project-title { text-wra
 .study-video-embed iframe { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border: 0; background: #000; }
 .study-video-embed figcaption a { color: var(--accent); }
 @media (max-width: 767px), (pointer: coarse) { .study-video-embed figcaption a { display: inline-flex; align-items: center; min-height: 44px; } }
-/* Four nav links must fit the narrowest phones (320px) without clipping. */
-@media (max-width: 420px) {
-  .site-nav { gap: 8px; justify-content: space-between; }
-  .site-nav a { font-size: 13px; }
-}
-@media (max-width: 360px) {
-  .site-nav { flex-wrap: wrap; justify-content: flex-start; gap: 0 20px; }
+/* Below 1024px the six nav links cannot share a row with the name and the booking button:
+   name + Book a call on the first row, the links on their own row, wrapping on narrow phones. */
+@media (max-width: 1023px) {
+  .site-header { display: flex; flex-wrap: wrap; align-items: center; min-height: 0; padding-top: 18px; padding-bottom: 4px; row-gap: 0; }
+  .wordmark { display: inline-flex; }
+  .header-book { margin-left: auto; }
+  .site-nav { order: 3; flex-basis: 100%; margin-left: 0; margin-top: 4px; flex-wrap: wrap; justify-content: flex-start; gap: 0 clamp(18px, 3.6vw, 36px); }
 }
 /* Background AUV survey with a CBF safety filter around the cursor (src/scripts/backdrop.ts). Sits under page content and never takes clicks. */
 .backdrop { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; display: block; }
@@ -416,3 +417,54 @@ main :is(h1, h2, h3), .page-title, .publication-title, .project-title { text-wra
    so the caption wraps to the image's width. */
 .study-article > .study-figure { display: grid; grid-template-columns: minmax(0, auto); justify-content: center; }
 .study-article > .study-figure figcaption { contain: inline-size; }
+/* Own booking picker (src/scripts/booking-widget.ts): details | month | times, like Cal.com, in the site's look. */
+.book-embed-own { padding: 12px 16px 18px; }
+.bk { display: grid; grid-template-columns: 220px minmax(0, 1fr) 210px; border: var(--rule); border-radius: 10px; background: #fff; min-height: 430px; }
+.bk-single { grid-template-columns: 220px minmax(0, 1fr); }
+.bk > * { padding: 20px; min-width: 0; }
+.bk > * + * { border-left: var(--rule); }
+.bk-host { margin: 0 0 4px; color: var(--metadata); font-size: 13px; }
+.bk-title { margin: 0 0 14px; font: 400 22px/1.2 var(--font-editorial); }
+.bk-facts { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 13px; color: var(--secondary); }
+.bk-facts b { font-weight: 400; color: var(--ink); overflow-wrap: anywhere; }
+.bk-chosen { margin: 16px 0 0; padding-top: 14px; border-top: var(--rule); font-size: 14px; color: var(--ink); line-height: 1.6; }
+.bk-back { margin-top: 14px; background: none; border: 0; padding: 0; cursor: pointer; font: inherit; font-size: 13px; color: var(--accent); text-decoration: underline; }
+.bk-cal-head, .bk-times-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 14px; }
+.bk-month { font: 400 18px/1.2 var(--font-editorial); }
+.bk-nav button { width: 32px; height: 32px; border: 0; border-radius: 6px; background: none; font-size: 20px; cursor: pointer; color: var(--ink); }
+.bk-nav button:disabled { color: var(--line); cursor: default; }
+.bk-nav button:not(:disabled):hover { background: var(--canvas); }
+.bk-weekdays, .bk-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+.bk-weekdays span { text-align: center; font-size: 11px; letter-spacing: var(--tracking-meta); text-transform: uppercase; color: var(--metadata); padding-bottom: 4px; }
+.bk-day { aspect-ratio: 1; min-height: 36px; border: 0; border-radius: 8px; background: none; font: inherit; font-size: 14px; color: var(--metadata); }
+.bk-day-open { background: #eef0eb; color: var(--ink); cursor: pointer; }
+.bk-day-open:hover { outline: 1px solid var(--accent); }
+.bk-day-selected { background: var(--accent); color: #fff; }
+.bk-day:disabled { cursor: default; }
+.bk-times-day { font-size: 14px; color: var(--ink); }
+.bk-toggle { display: inline-flex; border: var(--rule); border-radius: 6px; overflow: hidden; }
+.bk-toggle button { border: 0; background: none; padding: 4px 8px; font: inherit; font-size: 12px; cursor: pointer; color: var(--secondary); }
+.bk-toggle button[aria-pressed="true"] { background: #eef0eb; color: var(--ink); }
+.bk-times-list { display: grid; gap: 8px; max-height: 340px; overflow-y: auto; padding-right: 2px; }
+.bk-time { min-height: 40px; border: 1px solid var(--line); border-radius: 8px; background: #fff; font: inherit; font-size: 14px; color: var(--ink); cursor: pointer; }
+.bk-time:hover { border-color: var(--accent); color: var(--accent); }
+.bk-notice, .bk-empty { margin: 0 0 10px; font-size: 13px; color: var(--secondary); }
+.bk-form { display: grid; gap: 14px; align-content: start; }
+.bk-form label { display: grid; gap: 6px; font-size: 13px; color: var(--secondary); }
+.bk-form input, .bk-form textarea { font: inherit; font-size: 15px; color: var(--ink); padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+.bk-form input:focus, .bk-form textarea:focus { outline: 2px solid var(--accent); outline-offset: 0; border-color: var(--accent); }
+.bk-optional { color: var(--metadata); }
+.bk-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.bk-form-error { margin: 0; min-height: 1.2em; font-size: 13px; color: #9b2c2c; }
+.bk-submit { justify-self: start; min-height: 44px; padding: 0 20px; border: 0; border-radius: 999px; background: var(--accent); color: #fff; font: inherit; font-size: 14px; cursor: pointer; }
+.bk-submit:disabled { opacity: .6; cursor: default; }
+.bk-done h3 { margin: 0 0 10px; font: 400 22px/1.2 var(--font-editorial); }
+.bk-done p, .bk-message p { margin: 0 0 10px; color: var(--secondary); font-size: 15px; }
+.bk-message { padding: 20px; }
+.bk-retry { background: none; border: 0; padding: 0; font: inherit; cursor: pointer; }
+@media (max-width: 860px) {
+  .bk, .bk-single { grid-template-columns: minmax(0, 1fr); }
+  .bk > * + * { border-left: 0; border-top: var(--rule); }
+  .bk-times-list { max-height: none; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); }
+  .book-embed-own { padding: 8px; }
+}

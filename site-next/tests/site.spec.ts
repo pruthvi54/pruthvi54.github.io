@@ -6,7 +6,7 @@ const data = JSON.parse(fs.readFileSync(new URL('../src/data/content.json', impo
   compatibility: { from: string; to: string }[];
 };
 
-const core = ['/', '/projects/', '/publications/', '/experience/', '/about/'];
+const core = ['/', '/projects/', '/publications/', '/blogs/', '/experience/', '/about/'];
 // Projects marked `hidden: true` in their frontmatter are commented out: no page, not listed.
 const isHidden = (slug: string) => /^hidden: true/m.test(fs.readFileSync(new URL(`../src/content/projects/${slug}.mdx`, import.meta.url), 'utf8').split('\n---')[0]);
 const visibleOrder = data.projectOrder.filter((slug) => !isHidden(slug));
@@ -39,7 +39,11 @@ test('every canonical page has a direct static route and one heading', async ({ 
   await expect(page.locator('.project-row.has-study')).toHaveCount(9);
   await page.goto('/publications/');
   await expect(page.locator('.publication-row')).toHaveCount(5);
+  await expect(page.locator('.technical-note')).toHaveCount(0); // notes moved to Blogs
+  await page.goto('/blogs/');
+  await expect(page.locator('main h1')).toHaveText('Blogs');
   await expect(page.locator('.technical-note')).toHaveCount(2);
+  await expect(page.locator('.site-nav a[aria-current="page"]')).toHaveText('Blogs');
 });
 
 test('navigation, keyboard, citation and browser history work', async ({ page, context }) => {
@@ -300,4 +304,63 @@ test('a figure on its own is centred at its real width, with the caption wrappin
       }
     }
   }
+});
+
+test.describe('own booking picker (Google Calendar via Apps Script)', () => {
+  const MOCK = 'https://script.google.com/macros/s/TEST/exec';
+  // Free hours in Tokyo: Mon 19 Oct 11:00–12:00 and Tue 20 Oct 19:00–19:30 (stored as UTC instants).
+  const slots = ['2026-10-19T02:00:00Z', '2026-10-19T02:30:00Z', '2026-10-20T10:00:00Z'];
+  const open = async (page: import('@playwright/test').Page, onPost: (body: Record<string, string>) => object) => {
+    await page.route(`${MOCK}*`, async (route) => {
+      if (route.request().method() === 'POST') return route.fulfill({ contentType: 'application/json', body: JSON.stringify(onPost(JSON.parse(route.request().postData() || '{}'))) });
+      return route.fulfill({ contentType: 'application/json', body: JSON.stringify({ ok: true, durationMinutes: 30, slots }) });
+    });
+    await page.goto('/about/');
+    await page.evaluate((url) => { document.getElementById('book-call')!.dataset.bookingEndpoint = url; }, MOCK);
+    await page.locator('.header-book').click();
+    await page.locator('.bk-time').first().waitFor();
+  };
+
+  for (const [zone, firstTime, label] of [['Asia/Tokyo', '11:00 AM', 'Japan Standard Time'], ['Asia/Kolkata', '7:30 AM', 'India Standard Time'], ['America/New_York', '10:00 PM', 'Eastern Daylight Time']]) {
+    test(`shows free times in the visitor's local time: ${zone}`, async ({ browser }) => {
+      const context = await browser.newContext({ timezoneId: zone, locale: 'en-US', baseURL: 'http://127.0.0.1:4321' });
+      const page = await context.newPage();
+      await open(page, () => ({ ok: true }));
+      await expect(page.locator('.bk-facts b')).toHaveText(label);
+      await expect(page.locator('.bk-time').first()).toHaveText(firstTime);
+      await context.close();
+    });
+  }
+
+  test('a request sends the chosen UTC time, the visitor details and time zone, then confirms', async ({ browser }) => {
+    const context = await browser.newContext({ timezoneId: 'Asia/Kolkata', locale: 'en-US', baseURL: 'http://127.0.0.1:4321' });
+    const page = await context.newPage();
+    let sent: Record<string, string> | null = null;
+    await open(page, (body) => { sent = body; return { ok: true }; });
+    await page.locator('.bk-time').first().click();
+    await page.locator('.bk-submit').click();
+    await expect(page.locator('.bk-form-error')).toHaveText('Please enter your name.'); // validated before sending
+    await page.fill('input[name="name"]', 'Ada Lovelace');
+    await page.fill('input[name="email"]', 'ada@example.com');
+    await page.locator('.bk-submit').click();
+    await expect(page.locator('.bk-done h3')).toHaveText('Request sent');
+    expect(sent).toMatchObject({ name: 'Ada Lovelace', email: 'ada@example.com', start: '2026-10-19T02:00:00.000Z', website: '' });
+    expect(['Asia/Kolkata', 'Asia/Calcutta']).toContain(sent!.timeZone);
+    await context.close();
+  });
+
+  test('if the time was just taken, the visitor is sent back to choose again', async ({ page }) => {
+    await open(page, () => ({ ok: false, taken: true, error: 'That time was just taken.' }));
+    await page.locator('.bk-time').first().click();
+    await page.fill('input[name="name"]', 'Ada');
+    await page.fill('input[name="email"]', 'ada@example.com');
+    await page.locator('.bk-submit').click();
+    await expect(page.locator('.bk-notice')).toContainText('just taken');
+    await expect(page.locator('.bk-time').first()).toBeVisible();
+  });
+
+  test('the Apps Script logic (slots and validation) passes its checks', async () => {
+    const { execFileSync } = await import('node:child_process');
+    expect(execFileSync('node', ['tools/booking/check-backend.mjs']).toString()).toContain('all checks passed');
+  });
 });

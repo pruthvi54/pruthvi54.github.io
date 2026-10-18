@@ -1,12 +1,13 @@
 ---
 import BookCallLink from './BookCallLink.astro';
-interface Props { current?: 'home' | 'experience' | 'research' | 'projects' | 'about' }
+interface Props { current?: 'home' | 'experience' | 'research' | 'projects' | 'blogs' | 'about' }
 const { current } = Astro.props;
 const links = [
   { label: 'Home', href: '/', id: 'home' },
   { label: 'Experience', href: '/experience/', id: 'experience' },
   { label: 'Research', href: '/publications/', id: 'research' },
   { label: 'Projects', href: '/projects/', id: 'projects' },
+  { label: 'Blogs', href: '/blogs/', id: 'blogs' },
   { label: 'About me', href: '/about/', id: 'about' }
 ] as const;
 ---

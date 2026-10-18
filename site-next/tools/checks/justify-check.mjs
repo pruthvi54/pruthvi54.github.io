@@ -3,7 +3,7 @@ import fs from 'node:fs';
 const data = JSON.parse(fs.readFileSync('src/data/content.json', 'utf8'));
 // Projects marked `hidden: true` in their frontmatter are commented out: no page, not listed.
 const visibleOrder = data.projectOrder.filter((s) => !/^hidden: true/m.test(fs.readFileSync(`src/content/projects/${s}.mdx`, 'utf8').split('\n---')[0]));
-const routes = ['/', '/projects/', '/publications/', '/experience/', '/about/', ...visibleOrder.map((s) => `/projects/${s}/`)];
+const routes = ['/', '/projects/', '/publications/', '/blogs/', '/experience/', '/about/', ...visibleOrder.map((s) => `/projects/${s}/`)];
 const b = await chromium.launch({ channel: 'chrome' });
 const found = new Set();
 for (const width of [1440, 390]) {

@@ -200,7 +200,8 @@
       "x": "https://x.com/pruthvi_mane_"
     },
     "booking": {
-      "_comment": "Set calLink to your Cal.com event, e.g. \"pruthviraj-mane/30min\". Leave empty to fall back to email.",
+      "_comment": "endpoint = the Google Apps Script web-app URL (tools/booking/SETUP.md). When set, the window shows the site's own picker fed by Google Calendar. While empty, it falls back to Cal.com (calLink), then email.",
+      "endpoint": "",
       "calLink": "pruthviraj-mane/30min",
       "durationMinutes": 30
     }
@@ -342,7 +343,7 @@
     },
     {
       "from": "/insights/",
-      "to": "/publications/#notes"
+      "to": "/blogs/"
     },
     {
       "from": "/request-cv/",

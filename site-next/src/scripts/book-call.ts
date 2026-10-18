@@ -32,6 +32,15 @@ function loadCal(): CalApi {
 
 function startEmbed(dialog: HTMLDialogElement) {
   if (embedStarted) return;
+  // Preferred: the site's own picker, fed by the owner's Google Calendar through Apps Script.
+  const endpoint = dialog.dataset.bookingEndpoint;
+  const container = dialog.querySelector<HTMLElement>('#book-call-embed');
+  if (endpoint && container) {
+    embedStarted = true;
+    container.classList.add('book-embed-own');
+    import('./booking-widget').then(({ mountBooking }) => mountBooking(container, endpoint, Number(dialog.dataset.duration) || 30));
+    return;
+  }
   const calLink = dialog.dataset.bookingLink; // Not data-cal-link: Cal.com's embed.js turns any click inside such an element into its own pop-up.
   if (!calLink) return;
   embedStarted = true;

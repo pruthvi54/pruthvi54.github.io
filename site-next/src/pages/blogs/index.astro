@@ -1,0 +1,15 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import data from '../../data/content.json';
+---
+<SiteLayout title="Blogs" description="Technical notes by Pruthviraj Mane on marine simulation, Unreal Engine 5 and ROS–Gazebo for underwater robotics." current="blogs">
+  <div class="research-page page-width">
+    <div class="page-intro"><h1 class="page-title">Blogs</h1><p class="page-subtitle">Technical notes.</p></div>
+    <section class="technical-notes blog-list" aria-label="Technical notes">
+      {data.technicalNotes.map((note) => <article class="technical-note">
+        <span class="meta-label">{note.date}</span>
+        <div><h2>{note.title}</h2><p>{note.summary}</p><a class="quiet-link" href={note.link} target="_blank" rel="noopener noreferrer">Read on {note.platform} ↗</a></div>
+      </article>)}
+    </section>
+  </div>
+</SiteLayout>
