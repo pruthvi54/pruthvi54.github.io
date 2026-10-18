@@ -2,8 +2,9 @@
  * Booking backend for the "Book a call" window on the website. Runs inside the owner's Google account
  * as a Google Apps Script web app (see SETUP.md). Nothing else is needed: no Cal.com, no server.
  *
- * - Free hours: events in the Google calendar named CONFIG.BOOKABLE_CALENDAR ("Bookable hours").
- * - Busy time: the owner's main calendar, via Free/Busy (events set to "Show as free" don't block).
+ * - Free hours: events titled "Bookable" or "Bookable hours" in the main calendar (and any events in a calendar named
+ *   CONFIG.BOOKABLE_CALENDAR, if it exists).
+ * - Busy time: every other timed event in the main calendar, except ones shown as "Free", cancelled or declined.
  * - A request becomes a "Pending: <name>" event in the main calendar (so the slot is held) and an
  *   email to the owner with Accept / Decline buttons. Accept invites the guest with a Google Meet link;
  *   Decline deletes the hold and tells the guest.
@@ -144,13 +145,38 @@ function decide(action, id, token) {
 function availableSlots_(now) {
   const from = new Date(now.getTime() + CONFIG.MIN_NOTICE_HOURS * 3600000);
   const to = new Date(now.getTime() + CONFIG.HORIZON_DAYS * 86400000);
-  const calendars = CalendarApp.getCalendarsByName(CONFIG.BOOKABLE_CALENDAR);
-  if (!calendars.length) throw new Error('No calendar named "' + CONFIG.BOOKABLE_CALENDAR + '" was found.');
-  const windows = calendars[0].getEvents(from, to).map((e) => ({ start: e.getStartTime(), end: e.getEndTime() }));
   const main = CalendarApp.getDefaultCalendar().getId();
-  const answer = Calendar.Freebusy.query({ timeMin: from.toISOString(), timeMax: to.toISOString(), items: [{ id: main }] });
-  const busy = ((answer.calendars[main] || {}).busy || []).map((b) => ({ start: new Date(b.start), end: new Date(b.end) }));
-  return slotsFrom_(windows, busy, from, CONFIG.SLOT_MINUTES);
+  const items = [];
+  let pageToken;
+  do {
+    const page = Calendar.Events.list(main, { timeMin: from.toISOString(), timeMax: to.toISOString(), singleEvents: true, maxResults: 2500, pageToken: pageToken });
+    (page.items || []).forEach((e) => items.push(e));
+    pageToken = page.nextPageToken;
+  } while (pageToken);
+  // Free hours: events titled "Bookable" in the main calendar, plus any events in the "Bookable hours" calendar.
+  const windows = freeWindowsFromEvents_(items);
+  CalendarApp.getCalendarsByName(CONFIG.BOOKABLE_CALENDAR).forEach((c) =>
+    c.getEvents(from, to).forEach((e) => windows.push({ start: e.getStartTime(), end: e.getEndTime() })));
+  return slotsFrom_(windows, busyFromEvents_(items), from, CONFIG.SLOT_MINUTES);
+}
+
+const FREE_TITLE_ = /^\s*bookable(\s+hours?)?\s*$/i; // "Bookable" / "Bookable hours" events mark free hours instead of busy time
+
+// Pure: "Bookable" events in the main calendar become free windows.
+function freeWindowsFromEvents_(items) {
+  return items.filter((e) => e.status !== 'cancelled' && FREE_TITLE_.test(e.summary || '') && e.start && e.start.dateTime)
+    .map((e) => ({ start: new Date(e.start.dateTime), end: new Date(e.end.dateTime) }));
+}
+
+// Pure: busy time = every other timed event, except ones shown as "Free", cancelled, or declined by you.
+function busyFromEvents_(items) {
+  return items.filter((e) => {
+    if (e.status === 'cancelled' || e.transparency === 'transparent') return false;
+    if (FREE_TITLE_.test(e.summary || '')) return false;
+    if (!e.start || !e.start.dateTime) return false; // all-day events don't block (Google treats them as free by default)
+    const me = (e.attendees || []).find((a) => a.self);
+    return !(me && me.responseStatus === 'declined');
+  }).map((e) => ({ start: new Date(e.start.dateTime), end: new Date(e.end.dateTime) }));
 }
 
 // Pure: cut each free window into slots, drop slots before `from` or overlapping a busy interval.

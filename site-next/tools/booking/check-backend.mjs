@@ -7,7 +7,7 @@ import assert from 'node:assert/strict';
 const source = fs.readFileSync(new URL('./Code.gs', import.meta.url), 'utf8');
 const context = vm.createContext({});
 vm.runInContext(source, context);
-const { slotsFrom_, validateRequest_, validTimeZone_ } = context;
+const { slotsFrom_, validateRequest_, validTimeZone_, freeWindowsFromEvents_, busyFromEvents_ } = context;
 
 const at = (iso) => new Date(iso);
 const iso = (dates) => Array.from(dates, (d) => d.toISOString()); // copy out of the sandbox realm
@@ -47,5 +47,25 @@ assert.notEqual(validateRequest_({ ...good, note: 'x'.repeat(1001) }), '');
 assert.equal(validTimeZone_('Asia/Kolkata'), true);
 assert.equal(validTimeZone_('America/Argentina/Buenos_Aires'), true);
 assert.equal(validTimeZone_('<script>'), false);
+
+// Main-calendar events: "Bookable" is free time, other events are busy, unless Free / cancelled / declined / all-day.
+const ev = (summary, start, end, extra = {}) => ({ summary, start: { dateTime: start }, end: { dateTime: end }, ...extra });
+const items = [
+  ev('Bookable', '2026-10-22T10:00:00+09:00', '2026-10-22T22:30:00+09:00'),
+  ev('Astroscale Update', '2026-10-22T10:00:00+09:00', '2026-10-22T12:00:00+09:00'),
+  ev('Lunch (shown as free)', '2026-10-22T12:00:00+09:00', '2026-10-22T13:00:00+09:00', { transparency: 'transparent' }),
+  ev('Declined meeting', '2026-10-22T13:00:00+09:00', '2026-10-22T14:00:00+09:00', { attendees: [{ self: true, responseStatus: 'declined' }] }),
+  ev('Cancelled', '2026-10-22T14:00:00+09:00', '2026-10-22T15:00:00+09:00', { status: 'cancelled' }),
+  { summary: 'Holiday', start: { date: '2026-10-22' }, end: { date: '2026-10-23' } }
+];
+assert.equal(freeWindowsFromEvents_(items).length, 1);
+assert.equal(freeWindowsFromEvents_([ev('Bookable Hours', '2026-10-23T10:00:00+09:00', '2026-10-23T22:30:00+09:00')]).length, 1); // the owner's actual title
+assert.equal(busyFromEvents_([ev('bookable hour', '2026-10-23T10:00:00+09:00', '2026-10-23T22:30:00+09:00')]).length, 0);
+assert.equal(freeWindowsFromEvents_([ev('Not bookable meeting', '2026-10-23T10:00:00+09:00', '2026-10-23T11:00:00+09:00')]).length, 0);
+const busy = busyFromEvents_(items);
+assert.equal(busy.length, 1); // only Astroscale blocks
+const thursday = slotsFrom_(freeWindowsFromEvents_(items), busy, at('2026-10-21T00:00:00Z'), 30);
+assert.equal(thursday[0].toISOString(), '2026-10-22T03:00:00.000Z'); // first slot 12:00 Tokyo
+assert.equal(thursday.length, 21); // 12:00–22:30 = 21 half-hour slots
 
 console.log('Code.gs pure functions: all checks passed');

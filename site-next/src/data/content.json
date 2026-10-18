@@ -201,7 +201,7 @@
     },
     "booking": {
       "_comment": "endpoint = the Google Apps Script web-app URL (tools/booking/SETUP.md). When set, the window shows the site's own picker fed by Google Calendar. While empty, it falls back to Cal.com (calLink), then email.",
-      "endpoint": "",
+      "endpoint": "https://script.google.com/macros/s/AKfycbylb4_KGvSqltm_pzWevB7AiicibuA8p1G1jUoFyiI420nCaNMPnDfq_zfWKTFniXqGMA/exec",
       "calLink": "pruthviraj-mane/30min",
       "durationMinutes": 30
     }
